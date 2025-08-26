@@ -37,7 +37,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 ![Alt text](./full/or/relative/path/of/image)
 ```
 
-### Output
+### Résultat
 
 ![blog placeholder](../../assets/blog-placeholder-about.jpg)
 
@@ -47,28 +47,28 @@ The blockquote element represents content that is quoted from another source, op
 
 ### Blockquote without attribution
 
-#### Syntax
+#### Syntaxe
 
 ```markdown
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 ```
 
-#### Output
+#### Résultat
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 
 ### Blockquote with attribution
 
-#### Syntax
+#### Syntaxe
 
 ```markdown
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
 ```
 
-#### Output
+#### Résultat
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
@@ -85,7 +85,7 @@ The blockquote element represents content that is quoted from another source, op
 | _italics_ | **bold** | `code` |
 ```
 
-### Output
+### Résultat
 
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
@@ -112,7 +112,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 ```
 ````
 
-### Output
+### Résultat
 
 ```html
 <!doctype html>
@@ -131,7 +131,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 
 ### Ordered List
 
-#### Syntax
+#### Syntaxe
 
 ```markdown
 1. First item
@@ -139,7 +139,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 3. Third item
 ```
 
-#### Output
+#### Résultat
 
 1. First item
 2. Second item
@@ -147,7 +147,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 
 ### Unordered List
 
-#### Syntax
+#### Syntaxe
 
 ```markdown
 - List item
@@ -155,7 +155,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 - And another item
 ```
 
-#### Output
+#### Résultat
 
 - List item
 - Another item
@@ -163,7 +163,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 
 ### Nested list
 
-#### Syntax
+#### Syntaxe
 
 ```markdown
 - Fruit
@@ -175,7 +175,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
   - Cheese
 ```
 
-#### Output
+#### Résultat
 
 - Fruit
   - Apple
@@ -201,7 +201,7 @@ Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
 ```
 
-### Output
+### Résultat
 
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
