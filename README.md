@@ -1,4 +1,6 @@
-# Astro Starter Kit: Blog
+# mon-blog-astro-starter-blog
+
+## Astro Starter Kit: Blog
 
 ```sh
 pnpm create astro@latest -- --template blog
@@ -22,10 +24,10 @@ Inside of your Astro project, you'll see the following folders and files:
 ```text
 ├── public/
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
 ├── astro.config.mjs
 ├── README.md
 ├── package.json
