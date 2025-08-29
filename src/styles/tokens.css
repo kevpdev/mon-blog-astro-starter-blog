@@ -11,7 +11,7 @@
   
   --nav-font-weight-default: normal;
   --nav-font-weight-active: bolder;
-  --nav-text-color: var(--black);
+  --nav-text-color: rgb(var(--black));
   --nav-text-decoration: none;
   
   --nav-transition-duration: 0.2s;
@@ -29,7 +29,7 @@
   --social-gap-horizontal: 0.5rem;
   --social-gap-vertical: 1rem;
   --social-icon-transition: color 0.2s ease;
-  --social-icon-color: var(--black);
+  --social-icon-color: rgb(var(--black));
   --social-icon-color-hover: var(--accent);
   
   /* Spacing */
@@ -37,11 +37,11 @@
   --component-gap-small: 0.5rem;
   
   /* Footer */
-  --footer-bg: var(--gray-light);
+  --footer-bg: rgb(var(--gray-light));
   --footer-padding: 2rem 1rem;
   --footer-border-top: 1px solid rgba(var(--gray), 25%);
-  --footer-text-color: var(--black);
-  --footer-link-color: var(--black);
+  --footer-text-color: rgb(var(--black));
+  --footer-link-color: rgb(var(--black));
   --footer-link-color-hover: var(--accent);
   --footer-gap: 1.5rem;
   --footer-copyright-opacity: 0.8;

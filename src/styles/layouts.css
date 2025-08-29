@@ -1,0 +1,130 @@
+/* Layout Components - Shared styles for all layouts */
+
+/* Article container - Full width */
+article {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Hero Image Component */
+.hero-image {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+/* Prose Container - Common content area */
+.prose {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: rgb(var(--gray-dark));
+}
+
+@media (min-width: 640px) {
+  .prose {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .prose {
+    padding: 2rem;
+  }
+}
+
+/* Title Section */
+.title {
+  margin-bottom: 1em;
+  padding: 1em 0;
+  text-align: center;
+  line-height: 1;
+}
+
+.title h1 {
+  margin: 0 0 0.5em 0;
+}
+
+/* Blog-specific styles */
+.date {
+  margin-bottom: 0.5em;
+  color: rgb(var(--gray));
+}
+
+.last-updated-on {
+  font-style: italic;
+}
+
+/* Home Layout - Content container */
+.home-main {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+  color: rgb(var(--gray-dark));
+}
+
+@media (min-width: 640px) {
+  .home-main {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-main {
+    padding: 2rem;
+  }
+}
+
+.home-main h1 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  margin-bottom: 0.5em;
+}
+
+.home-main p {
+  line-height: 1.6;
+  margin-bottom: 1em;
+}
+
+.home-main ul {
+  line-height: 1.6;
+  margin: 1em 0;
+}
+
+.home-main li {
+  margin-bottom: 0.5em;
+}
+
+.home-main a {
+  color: rgb(var(--accent));
+  text-decoration: underline;
+}
+
+.home-main code {
+  background: rgb(var(--gray-light));
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 480px) {
+  .title {
+    padding: 0.75rem 0;
+  }
+  
+  .hero-image img {
+    border-radius: 8px;
+  }
+}

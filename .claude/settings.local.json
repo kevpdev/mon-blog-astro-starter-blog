@@ -5,7 +5,8 @@
       "Bash(pnpm lint:*)",
       "Bash(pnpm format:*)",
       "Bash(pnpm typecheck:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(pnpm build:*)"
     ],
     "deny": [],
     "ask": []

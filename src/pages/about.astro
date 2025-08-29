@@ -1,14 +1,12 @@
 ---
 import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<Layout
+<PageLayout
   title="À propos de moi"
   description="Découvrez mon parcours et mes passions"
-  pubDate={new Date('August 08 2021')}
-  heroImage={AboutHeroImage}
-  tags={['AstroJs', 'Astro', 'Astro.js']}>
+  heroImage={AboutHeroImage}>
   <p>
     Passionné par le développement web depuis plusieurs années, j'ai eu la chance
     de travailler sur de nombreux projets variés, allant de sites vitrine simples
@@ -41,4 +39,4 @@ import Layout from '../layouts/BlogPost.astro';
     ou simplement échanger sur les dernières nouveautés du développement web.
     Je suis toujours ravi de rencontrer d'autres passionnés de technologie !
   </p>
-</Layout>
+</PageLayout>

@@ -1,0 +1,224 @@
+/* 
+ * Design Tokens - Modern Design System
+ * Based on CSS custom properties for theming and configuration
+ * Scalable, maintainable, DRY approach
+ */
+
+:root {
+  /* ===== SEMANTIC COLORS ===== */
+  /* Primary colors - Brand colors */
+  --color-primary-50: #f0f4ff;
+  --color-primary-100: #e0eaff;
+  --color-primary-200: #c7d9ff;
+  --color-primary-300: #a5c3ff;
+  --color-primary-400: #7ba1ff;
+  --color-primary-500: #2337ff;  /* Main brand color */
+  --color-primary-600: #1d2ee6;
+  --color-primary-700: #1a27cc;
+  --color-primary-800: #1621b3;
+  --color-primary-900: #000d8a;
+  
+  /* Secondary colors - Supporting brand colors */
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+  
+  /* Tertiary colors - Accent colors */
+  --color-tertiary-50: #f5f3ff;
+  --color-tertiary-100: #ede9fe;
+  --color-tertiary-200: #ddd6fe;
+  --color-tertiary-300: #c4b5fd;
+  --color-tertiary-400: #a78bfa;
+  --color-tertiary-500: #8b5cf6;
+  --color-tertiary-600: #7c3aed;
+  --color-tertiary-700: #6d28d9;
+  --color-tertiary-800: #5b21b6;
+  --color-tertiary-900: #4c1d95;
+
+  /* ===== NEUTRAL COLORS ===== */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* ===== SEMANTIC COLOR ASSIGNMENTS ===== */
+  /* These are the colors you'll use in your components */
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-muted: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-50);
+
+  --color-bg-primary: var(--color-neutral-50);
+  --color-bg-secondary: var(--color-neutral-100);
+  --color-bg-muted: var(--color-neutral-200);
+  --color-bg-inverse: var(--color-neutral-900);
+
+  --color-border-primary: var(--color-neutral-200);
+  --color-border-secondary: var(--color-neutral-300);
+  --color-border-muted: var(--color-neutral-100);
+
+  /* Interactive colors */
+  --color-brand-primary: var(--color-primary-500);
+  --color-brand-primary-hover: var(--color-primary-600);
+  --color-brand-primary-active: var(--color-primary-700);
+
+  --color-brand-secondary: var(--color-secondary-500);
+  --color-brand-secondary-hover: var(--color-secondary-600);
+  --color-brand-secondary-active: var(--color-secondary-700);
+
+  /* State colors */
+  --color-success: #059669;
+  --color-success-light: #ecfdf5;
+  --color-warning: #d97706;
+  --color-warning-light: #fffbeb;
+  --color-error: #dc2626;
+  --color-error-light: #fef2f2;
+  --color-info: var(--color-primary-500);
+  --color-info-light: var(--color-primary-50);
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-family-base: 'Atkinson', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'Fira Code', Menlo, Monaco, 'Courier New', monospace;
+
+  /* Font sizes - Fluid typography */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+  --font-size-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem);
+  --font-size-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3rem);
+
+  /* Line heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.75;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ===== SPACING ===== */
+  /* Using consistent spacing scale */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0_5: 0.125rem;
+  --space-1: 0.25rem;
+  --space-1_5: 0.375rem;
+  --space-2: 0.5rem;
+  --space-2_5: 0.625rem;
+  --space-3: 0.75rem;
+  --space-3_5: 0.875rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ===== SHADOWS ===== */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* ===== BORDERS ===== */
+  --border-width-0: 0px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+
+  --border-radius-none: 0px;
+  --border-radius-xs: 0.125rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-2xl: 1rem;
+  --border-radius-full: 9999px;
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.35s ease;
+
+  /* ===== Z-INDEX ===== */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal: 1040;
+  --z-index-popover: 1050;
+  --z-index-tooltip: 1060;
+
+  /* ===== BREAKPOINTS (for reference, use in media queries) ===== */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ===== THEME VARIANTS ===== */
+
+/* Dark theme - class-based for manual switching */
+.theme-dark {
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-muted: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-900);
+
+  --color-bg-primary: var(--color-neutral-900);
+  --color-bg-secondary: var(--color-neutral-800);
+  --color-bg-muted: var(--color-neutral-700);
+  --color-bg-inverse: var(--color-neutral-50);
+
+  --color-border-primary: var(--color-neutral-700);
+  --color-border-secondary: var(--color-neutral-600);
+  --color-border-muted: var(--color-neutral-800);
+}
+
+/* System preference dark theme */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light):not(.theme-dark),
+  .theme-system {
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-300);
+    --color-text-muted: var(--color-neutral-500);
+    --color-text-inverse: var(--color-neutral-900);
+
+    --color-bg-primary: var(--color-neutral-900);
+    --color-bg-secondary: var(--color-neutral-800);
+    --color-bg-muted: var(--color-neutral-700);
+    --color-bg-inverse: var(--color-neutral-50);
+
+    --color-border-primary: var(--color-neutral-700);
+    --color-border-secondary: var(--color-neutral-600);
+    --color-border-muted: var(--color-neutral-800);
+  }
+}
