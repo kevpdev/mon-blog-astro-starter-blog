@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { footerConfig } from '../../config/footer';
 
 const posts = (await getCollection('blog'))
   .filter((post) => {
@@ -121,6 +122,6 @@ const posts = (await getCollection('blog'))
         </ul>
       </section>
     </main>
-    <Footer />
+    <Footer config={footerConfig} />
   </body>
 </html>

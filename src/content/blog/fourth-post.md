@@ -1,8 +1,8 @@
 ---
-title: "Quatrième article"
+title: 'Quatrième article'
 description: "L'accessibilité web pour tous"
-pubDate: "Aug 22 2025"
-heroImage: "../../assets/blog-placeholder-3.jpg"
+pubDate: 'Aug 22 2025'
+heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
 L'accessibilité web n'est pas un luxe, c'est une nécessité. Dans ce quatrième article, nous abordons les principes fondamentaux pour créer des sites web accessibles à tous, y compris aux personnes en situation de handicap.
@@ -10,6 +10,7 @@ L'accessibilité web n'est pas un luxe, c'est une nécessité. Dans ce quatrièm
 ## Les principes WCAG
 
 Les Web Content Accessibility Guidelines (WCAG) définissent quatre principes fondamentaux :
+
 - **Perceptible** : l'information doit être présentée de manière à ce que les utilisateurs puissent la percevoir
 - **Utilisable** : les composants d'interface doivent être utilisables
 - **Compréhensible** : l'information et l'interface utilisateur doivent être compréhensibles

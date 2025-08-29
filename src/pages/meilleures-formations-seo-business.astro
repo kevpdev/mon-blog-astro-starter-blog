@@ -1,10 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { footerConfig } from '../config/footer';
 
 // Récupérer uniquement les articles avec le tag "avis-formation"
 const allBlogPosts = await getCollection('blog');
@@ -19,27 +20,40 @@ const formationPosts = allBlogPosts
 <!doctype html>
 <html lang="fr">
   <head>
-    <BaseHead title="Meilleures Formations SEO & Business" description="Découvrez nos avis détaillés sur les meilleures formations en SEO, marketing digital et business en ligne." />
+    <BaseHead
+      title="Meilleures Formations SEO & Business"
+      description="Découvrez nos avis détaillés sur les meilleures formations en SEO, marketing digital et business en ligne."
+    />
   </head>
   <body>
     <Header />
     <main>
       <section class="hero">
         <h1>Meilleures Formations SEO & Business</h1>
-        <p>Découvrez nos avis détaillés et objectifs sur les formations les plus populaires en SEO, marketing digital et développement business.</p>
+        <p>
+          Découvrez nos avis détaillés et objectifs sur les formations les plus populaires en SEO,
+          marketing digital et développement business.
+        </p>
       </section>
-      
+
       <section class="formations-grid">
         {
           formationPosts.map((post) => (
             <article class="formation-card">
               {post.data.heroImage && (
                 <div class="formation-image">
-                  <Image src={post.data.heroImage} alt={post.data.title} width={400} height={200} />
+                  <Image
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    width={400}
+                    height={200}
+                  />
                 </div>
               )}
               <div class="formation-content">
-                <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
+                <h2>
+                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                </h2>
                 <p class="formation-description">{post.data.description}</p>
                 <div class="formation-meta">
                   <FormattedDate date={post.data.pubDate} />
@@ -56,14 +70,16 @@ const formationPosts = allBlogPosts
           ))
         }
       </section>
-      
-      {formationPosts.length === 0 && (
-        <div class="no-formations">
-          <p>Aucun avis de formation disponible pour le moment.</p>
-        </div>
-      )}
+
+      {
+        formationPosts.length === 0 && (
+          <div class="no-formations">
+            <p>Aucun avis de formation disponible pour le moment.</p>
+          </div>
+        )
+      }
     </main>
-    <Footer />
+    <Footer config={footerConfig} />
   </body>
 </html>
 
@@ -71,24 +87,24 @@ const formationPosts = allBlogPosts
   .hero {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--hero-gradient);
+    color: var(--hero-text-color);
     margin-bottom: 3rem;
   }
-  
+
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: bold;
   }
-  
+
   .hero p {
     font-size: 1.2rem;
     max-width: 600px;
     margin: 0 auto;
     opacity: 0.9;
   }
-  
+
   .formations-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -97,51 +113,53 @@ const formationPosts = allBlogPosts
     margin: 0 auto;
     padding: 0 2rem;
   }
-  
+
   .formation-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
-  
+
   .formation-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   }
-  
+
   .formation-image img {
     width: 100%;
     height: 200px;
     object-fit: cover;
   }
-  
+
   .formation-content {
     padding: 1.5rem;
   }
-  
+
   .formation-content h2 {
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
   }
-  
+
   .formation-content h2 a {
     color: var(--black);
     text-decoration: none;
     transition: color 0.3s ease;
   }
-  
+
   .formation-content h2 a:hover {
     color: var(--accent);
   }
-  
+
   .formation-description {
-    color: #666;
+    color: rgb(var(--gray));
     line-height: 1.6;
     margin-bottom: 1rem;
   }
-  
+
   .formation-meta {
     display: flex;
     justify-content: space-between;
@@ -149,15 +167,15 @@ const formationPosts = allBlogPosts
     flex-wrap: wrap;
     gap: 1rem;
     font-size: 0.9rem;
-    color: #888;
+    color: rgba(var(--gray), 0.8);
   }
-  
+
   .tags {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
   }
-  
+
   .tag {
     background: var(--accent);
     color: white;
@@ -165,23 +183,23 @@ const formationPosts = allBlogPosts
     border-radius: 4px;
     font-size: 0.8rem;
   }
-  
+
   .no-formations {
     text-align: center;
     padding: 4rem 2rem;
-    color: #666;
+    color: rgb(var(--gray));
   }
-  
+
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 2rem;
     }
-    
+
     .formations-grid {
       grid-template-columns: 1fr;
       padding: 0 1rem;
     }
-    
+
     .formation-meta {
       flex-direction: column;
       align-items: flex-start;

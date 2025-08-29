@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm format:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
