@@ -2,7 +2,7 @@
 title: 'Quatrième article'
 description: "L'accessibilité web pour tous"
 pubDate: 'Aug 22 2025'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+heroImage: '../../assets/netherlands-7449282_1280.jpg'
 ---
 
 L'accessibilité web n'est pas un luxe, c'est une nécessité. Dans ce quatrième article, nous abordons les principes fondamentaux pour créer des sites web accessibles à tous, y compris aux personnes en situation de handicap.

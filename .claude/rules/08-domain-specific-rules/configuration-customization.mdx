@@ -1,0 +1,57 @@
+---
+description: Configuration customization rules - References core templates
+alwaysApply: true
+---
+
+# Configuration Customization
+
+## Quick Reference
+
+**📚 Detailed templates**: `.claude/core/config-templates.mdx`  
+**🔧 Canonical configs**: `.claude/snippets/configs/`
+
+## Core Customization Points
+
+### Site Configuration
+- Update `src/config/site.ts` with your site details
+- Configure social links, author info, SEO defaults
+- Set feature flags (darkMode, comments, analytics)
+
+### Astro Configuration  
+- Use canonical config from `.claude/snippets/configs/astro.config.mjs`
+- Choose variant: standard, production, or image-optimized
+- Customize integrations, build settings, Vite options
+
+### Styling System
+- Modify design tokens in `src/styles/design-tokens.css`
+- Use mobile-first responsive approach
+- Follow component-based architecture
+
+### Content Structure
+- Configure content collections in `src/content/config.ts`
+- Customize blog post schema (title, description, pubDate, tags)
+- Set up static page collections
+
+## Quick Setup Commands
+
+```bash
+# Copy canonical configurations
+cp .claude/snippets/configs/astro.config.mjs ./astro.config.mjs
+cp .claude/snippets/configs/eslint.config.cjs ./.eslintrc.cjs
+
+# Update site configuration
+# Edit src/config/site.ts with your details
+
+# Test configuration
+pnpm typecheck && pnpm build
+```
+
+## Validation Checklist
+
+- [ ] Site configuration updated with real details
+- [ ] Astro config matches project requirements
+- [ ] Build succeeds without errors
+- [ ] SEO meta tags populated correctly
+- [ ] Social links and author info configured
+
+For complete examples and detailed configuration options, reference the core templates and canonical configs.

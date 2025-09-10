@@ -1,6 +1,11 @@
 {
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
-  "eslint.validate": ["javascript", "typescript", "astro"],
-  "prettier.requireConfig": true
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "astro": "html"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
 }

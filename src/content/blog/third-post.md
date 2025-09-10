@@ -2,7 +2,7 @@
 title: 'Troisième article'
 description: 'Optimisation des performances web'
 pubDate: 'Jul 22 2022'
-heroImage: '../../assets/blog-placeholder-2.jpg'
+heroImage: '../../assets/bridge-4230946_1280.jpg'
 ---
 
 L'optimisation des performances est cruciale pour offrir une expérience utilisateur de qualité. Dans ce troisième article, nous explorons les techniques essentielles pour améliorer la vitesse de chargement de vos applications web.

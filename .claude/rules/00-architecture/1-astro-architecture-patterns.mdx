@@ -1,0 +1,114 @@
+---
+description: System architecture patterns and component structure
+alwaysApply: false
+---
+
+# Architecture Patterns
+
+## Component Hierarchy
+
+```
+src/components/
+├── ui/                    # Pure UI components (Button, Card, Container)
+│   ├── Button.astro      # Reusable button variants
+│   ├── Card.astro        # Content containers
+│   └── Container.astro   # Layout containers
+└── layout/               # Layout components
+    ├── Header.astro      # Site header with navigation
+    ├── Footer.astro      # Site footer
+    └── Navigation.astro  # Navigation menu
+```
+
+## Layout System
+
+**Composable Design Pattern:**
+- `BaseLayout.astro` - Core HTML structure
+- `BlogLayout.astro` - Blog post layout 
+- `PageLayout.astro` - Static page layout
+- `HomeLayout.astro` - Homepage layout
+
+## Component Templates
+
+### UI Component Template
+```astro
+---
+interface Props {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+const { variant = 'primary', size = 'md', className = '' } = Astro.props;
+---
+
+<div class={`component-${variant} size-${size} ${className}`}>
+  <slot />
+</div>
+
+<style>
+  /* Component styles */
+</style>
+```
+
+### Layout Component Template
+```astro
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout {title} {description}>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>
+```
+
+## Design System Integration
+
+### Tokens Usage
+```css
+.component {
+  color: rgb(var(--text-primary));
+  background: rgb(var(--bg-primary));
+  padding: var(--space-md);
+}
+```
+
+### Responsive Patterns
+```css
+/* Mobile-first approach */
+.component { width: 100%; }
+
+@media (min-width: 768px) {
+  .component { width: 50%; }
+}
+```
+
+## Content Architecture
+
+### Collection Types
+- `blog` - Blog posts with frontmatter
+- `pages` - Static pages
+- `footer` - Footer configuration
+
+### Schema Pattern
+```typescript
+interface BlogPost {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  tags: string[];
+  draft?: boolean;
+}
+```
+
+This architecture supports scalability, maintainability, and consistent design patterns across the entire application.

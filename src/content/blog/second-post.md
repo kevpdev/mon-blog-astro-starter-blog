@@ -2,7 +2,7 @@
 title: 'Deuxième article'
 description: 'Les frameworks JavaScript modernes'
 pubDate: 'Jul 15 2022'
-heroImage: '../../assets/blog-placeholder-4.jpg'
+heroImage: '../../assets/bridge-4230946_1280.jpg'
 ---
 
 Dans ce deuxième article, nous plongeons dans l'univers des frameworks JavaScript qui révolutionnent la manière dont nous développons les applications web modernes.

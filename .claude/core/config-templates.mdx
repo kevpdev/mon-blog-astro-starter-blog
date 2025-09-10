@@ -1,0 +1,119 @@
+---
+description: Configuration templates and examples - Referenced by multiple rules
+alwaysApply: false
+---
+
+# Configuration Templates
+
+## Site Configuration Template
+
+```typescript
+// src/config/site.ts
+export const SITE_CONFIG = {
+  title: 'Site Title',
+  description: 'Site description for SEO',
+  url: 'https://example.com',
+  lang: 'fr',
+  
+  author: {
+    name: 'Author Name',
+    email: 'contact@example.com'
+  },
+  
+  // Blog settings
+  postsPerPage: 6,
+  showReadingTime: true,
+  
+  // Feature flags
+  features: {
+    darkMode: true,
+    comments: false,
+    analytics: false
+  }
+} as const;
+```
+
+## Astro Configuration Variants
+
+```javascript
+// Standard configuration - see .claude/snippets/configs/astro.config.mjs
+// Production configuration - optimized for performance  
+// Image-optimized configuration - for media-heavy sites
+```
+
+## Component Structure Template
+
+```astro
+---
+// Component props interface
+interface Props {
+  title: string;
+  description?: string;
+  className?: string;
+}
+
+const { title, description, className = '' } = Astro.props;
+---
+
+<div class={`component-base ${className}`}>
+  <h2>{title}</h2>
+  {description && <p>{description}</p>}
+  <slot />
+</div>
+
+<style>
+  .component-base {
+    /* Component styles */
+  }
+</style>
+```
+
+## CSS Tokens Reference
+
+```css
+:root {
+  /* Core colors (RGB for Tailwind) */
+  --brand-primary: 55 65 81;
+  --text-primary: 17 24 39;
+  
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+}
+```
+
+## Layout Templates
+
+### Blog Post Layout
+```astro
+---
+// BlogLayout.astro
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  heroImage?: string;
+  tags?: string[];
+}
+
+const { title, description, pubDate, heroImage, tags = [] } = Astro.props;
+---
+
+<BaseLayout {title} {description}>
+  {heroImage && <img src={heroImage} alt={title} />}
+  <h1>{title}</h1>
+  <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString()}</time>
+  <div class="tags">
+    {tags.map(tag => <span class="tag">{tag}</span>)}
+  </div>
+  <main>
+    <slot />
+  </main>
+</BaseLayout>
+```
+
+For detailed examples and complete configurations, refer to:
+- `.claude/snippets/configs/` - Canonical configurations
+- Individual rule files for specific implementations
+- Project's actual `src/config/` directory for current setup

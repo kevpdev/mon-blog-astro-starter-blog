@@ -2,47 +2,79 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import FormattedTag from '../components/FormattedTag.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import PostMeta from '../components/ui/PostMeta.astro';
+import Prose from '../components/ui/Prose.astro';
+import Button from '../components/ui/Button.astro';
+import RelatedPostsSidebar from '../components/ui/RelatedPostsSidebar.astro';
+import { getRelatedPosts } from '../utils/related-posts';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  currentPost?: CollectionEntry<'blog'>;
+};
 
-const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, currentPost } = Astro.props;
+
+// Obtenir les articles liés si currentPost est fourni
+const relatedPosts = currentPost ? await getRelatedPosts(currentPost, 3) : [];
 ---
 
 <BaseLayout title={title} description={description}>
-
   <article>
-    <div class="hero-image">
-      {
-        heroImage && (
-          <Image
-            width={1020}
-            height={510}
-            src={heroImage}
-            alt=""
+    {heroImage && (
+      <Section spacing="none" class="bg-neutral-100 dark:bg-neutral-900">
+        <Container size="lg">
+          <div class="aspect-[2/1] md:aspect-[16/9] overflow-hidden rounded-lg">
+            <Image
+              width={1200}
+              height={675}
+              src={heroImage}
+              alt={`Image de l'article: ${title}`}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </Container>
+      </Section>
+    )}
+
+    <Section spacing="none" class="pt-16">
+      <Container size="xl">
+        <!-- Header de l'article (centré sur toute la largeur) -->
+        <header class="text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold text-[rgb(var(--text-primary))] mb-6">{title}</h1>
+          <PostMeta 
+            date={pubDate}
+            updatedDate={updatedDate}
+            tags={tags}
+            class="justify-center"
           />
-        )
-      }
-    </div>
-    <div class="prose">
-      <div class="title">
-        <div class="date">
-          <FormattedDate date={pubDate} />
-          {
-            updatedDate && (
-              <div class="last-updated-on">
-                Last updated on <FormattedDate date={updatedDate} />
-              </div>
-            )
-          }
+        </header>
+
+        <!-- Layout 2 colonnes : contenu + sidebar -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <!-- Contenu principal -->
+          <main class="lg:col-span-8">
+            <Prose>
+              <slot />
+            </Prose>
+
+            <!-- Navigation de retour -->
+            <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700 text-center">
+              <Button href="/blog" variant="outline">
+                ← Retour au blog
+              </Button>
+            </div>
+          </main>
+
+          <!-- Sidebar avec articles liés -->
+          <aside class="lg:col-span-4">
+            <div class="lg:sticky lg:top-8">
+              <RelatedPostsSidebar posts={relatedPosts} />
+            </div>
+          </aside>
         </div>
-        <h1>{title}</h1>
-        <br />
-        <FormattedTag tags={tags} />
-        <hr />
-      </div>
-      <slot />
-    </div>
+      </Container>
+    </Section>
   </article>
 </BaseLayout>

@@ -39,15 +39,17 @@ export function applyTheme(theme: ThemeMode): void {
   
   const root = document.documentElement;
   
-  // Remove existing theme classes
-  root.classList.remove('theme-light', 'theme-dark');
+  // Remove existing theme class
+  root.classList.remove('dark');
   
-  // Apply new theme
+  // Apply new theme (only add dark class for dark mode)
   if (theme === 'system') {
     const systemTheme = getSystemTheme();
-    root.classList.add(`theme-${systemTheme}`);
-  } else {
-    root.classList.add(`theme-${theme}`);
+    if (systemTheme === 'dark') {
+      root.classList.add('dark');
+    }
+  } else if (theme === 'dark') {
+    root.classList.add('dark');
   }
 }
 

@@ -36,15 +36,27 @@ This is a modern Astro blog with TypeScript strict configuration, following comp
 - `PageLayout.astro` - Static page layout for content pages
 
 **Component System**:
-- `Navigation.astro` - Dynamic navigation with dropdown support
-- `Header.astro` - Responsive header with mobile hamburger menu
-- `Footer.astro` - Configurable footer with social links
-- `SocialLinks.astro` - Reusable social media links component
+```
+src/components/
+├── ui/                          # Pure UI components
+│   ├── Button.astro            # Button variants (primary, secondary, outline)
+│   ├── Card.astro              # Content cards with slots
+│   ├── Container.astro         # Responsive containers (sm, md, lg, xl)
+│   ├── Section.astro           # Page sections with spacing
+│   ├── Prose.astro             # Typography wrapper for content
+│   └── PostMeta.astro          # Blog post metadata display
+└── layout/                      # Layout helper components
+    ├── Header.astro            # Responsive header with mobile menu
+    ├── Footer.astro            # Configurable footer with social links
+    ├── Navigation.astro        # Dynamic navigation system
+    └── ThemeToggle.astro       # Dark/light mode switcher
+```
 
-**Content Collections**: Two main collections defined in `src/content.config.ts`:
+**Content Collections**: Three main collections defined in `src/content/config.ts`:
 
 - `blog` - Blog posts with required title, description, pubDate and optional updatedDate, heroImage, tags
 - `pages` - Static pages with similar schema but all date fields optional
+- `footer` - Footer configuration (links, social media, legal pages)
 
 **Content Management**:
 
@@ -63,22 +75,20 @@ This is a modern Astro blog with TypeScript strict configuration, following comp
 
 ### Design System & Styling
 
-**CSS Architecture**:
+**CSS Architecture (Tailwind CSS v4)**:
 ```
 src/styles/
-├── design-tokens.css     # Design system variables (colors, spacing, typography)
-├── global.css           # Global styles + imports  
-├── layouts.css          # Layout-specific styles
-├── components.css       # Component-specific styles
-└── tokens.css          # Legacy tokens (navigation, footer, etc.)
+├── tailwind.css         # Tailwind imports + @layer components  
+├── design-tokens.css    # Design system CSS variables (RGB format)
+└── prose.css           # Blog typography (@tailwindcss/typography)
 ```
 
-**Design Tokens System**:
-- **Semantic Colors**: `--color-primary-500`, `--color-text-primary`, `--color-bg-secondary`
-- **Spacing Scale**: `--space-1` to `--space-32` (consistent spacing)
-- **Typography**: Fluid responsive with `clamp()` functions
-- **Shadows & Borders**: `--shadow-sm` to `--shadow-2xl`
-- **Theme Support**: Light/dark mode with CSS classes and system preference
+**Design Tokens System (Modern)**:
+- **Brand Colors**: `--brand-primary: 55 65 81` (RGB format for Tailwind arbitrary values)
+- **Semantic Colors**: `--text-primary`, `--bg-primary`, `--border-primary`
+- **State Colors**: `--success`, `--warning`, `--error`, `--info` with light variants
+- **Usage**: `bg-[rgb(var(--bg-primary))]`, `text-[rgb(var(--text-secondary))]`
+- **Theme Support**: `.dark` class selector with automatic token switching
 
 **Responsive Design**:
 - **Mobile-First**: Base styles for mobile, progressively enhanced
@@ -88,11 +98,34 @@ src/styles/
 
 ### Configuration
 
-- Uses TypeScript strict mode with null checks enabled
-- MDX and sitemap integrations configured
-- Site URL set to 'https://example.com' in astro.config.mjs
-- Language set to French (`lang="fr"`) in layout templates
-- Mobile-first responsive design with hamburger navigation
+**Core Stack**:
+- **Astro 5.13.3** with TypeScript strict mode and null checks
+- **Tailwind CSS v4.1.13** with Vite plugin for performance
+- **MDX & Sitemap** integrations for rich content and SEO
+- **Vitest** for unit testing with @testing-library/dom
+- **Husky + lint-staged** for pre-commit quality control
+
+**Site Configuration**:
+```typescript
+// src/config/site.ts
+export const SITE_CONFIG = {
+  title: 'Mon Blog',
+  description: 'Un blog moderne avec Astro',
+  url: 'https://example.com',
+  lang: 'fr',
+  author: { name: 'Author', email: 'contact@example.com' }
+};
+```
+
+**Navigation Setup**:
+```typescript
+// src/config/navigation.ts
+export const NAVIGATION = [
+  { name: 'Accueil', href: '/' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'À propos', href: '/about' }
+];
+```
 
 ### Content Schema
 

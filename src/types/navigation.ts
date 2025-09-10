@@ -22,6 +22,7 @@ export interface SocialLink {
   href: string;
   icon: string;
   ariaLabel: string;
+  enabled?: boolean;
 }
 
 export type SocialLinksConfig = SocialLink[];

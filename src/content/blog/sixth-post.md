@@ -2,7 +2,7 @@
 title: 'Sixth post'
 description: 'Découvrez les nouvelles tendances du développement web'
 pubDate: 'Aug 24 2025'
-heroImage: '../../assets/blog-placeholder-4.jpg'
+heroImage: '../../assets/purple-flower-6620617_1280.jpg'
 tags: ['développement', 'web', 'tendances']
 ---
 

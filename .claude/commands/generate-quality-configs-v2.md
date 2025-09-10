@@ -65,46 +65,8 @@ trim_trailing_whitespace = false
 ### `.eslintrc.cjs` (Astro v5 compatible)
 
 ```js
-/* eslint-env node */
-module.exports = {
-  root: true,
-  ignorePatterns: ['dist', '.astro', '.vercel', 'node_modules'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'astro', 'jsx-a11y', 'import'],
-  extends: [
-    'eslint:recommended',
-    '@typescript-eslint/recommended',
-    'plugin:astro/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'prettier',
-  ],
-  overrides: [
-    {
-      files: ['*.astro'],
-      parser: 'astro-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
-      },
-    },
-  ],
-  rules: {
-    'no-console': ['warn', { allow: ['error'] }],
-    '@typescript-eslint/no-unused-vars': 'error',
-    'import/order': [
-      'warn',
-      {
-        alphabetize: { order: 'asc', caseInsensitive: true },
-        'newlines-between': 'always',
-        groups: [['builtin', 'external'], ['internal'], ['parent', 'sibling', 'index']],
-      },
-    ],
-    'max-lines-per-function': ['warn', { max: 60 }],
-    complexity: ['warn', 10],
-  },
-};
+// Copy canonical ESLint configuration from .claude/snippets/configs/eslint.config.cjs
+// Customize rules as needed for your specific project requirements
 ```
 
 ### `.lintstagedrc.json`
@@ -153,29 +115,10 @@ module.exports = {
 ### `astro.config.mjs` (enrichissement)
 
 ```js
+// Refer to canonical configuration: .claude/snippets/configs/astro.config.mjs
+// Copy the standard or production variant as needed for your setup
 import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-
-export default defineConfig({
-  site: 'https://example.com',
-  integrations: [mdx(), sitemap()],
-  vite: {
-    build: {
-      sourcemap: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['astro'],
-          },
-        },
-      },
-    },
-  },
-  compilerOptions: {
-    types: ['astro/client'],
-  },
-});
+// ... (see snippets/configs/astro.config.mjs for complete configuration)
 ```
 
 ### Scripts `package.json` à ajouter

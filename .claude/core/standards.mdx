@@ -1,0 +1,202 @@
+---
+description: Core coding standards and best practices - Referenced by all rules
+alwaysApply: true
+---
+
+# Core Standards
+
+## Code Quality Principles
+
+### Clean Code (from rules/01-standards/1-clean-code.mdx)
+- Write no comments
+- Use strict types only  
+- Disallow untyped values
+- Use explicit constants, never magic numbers
+- Use long, readable variable names
+- Write the simplest code possible
+- Eliminate duplication (DRY)
+
+### Length Limits
+- Max 30 lines per function
+- Max 5 params per function  
+- Max 300 lines per file
+- Max 10 sub-files per folder
+
+### Architecture Patterns
+- One responsibility per file
+- No flag parameters
+- Fail fast, throw errors early
+- Smart/dumb component pattern (frontend)
+
+## TypeScript Standards
+
+### Configuration
+```typescript
+// Strict TypeScript configuration
+{
+  "strict": true,
+  "noImplicitAny": true,
+  "noUncheckedIndexedAccess": true,
+  "exactOptionalPropertyTypes": true
+}
+```
+
+### Type Definitions
+- Always use explicit interfaces
+- Prefer `type` for unions, `interface` for objects
+- Use generic constraints appropriately
+- Avoid `any`, prefer `unknown`
+
+## Astro Best Practices
+
+### Component Structure
+```astro
+---
+// Props interface
+interface Props {
+  required: string;
+  optional?: number;
+}
+
+// Component logic
+const { required, optional = 42 } = Astro.props;
+---
+
+<!-- Template with semantic HTML -->
+<section class="component-name">
+  <h2>{required}</h2>
+  <!-- Content -->
+</section>
+
+<style>
+  /* Scoped styles */
+  .component-name { /* styles */ }
+</style>
+```
+
+### Performance Patterns
+- Use `client:` directives judiciously
+- Prefer static generation over SSR when possible
+- Optimize images with `<Image>` component
+- Implement proper caching strategies
+
+## CSS Architecture
+
+### Design Tokens (from design-tokens.css)
+```css
+:root {
+  /* Colors (RGB format for Tailwind) */
+  --brand-primary: 55 65 81;
+  --text-primary: 17 24 39;
+  --bg-primary: 255 255 255;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+}
+```
+
+### Mobile-First Responsive
+```css
+/* Base styles (mobile) */
+.component { width: 100%; }
+
+/* Progressive enhancement */
+@media (min-width: 768px) {
+  .component { width: 50%; }
+}
+```
+
+## Accessibility Standards
+
+### WCAG 2.2 AA Compliance
+- Color contrast ≥ 4.5:1 for normal text
+- Color contrast ≥ 3:1 for large text
+- Semantic HTML structure
+- Proper heading hierarchy (H1→H2→H3)
+- Alt text for all informative images
+- Keyboard navigation support
+- Focus management
+- ARIA labels where needed
+
+### Implementation Checklist
+```astro
+<!-- Semantic structure -->
+<main>
+  <h1>Page Title</h1>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+  
+  <article>
+    <h2>Article Title</h2>
+    <img src="image.jpg" alt="Descriptive alt text" />
+  </article>
+</main>
+```
+
+## Performance Standards
+
+### Core Web Vitals Targets
+- **LCP (Largest Contentful Paint)**: < 2.5s
+- **FID (First Input Delay)**: < 100ms  
+- **CLS (Cumulative Layout Shift)**: < 0.1
+
+### Optimization Techniques
+- Image optimization (WebP/AVIF with fallbacks)
+- Code splitting and lazy loading
+- CSS critical path optimization
+- Font loading optimization
+- Resource hints (preload, prefetch)
+
+## Security Guidelines
+
+### Frontend Security
+- Never commit secrets to repository
+- Sanitize user inputs
+- Use HTTPS everywhere
+- Implement proper CORS policies
+- Validate environment variables
+- Use CSP headers
+
+### Dependency Management
+```bash
+# Regular security audits
+pnpm audit --audit-level moderate
+
+# Keep dependencies updated
+pnpm outdated
+pnpm update --latest
+```
+
+## Testing Standards
+
+### Test Structure
+```typescript
+// Unit test template
+describe('ComponentName', () => {
+  describe('initialization', () => {
+    it('should handle valid props', () => {
+      // Test implementation
+    });
+  });
+  
+  describe('edge cases', () => {
+    it('should handle invalid input gracefully', () => {
+      // Edge case tests
+    });
+  });
+});
+```
+
+### Coverage Targets
+- Unit tests: >80% coverage
+- Integration tests for critical paths
+- E2E tests for user workflows
+- Performance regression tests
+
+This document serves as the canonical reference for all coding standards. Specific rules should reference sections from this document rather than duplicating content.

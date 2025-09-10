@@ -2,7 +2,7 @@
 title: 'Premier article'
 description: 'Découverte du développement web moderne'
 pubDate: 'Jul 08 2022'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+heroImage: '../../assets/tree-7619791_1280.jpg'
 ---
 
 Bienvenue dans ce premier article où nous explorons les fondamentaux du développement web moderne. Dans un monde en constante évolution technologique, il est essentiel de comprendre les bases qui nous permettront de construire des applications robustes et performantes.

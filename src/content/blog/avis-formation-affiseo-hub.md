@@ -3,7 +3,7 @@ title: 'Mon avis sur la formation Affiseo Hub'
 description: "Retour d'expérience détaillé sur la formation SEO proposée par Affiseo Hub"
 pubDate: 'Aug 24 2025'
 tags: ['formation', 'seo', 'avis', 'affiseo-hub', 'avis-formation']
-heroImage: '../../assets/blog-placeholder-3.jpg'
+heroImage: '../../assets/tree-7619791_1280.jpg'
 ---
 
 Après avoir suivi la formation proposée par Affiseo Hub, je souhaitais partager mon retour d'expérience pour aider ceux qui hésitent encore à se lancer dans cette aventure SEO.
