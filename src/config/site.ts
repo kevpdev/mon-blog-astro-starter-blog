@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
 
 // Informations de l'auteur centralisées
 export const AUTHOR_CONFIG = {
-  name: 'Nom de l\'auteur',
+  name: 'AuthorName',
   email: 'contact@monblog.com',
   bio: 'Développeur web passionné par les technologies modernes et l\'optimisation des performances. Je partage mes connaissances et expériences à travers ce blog.',
   avatar: '/images/avatar.jpg',
@@ -38,7 +38,7 @@ export const COMMON_LINKS: CommonLink[] = [
     enabled: true
   },
   {
-    label: 'About', 
+    label: 'About',
     href: '/about',
     enabled: true
   },

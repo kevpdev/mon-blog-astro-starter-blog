@@ -1,0 +1,119 @@
+---
+// Template de composant Astro
+// Copier dans src/components/ui/ ou src/components/layout/
+// Renommer selon la convention kebab-case (ex: my-component.astro)
+
+export interface Props {
+  // Props obligatoires
+  title: string;
+  
+  // Props optionnelles avec valeurs par défaut
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  
+  // Classes CSS personnalisées
+  class?: string;
+}
+
+const { 
+  title,
+  variant = 'primary',
+  size = 'md', 
+  disabled = false,
+  class: className = '' 
+} = Astro.props;
+
+// Logique TypeScript pour les classes CSS dynamiques
+const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
+const variantClasses = {
+  primary: 'bg-[rgb(var(--brand-primary))] text-[rgb(var(--text-inverse))] hover:bg-[rgb(var(--brand-primary-hover))] focus:ring-[rgb(var(--brand-primary))]',
+  secondary: 'bg-[rgb(var(--brand-secondary))] text-[rgb(var(--text-inverse))] hover:bg-[rgb(var(--brand-secondary-hover))] focus:ring-[rgb(var(--brand-secondary))]',
+  outline: 'border border-[rgb(var(--border-primary))] text-[rgb(var(--text-primary))] hover:bg-[rgb(var(--bg-muted))] focus:ring-[rgb(var(--brand-primary))]'
+};
+
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-4 py-2 text-base',
+  lg: 'px-6 py-3 text-lg'
+};
+
+const componentClasses = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  className
+].filter(Boolean).join(' ');
+---
+
+<!-- 
+Structure HTML du composant avec design tokens
+Utiliser les tokens CSS : rgb(var(--token-name))
+Classes Tailwind avec arbitrary values pour cohérence
+-->
+<div class={componentClasses} {...disabled && { 'aria-disabled': 'true' }}>
+  <!-- Slot par défaut -->
+  <slot>
+    {title}
+  </slot>
+  
+  <!-- Slots nommés optionnels -->
+  <slot name="icon" />
+  <slot name="suffix" />
+</div>
+
+<style>
+  /* CSS custom uniquement si nécessaire */
+  /* Préférer les design tokens et Tailwind */
+  
+  /* Exemple d'utilisation des tokens CSS */
+  .custom-hover:hover {
+    background-color: rgb(var(--bg-muted));
+    color: rgb(var(--text-primary));
+  }
+  
+  /* Responsive design */
+  @media (max-width: 640px) {
+    .responsive-text {
+      font-size: clamp(0.875rem, 2.5vw, 1rem);
+    }
+  }
+</style>
+
+<!-- 
+BONNES PRATIQUES :
+
+1. PROPS
+   - Interface TypeScript avec types stricts
+   - Props optionnelles avec valeurs par défaut
+   - Destructuring avec renommage si nécessaire
+   
+2. CSS & STYLING
+   - Design tokens en priorité : rgb(var(--token-name))
+   - Classes Tailwind avec arbitrary values
+   - CSS custom uniquement si indispensable
+   - Mobile-first responsive design
+
+3. ACCESSIBILITÉ
+   - Attributs ARIA appropriés
+   - Focus management
+   - Keyboard navigation
+   - Screen reader friendly
+
+4. PERFORMANCE
+   - Classes CSS calculées côté serveur
+   - Pas de JavaScript client sauf nécessaire
+   - Images optimisées si utilisées
+
+5. STRUCTURE
+   - Slot par défaut + slots nommés
+   - Props spreading (...props)
+   - Classes conditionnelles propres
+
+6. NOMMAGE
+   - Fichier : kebab-case.astro
+   - Props : camelCase
+   - CSS classes : kebab-case
+   - Variables : camelCase
+-->

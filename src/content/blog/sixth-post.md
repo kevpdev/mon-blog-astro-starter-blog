@@ -4,6 +4,7 @@ description: 'Découvrez les nouvelles tendances du développement web'
 pubDate: 'Aug 24 2025'
 heroImage: '../../assets/purple-flower-6620617_1280.jpg'
 tags: ['développement', 'web', 'tendances']
+author: 'AuthorName2'
 ---
 
 Ce sixième article explore les dernières innovations du développement web et les technologies émergentes qui façonnent notre industrie.

@@ -1,0 +1,148 @@
+#!/bin/bash
+
+# Claude Context Check Command
+# Simple verification of project state vs CLAUDE.md documentation
+
+set -e  # Exit on error
+
+echo "🔍 Checking Claude context synchronization..."
+
+# Check if we're in the right directory
+if [ ! -f "package.json" ]; then
+    echo "❌ Error: package.json not found. Run this from project root."
+    exit 1
+fi
+
+# Check if CLAUDE.md exists
+if [ ! -f "CLAUDE.md" ]; then
+    echo "🚨 CLAUDE.md not found!"
+    echo "💡 Run /sync-context to create it"
+    exit 1
+fi
+
+echo "📊 Project Analysis:"
+echo ""
+
+# Project info
+PROJECT_NAME=$(grep '"name"' package.json | sed 's/.*"\([^"]*\)".*/\1/' | head -1)
+echo "📦 Project: $PROJECT_NAME"
+
+# Count scripts
+SCRIPT_COUNT=$(grep -c '":' package.json | head -1 || echo "0")
+echo "📋 Scripts: $SCRIPT_COUNT found in package.json"
+
+# Check structure
+echo "🏗️  Structure:"
+if [ -d "src" ]; then
+    echo "  ✅ src/ directory exists"
+    
+    # Check key directories
+    for dir in components layouts pages utils config styles; do
+        if [ -d "src/$dir" ]; then
+            count=$(find "src/$dir" -name "*.astro" -o -name "*.ts" -o -name "*.js" | wc -l)
+            echo "  📁 src/$dir/ - $count files"
+        fi
+    done
+else
+    echo "  ❌ src/ directory missing"
+fi
+
+echo ""
+echo "📄 CLAUDE.md Status:"
+
+# Check if key sections exist in CLAUDE.md
+if grep -q "## Commands" CLAUDE.md; then
+    echo "  ✅ Commands section exists"
+else
+    echo "  ⚠️  Commands section missing"
+fi
+
+if grep -q "## Architecture" CLAUDE.md; then
+    echo "  ✅ Architecture section exists"
+else
+    echo "  ⚠️  Architecture section missing"
+fi
+
+if grep -q "### Routing" CLAUDE.md; then
+    echo "  ✅ Routing section exists"
+else
+    echo "  ⚠️  Routing section missing"
+fi
+
+if grep -q "<!-- SECTION MANUELLE" CLAUDE.md; then
+    echo "  ✅ Manual sections properly marked"
+else
+    echo "  ⚠️  Manual sections not marked"
+fi
+
+echo ""
+
+# Quick freshness check
+PACKAGE_MODIFIED=$(stat -c %Y package.json 2>/dev/null || stat -f %m package.json 2>/dev/null || echo "0")
+CLAUDE_MODIFIED=$(stat -c %Y CLAUDE.md 2>/dev/null || stat -f %m CLAUDE.md 2>/dev/null || echo "0")
+
+if [ "$PACKAGE_MODIFIED" -gt "$CLAUDE_MODIFIED" ]; then
+    echo "⚠️  package.json is newer than CLAUDE.md"
+    echo "💡 Consider running /sync-context to update"
+    echo ""
+fi
+
+# Check for new components/layouts since last update
+NEW_COMPONENTS=0
+if [ -d "src/components" ]; then
+    while IFS= read -r -d '' file; do
+        FILE_MODIFIED=$(stat -c %Y "$file" 2>/dev/null || stat -f %m "$file" 2>/dev/null || echo "0")
+        if [ "$FILE_MODIFIED" -gt "$CLAUDE_MODIFIED" ]; then
+            if [ $NEW_COMPONENTS -eq 0 ]; then
+                echo "🆕 New/modified files since last sync:"
+            fi
+            echo "  📄 $(basename "$file")"
+            NEW_COMPONENTS=$((NEW_COMPONENTS + 1))
+        fi
+    done < <(find src/components -name "*.astro" -print0)
+fi
+
+if [ -d "src/layouts" ]; then
+    while IFS= read -r -d '' file; do
+        FILE_MODIFIED=$(stat -c %Y "$file" 2>/dev/null || stat -f %m "$file" 2>/dev/null || echo "0")
+        if [ "$FILE_MODIFIED" -gt "$CLAUDE_MODIFIED" ]; then
+            if [ $NEW_COMPONENTS -eq 0 ]; then
+                echo "🆕 New/modified files since last sync:"
+            fi
+            echo "  📄 $(basename "$file")"
+            NEW_COMPONENTS=$((NEW_COMPONENTS + 1))
+        fi
+    done < <(find src/layouts -name "*.astro" -print0)
+fi
+
+if [ $NEW_COMPONENTS -gt 0 ]; then
+    echo "💡 Run /sync-context to update documentation"
+    echo ""
+fi
+
+# Summary
+echo "📈 Summary:"
+
+# Count documented vs actual commands
+DOCUMENTED_COMMANDS=$(grep -c "pnpm " CLAUDE.md || echo "0")
+echo "  📋 Commands: $DOCUMENTED_COMMANDS documented vs $SCRIPT_COUNT actual"
+
+# Count documented vs actual layouts
+if [ -d "src/layouts" ]; then
+    ACTUAL_LAYOUTS=$(find src/layouts -name "*.astro" | wc -l)
+    DOCUMENTED_LAYOUTS=$(grep -c "\.astro\` -" CLAUDE.md | head -1 || echo "0")
+    echo "  🏗️  Layouts: $DOCUMENTED_LAYOUTS documented vs $ACTUAL_LAYOUTS actual"
+fi
+
+# Overall status
+if [ "$PACKAGE_MODIFIED" -gt "$CLAUDE_MODIFIED" ] || [ $NEW_COMPONENTS -gt 0 ]; then
+    echo ""
+    echo "🔧 Status: NEEDS UPDATE"
+    echo "💡 Run /sync-context to refresh documentation"
+    exit 1
+else
+    echo ""
+    echo "✅ Status: UP TO DATE"
+    echo "🎯 CLAUDE.md reflects current project structure"
+    exit 0
+fi

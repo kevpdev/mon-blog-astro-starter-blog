@@ -10,18 +10,17 @@ interface Props {
 
 const { 
   links, 
-  size = 'medium', 
   direction = 'horizontal',
   class: className = ''
 } = Astro.props;
 
-const sizeMap = {
-  small: '24',
-  medium: '32', 
-  large: '48'
-};
-
-const iconSize = sizeMap[size];
+// Icon sizes are handled inline
+// const sizeMap = {
+//   small: '24',
+//   medium: '32', 
+//   large: '48'
+// };
+// const iconSize = sizeMap[size];
 ---
 
 <div class={`flex ${direction === 'horizontal' ? 'gap-3' : 'flex-col gap-2'} ${className}`}>

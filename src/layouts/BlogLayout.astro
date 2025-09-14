@@ -9,12 +9,13 @@ import Prose from '../components/ui/Prose.astro';
 import Button from '../components/ui/Button.astro';
 import RelatedPostsSidebar from '../components/ui/RelatedPostsSidebar.astro';
 import { getRelatedPosts } from '../utils/related-posts';
+import { AUTHOR_CONFIG } from '../config/site';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   currentPost?: CollectionEntry<'blog'>;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, tags, currentPost } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, author, currentPost } = Astro.props;
 
 // Obtenir les articles liés si currentPost est fourni
 const relatedPosts = currentPost ? await getRelatedPosts(currentPost, 3) : [];
@@ -47,6 +48,7 @@ const relatedPosts = currentPost ? await getRelatedPosts(currentPost, 3) : [];
             date={pubDate}
             updatedDate={updatedDate}
             tags={tags}
+            author={author || AUTHOR_CONFIG.name}
             class="justify-center"
           />
         </header>

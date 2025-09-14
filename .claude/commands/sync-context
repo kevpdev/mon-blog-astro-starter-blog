@@ -1,0 +1,338 @@
+#!/bin/bash
+
+# Claude Context Synchronization Command
+# Simple and robust bash script to update CLAUDE.md with current project state
+
+set -e  # Exit on error
+
+echo "🚀 Synchronizing Claude context..."
+
+# Check if we're in the right directory
+if [ ! -f "package.json" ]; then
+    echo "❌ Error: package.json not found. Run this from project root."
+    exit 1
+fi
+
+# Backup existing CLAUDE.md
+if [ -f "CLAUDE.md" ]; then
+    echo "📄 Backing up existing CLAUDE.md..."
+    cp CLAUDE.md CLAUDE.md.backup
+fi
+
+# Create temporary file for new content
+TEMP_FILE=$(mktemp)
+trap "rm -f $TEMP_FILE" EXIT
+
+echo "📋 Generating new CLAUDE.md content..."
+
+# Start writing new content
+cat > "$TEMP_FILE" << 'EOL'
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+EOL
+
+# Generate Commands section
+echo "## Commands" >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+echo "All commands are run from the root of the project using pnpm:" >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+
+# Development commands
+echo "### Development" >> "$TEMP_FILE"
+if grep -q '"dev"' package.json; then
+    echo "- \`pnpm dev\` - Start development server at localhost:4321" >> "$TEMP_FILE"
+fi
+if grep -q '"build"' package.json; then
+    echo "- \`pnpm build\` - Build production site to ./dist/" >> "$TEMP_FILE"
+fi
+if grep -q '"preview"' package.json; then
+    echo "- \`pnpm preview\` - Preview build locally" >> "$TEMP_FILE"
+fi
+if grep -q '"astro"' package.json; then
+    echo "- \`pnpm astro\` - Run Astro CLI commands (e.g., \`pnpm astro add\`, \`pnpm astro check\`)" >> "$TEMP_FILE"
+fi
+echo "" >> "$TEMP_FILE"
+
+# Quality & Testing commands
+echo "### Quality & Testing" >> "$TEMP_FILE"
+if grep -q '"lint"' package.json; then
+    echo "- \`pnpm lint\` - Run ESLint on .js, .ts, .astro files" >> "$TEMP_FILE"
+fi
+if grep -q '"lint:fix"' package.json; then
+    echo "- \`pnpm lint:fix\` - Run ESLint with auto-fix" >> "$TEMP_FILE"
+fi
+if grep -q '"format"' package.json; then
+    echo "- \`pnpm format\` - Format code with Prettier" >> "$TEMP_FILE"
+fi
+if grep -q '"format:check"' package.json; then
+    echo "- \`pnpm format:check\` - Check code formatting" >> "$TEMP_FILE"
+fi
+if grep -q '"typecheck"' package.json; then
+    echo "- \`pnpm typecheck\` - Run Astro type checking" >> "$TEMP_FILE"
+fi
+if grep -q '"test"' package.json; then
+    echo "- \`pnpm test\` - Run Vitest tests" >> "$TEMP_FILE"
+fi
+if grep -q '"test:watch"' package.json; then
+    echo "- \`pnpm test:watch\` - Run Vitest in watch mode" >> "$TEMP_FILE"
+fi
+if grep -q '"quality"' package.json; then
+    echo "- \`pnpm quality\` - Run typecheck, lint, and format check" >> "$TEMP_FILE"
+fi
+echo "" >> "$TEMP_FILE"
+
+# Claude Maintenance commands
+echo "### Claude Maintenance" >> "$TEMP_FILE"
+echo "- \`/sync-context\` - Update CLAUDE.md with current project structure" >> "$TEMP_FILE"
+echo "- \`/check-context\` - Check if CLAUDE.md is up to date" >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+
+# Generate Architecture section
+echo "## Architecture Overview" >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+echo "This is a modern Astro blog with TypeScript strict configuration, following component-based architecture with design tokens and mobile-first responsive design." >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+
+# Layouts
+if [ -d "src/layouts" ]; then
+    echo "### Layout Architecture (Composable Design)" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+    echo "**Base Layout System**:" >> "$TEMP_FILE"
+    
+    for layout in src/layouts/*.astro; do
+        if [ -f "$layout" ]; then
+            layout_name=$(basename "$layout" .astro)
+            case "$layout_name" in
+                "BaseLayout")
+                    echo "- \`BaseLayout.astro\` - Core HTML structure, shared head/body/footer" >> "$TEMP_FILE"
+                    ;;
+                "HomeLayout")
+                    echo "- \`HomeLayout.astro\` - Homepage-specific layout extending BaseLayout" >> "$TEMP_FILE"
+                    ;;
+                "BlogLayout")
+                    echo "- \`BlogLayout.astro\` - Blog post layout with hero image, metadata, tags" >> "$TEMP_FILE"
+                    ;;
+                "PageLayout")
+                    echo "- \`PageLayout.astro\` - Static page layout for content pages" >> "$TEMP_FILE"
+                    ;;
+                *)
+                    echo "- \`${layout_name}.astro\` - Layout component" >> "$TEMP_FILE"
+                    ;;
+            esac
+        fi
+    done
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Components structure
+if [ -d "src/components" ]; then
+    echo "**Component System**:" >> "$TEMP_FILE"
+    echo "\`\`\`" >> "$TEMP_FILE"
+    echo "src/components/" >> "$TEMP_FILE"
+    
+    # List component directories
+    find src/components -type d | sort | while read dir; do
+        if [ "$dir" != "src/components" ]; then
+            level=$(echo "$dir" | tr -cd '/' | wc -c)
+            indent=""
+            for i in $(seq 2 $level); do
+                indent+="│   "
+            done
+            dirname=$(basename "$dir")
+            echo "${indent}├── ${dirname}/" >> "$TEMP_FILE"
+            
+            # List key components in each directory (max 3)
+            component_count=0
+            for component in "$dir"/*.astro; do
+                if [ -f "$component" ] && [ $component_count -lt 3 ]; then
+                    comp_name=$(basename "$component")
+                    case "$comp_name" in
+                        "Button.astro")
+                            echo "${indent}│   ├── $comp_name # Button variants" >> "$TEMP_FILE"
+                            ;;
+                        "Header.astro")
+                            echo "${indent}│   ├── $comp_name # Site header" >> "$TEMP_FILE"
+                            ;;
+                        "Footer.astro")
+                            echo "${indent}│   ├── $comp_name # Site footer" >> "$TEMP_FILE"
+                            ;;
+                        "Navigation.astro")
+                            echo "${indent}│   ├── $comp_name # Navigation menu" >> "$TEMP_FILE"
+                            ;;
+                        "ThemeToggle.astro")
+                            echo "${indent}│   ├── $comp_name # Dark/light toggle" >> "$TEMP_FILE"
+                            ;;
+                        *)
+                            echo "${indent}│   ├── $comp_name" >> "$TEMP_FILE"
+                            ;;
+                    esac
+                    component_count=$((component_count + 1))
+                fi
+            done
+        fi
+    done
+    
+    echo "\`\`\`" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Content Collections
+if [ -f "src/content/config.ts" ]; then
+    echo "**Content Collections**: " >> "$TEMP_FILE"
+    collections=$(grep -o 'export const [a-zA-Z]*Collection' src/content/config.ts | sed 's/export const //g' | sed 's/Collection//g' | tr '\n' ', ' | sed 's/,$//')
+    if [ -n "$collections" ]; then
+        echo "$collections" >> "$TEMP_FILE"
+    else
+        echo "Three main collections defined in \`src/content/config.ts\`" >> "$TEMP_FILE"
+    fi
+    echo "" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Routes
+if [ -d "src/pages" ]; then
+    echo "### Routing" >> "$TEMP_FILE"
+    echo "" >> "$TEMP_FILE"
+    
+    # Main pages
+    for page in src/pages/*.astro; do
+        if [ -f "$page" ]; then
+            page_name=$(basename "$page" .astro)
+            case "$page_name" in
+                "index")
+                    echo "- \`src/pages/index.astro\` - Homepage" >> "$TEMP_FILE"
+                    ;;
+                "about")
+                    echo "- \`src/pages/about.astro\` - About page" >> "$TEMP_FILE"
+                    ;;
+                "[...slug]")
+                    echo "- \`src/pages/[...slug].astro\` - Dynamic pages from content collections" >> "$TEMP_FILE"
+                    ;;
+                *)
+                    echo "- \`src/pages/${page_name}.astro\` - ${page_name} page" >> "$TEMP_FILE"
+                    ;;
+            esac
+        fi
+    done
+    
+    # Page directories
+    for dir in src/pages/*/; do
+        if [ -d "$dir" ]; then
+            dir_name=$(basename "$dir")
+            case "$dir_name" in
+                "blog")
+                    echo "- \`src/pages/blog/index.astro\` - Blog listing page" >> "$TEMP_FILE"
+                    echo "- \`src/pages/blog/[...slug].astro\` - Individual blog posts" >> "$TEMP_FILE"
+                    ;;
+                *)
+                    echo "- \`src/pages/${dir_name}/\` - ${dir_name} section" >> "$TEMP_FILE"
+                    ;;
+            esac
+        fi
+    done
+    
+    # RSS feed
+    if [ -f "src/pages/rss.xml.js" ] || [ -f "src/pages/rss.xml.ts" ]; then
+        echo "- \`src/pages/rss.xml.js\` - RSS feed generation" >> "$TEMP_FILE"
+    fi
+    
+    echo "" >> "$TEMP_FILE"
+fi
+
+# Configuration section
+echo "### Configuration" >> "$TEMP_FILE"
+echo "" >> "$TEMP_FILE"
+echo "**Core Stack**:" >> "$TEMP_FILE"
+
+# Extract key dependencies
+if grep -q '"astro"' package.json; then
+    astro_version=$(grep '"astro"' package.json | sed 's/.*"\([^"]*\)".*/\1/')
+    echo "- **Astro $astro_version** with TypeScript strict mode and null checks" >> "$TEMP_FILE"
+fi
+
+if grep -q '"tailwindcss"' package.json; then
+    tailwind_version=$(grep '"tailwindcss"' package.json | sed 's/.*"\([^"]*\)".*/\1/')
+    echo "- **Tailwind CSS $tailwind_version** with Vite plugin for performance" >> "$TEMP_FILE"
+fi
+
+if grep -q '"vitest"' package.json; then
+    echo "- **Vitest** for unit testing with @testing-library/dom" >> "$TEMP_FILE"
+fi
+
+if grep -q '"eslint"' package.json; then
+    echo "- **ESLint** flat config with TypeScript support" >> "$TEMP_FILE"
+fi
+
+if grep -q '"husky"' package.json; then
+    echo "- **Husky + lint-staged** for pre-commit quality control" >> "$TEMP_FILE"
+fi
+
+echo "" >> "$TEMP_FILE"
+
+# Preserve manual sections if they exist
+if [ -f "CLAUDE.md" ]; then
+    echo "🔍 Preserving manual sections..."
+    
+    # Extract manual sections between markers
+    if grep -q "<!-- SECTION MANUELLE" CLAUDE.md; then
+        echo "" >> "$TEMP_FILE"
+        sed -n '/<!-- SECTION MANUELLE/,/<!-- FIN SECTION MANUELLE -->/p' CLAUDE.md >> "$TEMP_FILE"
+        echo "" >> "$TEMP_FILE"
+    else
+        # Add default manual section
+        cat >> "$TEMP_FILE" << 'EOL'
+
+<!-- SECTION MANUELLE : Ne pas modifier automatiquement -->
+
+## Development Best Practices
+
+### Code Quality & Standards
+
+**Automated Quality Control**:
+- **ESLint**: Static analysis with auto-fix (`pnpm lint:fix`)
+- **Prettier**: Code formatting with consistent style
+- **TypeScript**: Strict mode with null checks enabled
+- **Pre-commit Hooks**: Husky + lint-staged (validates only modified files)
+- **Quality Command**: `pnpm quality` runs typecheck + lint + format check
+
+**Architecture Principles**:
+- **DRY (Don't Repeat Yourself)**: Shared components and layouts
+- **Component-Based**: Reusable, configurable components
+- **Mobile-First**: Progressive enhancement from mobile to desktop
+- **Design System**: Centralized tokens for consistency
+- **Semantic HTML**: Proper markup with accessibility in mind
+
+<!-- FIN SECTION MANUELLE -->
+
+EOL
+    fi
+fi
+
+# Add final reminders
+cat >> "$TEMP_FILE" << 'EOL'
+
+# important-instruction-reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+
+      
+      IMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.
+EOL
+
+# Replace the original file
+mv "$TEMP_FILE" CLAUDE.md
+
+echo "✅ CLAUDE.md successfully updated!"
+echo "📍 Updated sections:"
+echo "  - Commands (from package.json)"
+echo "  - Architecture (from src/ structure)"
+echo "  - Routes (from src/pages/)"
+echo "  - Configuration (from package.json)"
+echo ""
+echo "🔍 Manual sections preserved between <!-- SECTION MANUELLE --> markers"
+echo ""
+echo "🎯 Run /check-context to verify the results"

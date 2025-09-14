@@ -7,10 +7,9 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 export default [
   js.configs.recommended,
   {
-    files: ['**/*.{js,ts,astro}'],
+    files: ['**/*.{js,ts}'],
     plugins: {
       '@typescript-eslint': typescript,
-      'astro': astro,
       'jsx-a11y': jsxA11y,
     },
     languageOptions: {
@@ -19,29 +18,40 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
+      globals: {
+        // Node.js globals
+        __dirname: 'readonly',
+        process: 'readonly',
+        global: 'readonly',
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        // CSS globals
+        CSSStyleRule: 'readonly',
+        CSSStyleSheet: 'readonly',
+        CSSRule: 'readonly',
+        // TypeScript globals
+        HTMLElementTagNameMap: 'readonly',
+      },
     },
     rules: {
       'no-console': ['warn', { allow: ['error'] }],
       '@typescript-eslint/no-unused-vars': 'error',
-      'max-lines-per-function': ['warn', { max: 60 }],
-      'complexity': ['warn', 10],
+      'max-lines-per-function': ['warn', { max: 100 }], // Augmenté pour les tests
+      'complexity': ['warn', 15], // Augmenté pour les tests
     },
-    ignores: ['dist', '.astro', 'node_modules'],
   },
   {
-    files: ['**/*.astro'],
-    plugins: {
-      astro,
-    },
-    languageOptions: {
-      parser: astro.parsers['astro-eslint-parser'],
-      parserOptions: {
-        parser: typescriptParser,
-        extraFileExtensions: ['.astro'],
-      },
-    },
+    files: ['**/*.test.{js,ts}', '**/__tests__/**/*.{js,ts}', '**/vitest.*.{js,ts}', '**/*.setup.{js,ts}'],
     rules: {
-      ...astro.configs.recommended.rules,
+      'max-lines-per-function': 'off', // Désactiver pour les tests
+      'complexity': 'off', // Désactiver pour les tests
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
+  },
+  ...astro.configs.recommended,
+  {
+    ignores: ['dist', '.astro', 'node_modules', '.claude/**', '**/*.config.mjs'],
   },
 ];

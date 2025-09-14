@@ -1,0 +1,175 @@
+---
+// Template de page Astro
+// Copier dans src/pages/ et renommer selon l'URL souhaitée
+// Exemple: src/pages/contact.astro → /contact
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Prose from '../components/ui/Prose.astro';
+
+// Configuration SEO de la page
+const title = "Titre de la page";
+const description = "Description SEO de 150-160 caractères qui décrit précisément le contenu et le but de cette page";
+const lang = 'fr'; // Optionnel, défaut dans BaseLayout
+
+// Données spécifiques à la page (optionnel)
+// const pageData = {
+//   lastUpdated: new Date('2024-01-01'),
+//   category: 'informations',
+//   showBreadcrumbs: true
+// };
+---
+
+<!-- 
+LAYOUTS DISPONIBLES :
+- BaseLayout : Structure HTML basique (head, body, footer) ✅
+- PageLayout : Page avec hero + contenu (pour content collections)  
+- BlogLayout : Page d'article avec métadonnées (pour content collections)
+- HomeLayout : Page d'accueil spécialisée (étend BaseLayout)
+-->
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <!-- Hero section -->
+  <Section spacing="lg" class="bg-[rgb(var(--bg-muted))] border-b border-[rgb(var(--border-primary))]">
+    <Container size="lg">
+      <div class="text-center space-y-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-[rgb(var(--text-primary))]">
+          {title}
+        </h1>
+        <p class="text-xl text-[rgb(var(--text-secondary))] max-w-2xl mx-auto">
+          Sous-titre explicatif qui développe le sujet de la page
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Contenu principal -->
+  <Section spacing="xl">
+    <Container size="md">
+      <Prose>
+        <!-- Contenu en prose avec styles typographiques -->
+        <h2>Section principale</h2>
+        
+        <p>
+          Paragraphe d'introduction qui explique le contenu de cette page
+          et guide le lecteur dans sa compréhension du sujet traité.
+        </p>
+
+        <h3>Sous-section</h3>
+        
+        <p>
+          Contenu détaillé avec explications, exemples, et informations
+          pertinentes pour l'utilisateur.
+        </p>
+
+        <!-- Liste à puces -->
+        <ul>
+          <li>Premier point important</li>
+          <li>Deuxième élément d'information</li>
+          <li>Troisième aspect à retenir</li>
+        </ul>
+
+        <h3>Autre sous-section</h3>
+        
+        <!-- Code exemple si pertinent -->
+        <pre><code class="language-javascript">{`// Exemple de code si la page le justifie
+function exemple() {
+  return "Hello World!";
+}`}</code></pre>
+
+        <!-- Call-to-action -->
+        <div class="bg-[rgb(var(--bg-secondary))] p-6 rounded-lg border border-[rgb(var(--border-primary))] my-8">
+          <h4 class="text-lg font-semibold mb-2">Action à réaliser</h4>
+          <p class="text-[rgb(var(--text-secondary))] mb-4">
+            Incitation à l'action avec contexte et bénéfice clair.
+          </p>
+          <a 
+            href="/contact" 
+            class="inline-flex items-center px-4 py-2 bg-[rgb(var(--brand-primary))] text-[rgb(var(--text-inverse))] rounded-md hover:bg-[rgb(var(--brand-primary-hover))] transition-colors"
+          >
+            Bouton d'action
+          </a>
+        </div>
+      </Prose>
+    </Container>
+  </Section>
+
+  <!-- Section additionnelle (optionnelle) -->
+  <Section spacing="lg" class="bg-[rgb(var(--bg-muted))]">
+    <Container size="lg">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Cards ou contenu structuré -->
+        <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))]">
+          <h3 class="text-lg font-semibold mb-3">Élément 1</h3>
+          <p class="text-[rgb(var(--text-secondary))]">
+            Description de cet élément avec détails pertinents.
+          </p>
+        </div>
+        
+        <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))]">
+          <h3 class="text-lg font-semibold mb-3">Élément 2</h3>
+          <p class="text-[rgb(var(--text-secondary))]">
+            Description de cet élément avec détails pertinents.
+          </p>
+        </div>
+        
+        <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))]">
+          <h3 class="text-lg font-semibold mb-3">Élément 3</h3>
+          <p class="text-[rgb(var(--text-secondary))]">
+            Description de cet élément avec détails pertinents.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<!-- 
+BONNES PRATIQUES POUR LES PAGES :
+
+1. SEO & MÉTADONNÉES
+   - title : 50-60 caractères, descriptif et unique
+   - description : 150-160 caractères, mots-clés naturels
+   - lang : spécifier si différent du défaut (fr)
+   - Structure H1 > H2 > H3 hiérarchique
+
+2. LAYOUTS
+   - PageLayout : Pages standards avec hero
+   - BaseLayout : Pages simples sans hero
+   - BlogLayout : Articles de blog uniquement
+   - HomeLayout : Page d'accueil uniquement
+
+3. COMPOSANTS UI
+   - Container : Largeurs responsive (sm, md, lg, xl)
+   - Section : Espacement vertical (sm, md, lg, xl)
+   - Prose : Styles typographiques pour contenu long
+   
+4. DESIGN TOKENS
+   - Couleurs : rgb(var(--token-name))
+   - Espacement : classes Tailwind standard
+   - Typography : clamp() pour responsive
+
+5. ACCESSIBILITÉ
+   - Hiérarchie des titres respectée
+   - Liens avec contexte clair
+   - Images avec alt text
+   - Contraste suffisant
+
+6. PERFORMANCE
+   - Images optimisées (WebP, lazy loading)
+   - CSS minimal via Tailwind
+   - Pas de JS client sauf nécessaire
+   - Structure sémantique HTML5
+
+7. RESPONSIVE
+   - Mobile-first design
+   - Grids responsives (sm:, md:, lg:)
+   - Typography fluide avec clamp()
+   - Touch-friendly (44px min pour boutons)
+
+8. NOMMAGE FICHIERS
+   - kebab-case.astro pour URL propres
+   - Exemple : about-us.astro → /about-us
+   - Index files : contact/index.astro → /contact
+-->

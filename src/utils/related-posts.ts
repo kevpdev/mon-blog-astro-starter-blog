@@ -119,9 +119,6 @@ export async function getRelatedPostsStats(
   currentPost: CollectionEntry<'blog'>
 ): Promise<{totalRelated: number, topSharedTag: string | null}> {
   const relatedPosts = await getRelatedPosts(currentPost, 10); // Plus large échantillon
-  const currentTags = (currentPost.data.tags || []).map((tag: string) => 
-    tag.toLowerCase().trim()
-  );
   
   // Compter les occurrences de chaque tag dans les articles liés
   const tagCounts = new Map<string, number>();

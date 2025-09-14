@@ -7,14 +7,17 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "cross-env ESLINT_USE_FLAT_CONFIG=false eslint . --ext .js,.ts,.astro",
-    "lint:fix": "cross-env ESLINT_USE_FLAT_CONFIG=false eslint . --ext .js,.ts,.astro --fix",
+    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "quality": "pnpm typecheck && pnpm lint && pnpm format:check",
+    "quality": "pnpm typecheck && pnpm test && pnpm lint && pnpm format:check",
+    "claude:sync": "bash .claude/commands/sync-context",
+    "claude:check": "bash .claude/commands/check-context",
+    "claude:diff": "bash .claude/commands/check-context",
     "prepare": "husky"
   },
   "dependencies": {
@@ -28,6 +31,7 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.35.0",
     "@tailwindcss/vite": "4.1.13",
     "@testing-library/dom": "^10.4.1",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
@@ -40,6 +44,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",
+    "jsdom": "^27.0.0",
     "lint-staged": "^15.5.2",
     "prettier": "^3.6.2",
     "tailwindcss": "4.1.13",
