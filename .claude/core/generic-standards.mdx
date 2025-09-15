@@ -1,0 +1,113 @@
+---
+description: Core coding standards and best practices for all technologies
+alwaysApply: true
+---
+
+# Generic Development Standards
+
+## Clean Code Principles
+
+### Code Quality Rules
+- Write no comments
+- Use strict types only
+- Disallow untyped values
+- Use explicit constants, never magic numbers
+- Avoid double negatives
+- Use long, readable variable names
+- Write the simplest code possible
+- Eliminate duplication (DRY)
+
+### Length Limits
+- Max 30 lines per function
+- Max 5 params per function
+- Max 300 lines per file
+- Max 10 sub-files per folder
+
+### Architecture Patterns
+- One responsibility per file
+- No flag parameters
+- Fail fast, throw errors early
+- Smart/dumb component pattern (frontend)
+
+## TypeScript Standards
+
+### Type System
+- Type everything explicitly
+- Never use `any`, prefer `unknown` if needed
+- Avoid `as` for type conversion, use type guards
+- Use generics for reusable functions
+- Use descriptive type parameter names
+
+### Interfaces and Types
+- Use `interface` for extensible objects
+- Use `type` for unions and primitives
+- Prefer string literal unions to enums
+- Define enum values explicitly when using enums
+- Avoid `null` and `undefined` in returns
+
+### Error Handling
+- Catch errors as `unknown | Error`
+- Use custom domain errors
+- Translate errors to user language
+- Log errors in EN with error codes
+
+## Testing Standards
+
+### Organization
+- Organize test files by feature
+- Group related tests using `describe`
+- Follow Arrange-Act-Assert (AAA) pattern
+
+### Test Quality
+- Write tests in English
+- Use descriptive test names
+- Prefer action-based user interaction tests
+- Use existing types for tests
+- Cover edge cases and error paths
+
+### Coverage Targets
+- Unit tests: >80% coverage
+- Integration tests for critical paths
+- E2E tests for user workflows
+
+## Accessibility Standards
+
+### WCAG 2.2 AA Compliance
+- Color contrast ≥ 4.5:1 for normal text
+- Color contrast ≥ 3:1 for large text
+- Semantic HTML structure
+- Proper heading hierarchy (H1→H2→H3)
+- Alt text for all informative images
+- Keyboard navigation support
+- Focus management
+- ARIA labels where needed
+
+## Performance Standards
+
+### Core Web Vitals Targets
+- **LCP (Largest Contentful Paint)**: < 2.5s
+- **FID (First Input Delay)**: < 100ms
+- **CLS (Cumulative Layout Shift)**: < 0.1
+
+### Optimization Techniques
+- Image optimization (WebP/AVIF with fallbacks)
+- Code splitting and lazy loading
+- CSS critical path optimization
+- Font loading optimization
+- Resource hints (preload, prefetch)
+
+## Security Guidelines
+
+### Frontend Security
+- Never commit secrets to repository
+- Sanitize user inputs
+- Use HTTPS everywhere
+- Implement proper CORS policies
+- Validate environment variables
+- Use CSP headers
+
+### Dependency Management
+- Regular security audits
+- Keep dependencies updated
+- Review third-party packages before installation
+- Use lock files for reproducible builds

@@ -1,0 +1,272 @@
+---
+description: Astro-specific development patterns and best practices
+alwaysApply: true
+---
+
+# Astro Development Patterns
+
+## Component Architecture
+
+### Component Structure Template
+```astro
+---
+interface Props {
+  title: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+const {
+  title,
+  variant = 'primary',
+  size = 'md',
+  className = ''
+} = Astro.props;
+---
+
+<div class={`component component--${variant} component--${size} ${className}`}>
+  <slot />
+</div>
+
+<style>
+  .component {
+    /* Use design tokens */
+    background: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+  }
+</style>
+```
+
+### Component Categories
+```
+src/components/
+├── ui/                    # Pure UI components (Button, Card, Input)
+├── layout/               # Layout components (Header, Footer, Navigation)
+└── [feature]/           # Feature-specific components
+```
+
+## Layout System
+
+### Layout Hierarchy
+- **BaseLayout.astro** - Core HTML structure (required)
+- **HomeLayout.astro** - Homepage specific
+- **BlogLayout.astro** - Blog posts with metadata
+- **PageLayout.astro** - Static content pages
+- **[Custom]Layout.astro** - New layouts extend BaseLayout
+
+### Layout Rules
+- ✅ All layouts MUST extend BaseLayout.astro
+- ✅ Use slots for content injection (`<slot />`, `<slot name="head" />`)
+- ❌ NEVER duplicate HTML structure between layouts
+- ❌ NEVER put CSS directly in layouts
+
+## CSS Architecture (Tailwind v4)
+
+### File Structure
+```
+src/styles/
+├── tailwind.css          # @tailwind imports + @layer components
+├── design-tokens.css     # CSS variables in RGB format
+└── prose.css            # Typography customization
+```
+
+### Design Token Usage
+```css
+/* CSS Variables (RGB format for Tailwind) */
+:root {
+  --brand-primary: 55 65 81;
+  --text-primary: 17 24 39;
+  --bg-primary: 255 255 255;
+}
+
+/* Tailwind Classes */
+class="bg-[rgb(var(--bg-primary))] text-[rgb(var(--text-primary))]"
+class="border-[rgb(var(--border-primary)/0.6)]"
+
+/* Custom CSS */
+.component {
+  background: rgb(var(--bg-secondary));
+  color: rgb(var(--text-primary));
+}
+```
+
+### CSS Rules
+- ✅ Use Tailwind utilities by default
+- ✅ Use design tokens with `bg-[rgb(var(--bg-primary))]` syntax
+- ✅ Use `@layer components` for small reusable classes only
+- ✅ Define CSS variables in RGB format
+- ❌ NEVER write hardcoded hex, rgba, or pixel values
+
+## Content Collections
+
+### Schema Patterns
+```typescript
+// src/content/config.ts
+export const collections = {
+  blog: defineCollection({
+    type: 'content',
+    schema: blogSchema,        // title, description, pubDate, tags
+  }),
+  pages: defineCollection({
+    type: 'content',
+    schema: pageSchema,        // title, description, optional dates
+  }),
+  footer: defineCollection({
+    type: 'data',
+    schema: footerSchema,      // social links, legal pages
+  })
+};
+```
+
+### Frontmatter Standards
+```yaml
+---
+title: 'Article Title (50-60 chars)'
+description: 'Meta description for SEO (140-160 chars)'
+pubDate: '2024-12-11T10:00:00Z'
+updatedDate: '2024-12-11T10:00:00Z'
+heroImage: './hero-image.webp'
+tags: ['astro', 'web-development', 'tutorial']
+draft: false
+---
+```
+
+## Image Optimization
+
+### Image Component Usage
+```astro
+<!-- Hero images -->
+<Image
+  width={1200}
+  height={675}
+  src={heroImage}
+  alt={`Image de l'article: ${title}`}
+  class="w-full h-full object-cover"
+/>
+
+<!-- Responsive containers -->
+<div class="aspect-[2/1] md:aspect-[16/9] overflow-hidden rounded-lg">
+  <Image ... />
+</div>
+```
+
+### Image Standards
+- **Hero images**: 1200x675px minimum, 16:9 aspect ratio
+- **Format**: WebP/AVIF with fallbacks
+- **Alt text**: Always descriptive and contextual
+- **Dimensions**: Always specify width and height
+
+## Responsive Design
+
+### Mobile-First Approach
+```css
+/* Base styles for mobile */
+.component { /* mobile styles */ }
+
+/* Progressive enhancement */
+@media (min-width: 640px) { /* sm: tablet */ }
+@media (min-width: 768px) { /* md: desktop */ }
+@media (min-width: 1024px) { /* lg: large desktop */ }
+```
+
+### Responsive Rules
+- ✅ Mobile-first styles by default
+- ✅ Use Tailwind breakpoints (sm, md, lg, xl)
+- ✅ Test on all breakpoints
+- ❌ NEVER use `max-width` media queries
+
+## SEO & Performance
+
+### Meta Requirements
+- **Title**: 50-60 characters
+- **Description**: 140-160 characters
+- **Canonical URLs**: Always included
+- **Structured data**: JSON-LD for blog posts
+- **Sitemap**: Auto-generated
+
+### Performance Patterns
+- Use `client:` directives judiciously
+- Prefer static generation over SSR when possible
+- Implement proper caching strategies
+- Optimize images with `<Image>` component
+
+## Accessibility Standards
+
+### Semantic HTML
+```astro
+<main>
+  <h1>Page Title</h1>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+
+  <article>
+    <h2>Article Title</h2>
+    <img src="image.jpg" alt="Descriptive alt text" />
+  </article>
+</main>
+```
+
+### Accessibility Rules
+- Use proper HTML5 semantic elements
+- One `<h1>` per page, logical heading hierarchy
+- `<button>` for actions, `<a>` for navigation
+- ARIA labels where needed
+- Keyboard navigation support
+- Color contrast ≥ 4.5:1 for normal text
+
+## Anti-Patterns (Forbidden)
+
+### CSS Anti-Patterns
+```css
+/* ❌ NEVER DO THIS */
+@media (max-width: 767px) { /* Desktop-first */ }
+color: #333333; /* Use design tokens */
+margin: 10px 5px 15px 20px; /* Inconsistent spacing */
+!important; /* Indicates architecture problem */
+```
+
+### Component Anti-Patterns
+```astro
+<!-- ❌ NEVER DO THIS -->
+<div style="color: red;">                    <!-- Inline styles -->
+<img src="..." />                           <!-- Missing alt text -->
+<button onclick="...">                      <!-- Inline JavaScript -->
+```
+
+## File Organization
+
+### Naming Conventions
+- **Components**: PascalCase (`Navigation.astro`, `SocialLinks.astro`)
+- **Layouts**: PascalCase + Layout suffix (`BlogLayout.astro`)
+- **Pages**: kebab-case (`about.astro`, `blog-post.astro`)
+- **CSS Classes**: kebab-case (`.nav-container`, `.mobile-menu`)
+- **CSS Variables**: kebab-case with semantic prefix (`--color-text-primary`)
+
+### Directory Structure
+```
+src/
+├── components/
+│   ├── ui/                        # Reusable UI elements
+│   └── layout/                    # Layout components
+├── layouts/                       # Page layouts
+├── pages/                         # File-based routing
+├── content/                       # Content collections
+├── styles/                        # CSS architecture
+└── config/                        # Configuration files
+```
+
+## Quality Checklist
+
+### Before Merging
+- [ ] Component follows established patterns
+- [ ] Uses TypeScript interfaces for props
+- [ ] Follows mobile-first responsive design
+- [ ] Uses design tokens for colors/spacing
+- [ ] Semantic HTML structure
+- [ ] Proper meta tags and alt texts
+- [ ] Tested on mobile, tablet, desktop
+- [ ] Accessibility verified

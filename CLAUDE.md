@@ -1,116 +1,70 @@
-# CLAUDE.md
+# Blog Astro - Documentation Projet
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Documentation technique pour le blog Astro avec TypeScript et Tailwind CSS.
 
-## Commands
+## Getting Started
 
-All commands are run from the root of the project using pnpm:
+### Prerequisites
+- Node.js 24+
+- pnpm (package manager)
 
 ### Development
-- `pnpm dev` - Start development server at localhost:4321
-- `pnpm build` - Build production site to ./dist/
-- `pnpm preview` - Preview build locally
-- `pnpm astro` - Run Astro CLI commands (e.g., `pnpm astro add`, `pnpm astro check`)
+```bash
+pnpm install       # Install dependencies
+pnpm dev          # Start dev server (localhost:4321)
+pnpm build        # Build for production
+pnpm preview      # Preview production build
+```
 
 ### Quality & Testing
-- `pnpm lint` - Run ESLint on .js, .ts, .astro files
-- `pnpm lint:fix` - Run ESLint with auto-fix
-- `pnpm format` - Format code with Prettier
-- `pnpm format:check` - Check code formatting
-- `pnpm typecheck` - Run Astro type checking
-- `pnpm test` - Run Vitest tests
-- `pnpm test:watch` - Run Vitest in watch mode
-- `pnpm quality` - Run typecheck, lint, and format check
-
-### Claude Maintenance
-- `/sync-context` - Update CLAUDE.md with current project structure
-- `/check-context` - Check if CLAUDE.md is up to date
-
-## Architecture Overview
-
-This is a modern Astro blog with TypeScript strict configuration, following component-based architecture with design tokens and mobile-first responsive design.
-
-### Layout Architecture (Composable Design)
-
-**Base Layout System**:
-- `BaseLayout.astro` - Core HTML structure, shared head/body/footer
-- `BlogLayout.astro` - Blog post layout with hero image, metadata, tags
-- `BlogListLayout.astro` - Layout component
-- `FormationsLayout.astro` - Layout component
-- `HomeLayout.astro` - Homepage-specific layout extending BaseLayout
-- `PageLayout.astro` - Static page layout for content pages
-
-**Component System**:
-```
-src/components/
-│   ├── layout/
-│   │   ├── FooterNew.astro
-│   │   ├── Header.astro # Site header
-│   │   ├── Navigation.astro # Navigation menu
-│   ├── ui/
-│   │   ├── Badge.astro
-│   │   ├── BaseHead.astro
-│   │   ├── Button.astro # Button variants
+```bash
+pnpm quality      # Run all checks (typecheck + lint + format)
+pnpm lint         # ESLint check
+pnpm lint:fix     # ESLint with auto-fix
+pnpm format       # Format with Prettier
+pnpm test         # Run Vitest tests
 ```
 
-### Routing
+## Tech Stack
 
-- `src/pages/[...slug].astro` - Dynamic pages from content collections
-- `src/pages/about.astro` - About page
-- `src/pages/contact.astro` - contact page
-- `src/pages/index.astro` - Homepage
-- `src/pages/meilleures-formations-seo-business.astro` - meilleures-formations-seo-business page
-- `src/pages/blog/index.astro` - Blog listing page
-- `src/pages/blog/[...slug].astro` - Individual blog posts
-- `src/pages/rss.xml.js` - RSS feed generation
+- **Astro 5.13.3** - Modern web framework
+- **TypeScript** - Strict mode with null checks
+- **Tailwind CSS 4.1.13** - Utility-first CSS framework
+- **Vitest** - Unit testing framework
+- **ESLint + Prettier** - Code quality and formatting
+- **Husky + lint-staged** - Pre-commit hooks
 
-### Configuration
+## Project Structure
 
-**Core Stack**:
-- **Astro astro
-^5.13.3** with TypeScript strict mode and null checks
-- **Tailwind CSS 4.1.13** with Vite plugin for performance
-- **Vitest** for unit testing with @testing-library/dom
-- **ESLint** flat config with TypeScript support
-- **Husky + lint-staged** for pre-commit quality control
+```
+src/
+├── components/
+│   ├── layout/          # Header, Footer, Navigation
+│   └── ui/              # Reusable UI components
+├── layouts/             # Page layout templates
+├── pages/               # File-based routing
+├── content/             # Blog posts and pages (Markdown)
+├── styles/              # CSS and design tokens
+└── config/              # Configuration files
+```
 
+## Key Features
 
-<!-- SECTION MANUELLE : Ne pas modifier automatiquement -->
+- **Static Site Generation** with Astro
+- **Content Collections** for blog posts
+- **Responsive Design** mobile-first approach
+- **SEO Optimized** with proper meta tags
+- **Performance** optimized images and assets
+- **Accessibility** WCAG 2.2 AA compliant
 
-## Development Best Practices
+## Contributing
 
-### Code Quality & Standards
+1. Follow existing code patterns and conventions
+2. Run `pnpm quality` before committing
+3. Write tests for new features
+4. Ensure responsive design works on all breakpoints
+5. Validate accessibility with screen readers
 
-**Automated Quality Control**:
-- **ESLint**: Static analysis with auto-fix (`pnpm lint:fix`)
-- **Prettier**: Code formatting with consistent style
-- **TypeScript**: Strict mode with null checks enabled
-- **Pre-commit Hooks**: Husky + lint-staged (validates only modified files)
-- **Quality Command**: `pnpm quality` runs typecheck + lint + format check
+## Deployment
 
-**Architecture Principles**:
-- **DRY (Don't Repeat Yourself)**: Shared components and layouts
-- **Component-Based**: Reusable, configurable components
-- **Mobile-First**: Progressive enhancement from mobile to desktop
-- **Design System**: Centralized tokens for consistency
-- **Semantic HTML**: Proper markup with accessibility in mind
-
-### Performance & UX
-
-**Technical Stack**:
-- **Package Manager**: pnpm with Node.js 24+ support
-- **Testing**: Vitest with @testing-library/dom for component testing
-- **Build**: Optimized production builds with Astro's static generation
-- **Assets**: WebP images with responsive sizing and lazy loading
-
-<!-- FIN SECTION MANUELLE -->
-
-
-# important-instruction-reminders
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
-
-      
-      IMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.
+The site is built for static hosting. Run `pnpm build` to generate the production build in `./dist/`.
