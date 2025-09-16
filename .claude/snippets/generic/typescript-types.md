@@ -157,6 +157,74 @@ function assertIsNumber(value: unknown): asserts value is number {
 }
 ```
 
+## Types de Gestion d'Erreurs
+
+```typescript
+// Types d'erreurs
+type ErrorType = 'validation' | 'network' | 'content' | 'system' | 'unknown';
+
+// Interface erreur applicative
+interface AppError {
+  type: ErrorType;
+  message: string;
+  details?: string;
+  code?: string;
+  timestamp: Date;
+}
+
+// Classe d'erreur personnalisée
+class CustomError extends Error {
+  type: ErrorType;
+  details?: string;
+  code?: string;
+  timestamp: Date;
+
+  constructor(type: ErrorType, message: string, details?: string, code?: string) {
+    super(message);
+    this.type = type;
+    this.details = details;
+    this.code = code;
+    this.timestamp = new Date();
+    this.name = 'CustomError';
+  }
+
+  toJSON(): AppError {
+    return {
+      type: this.type,
+      message: this.message,
+      details: this.details,
+      code: this.code,
+      timestamp: this.timestamp
+    };
+  }
+}
+
+// Types pour composants d'erreur
+interface ErrorComponentProps {
+  title?: string;
+  message: string;
+  type?: 'error' | 'warning' | 'info';
+  showError?: boolean;
+  dismissible?: boolean;
+  class?: string;
+}
+
+// Types pour validation
+type ValidatorFunction<T> = (value: unknown, fieldName: string) => T;
+type AsyncValidatorFunction<T> = (value: unknown, fieldName: string) => Promise<T>;
+
+// Types pour retry logic
+interface RetryOptions {
+  maxRetries?: number;
+  delay?: number;
+  context?: string;
+}
+
+// Types pour safe execution
+type SafeExecuteResult<T> = T | Promise<T>;
+type FallbackValue<T> = T | (() => T);
+```
+
 ## Types d'Événements
 
 ```typescript

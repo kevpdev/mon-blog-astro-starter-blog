@@ -130,26 +130,30 @@ src/components/
 
 ## Context Organization & Loading Strategy
 
-The `.claude/` directory is organized for optimal context loading and performance:
+The `.claude/` directory is organized with thematic subfolders for optimal context loading and performance:
 
 ### **Core Context (Always Loaded)**
-- **`core/generic-standards.mdx`** - TypeScript, testing, accessibility, security standards
-- **`core/astro-patterns.mdx`** - Astro-specific patterns, components, CSS architecture
+- **`core/project-overview.mdx`** - Essential architecture, tech stack, project structure
+- **`core/development-workflow.mdx`** - Commands, quality workflow, essential practices
 - **`CLAUDE.md`** (this file) - Central orchestration and project context
 
-### **Specialized Rules (Contextual Loading)**
+### **Specialized Rules (Contextual Loading by Theme)**
 - **`rules/generic/`** - Reusable across projects
-  - `typescript-naming.mdx` - Naming conventions
-  - `testing-frontend.mdx` - Frontend testing patterns
-  - `package-installation.mdx` - Dependency management
+  - `code-quality/` - Clean code, TypeScript standards, naming conventions
+  - `testing/` - Testing organization, coverage, frontend testing patterns
+  - `error-handling/` - Error handling patterns, monitoring, validation
+  - `security/` - Frontend security, dependency management
+  - `performance/` - Core Web Vitals, optimization strategies
 - **`rules/astro/`** - Framework-specific patterns
-  - `tailwind-config.mdx` - Tailwind CSS v4 configuration
-  - `testing-standards.mdx` - Astro testing patterns
-  - `component-architecture.mdx` - Component design patterns
+  - `components/` - Component architecture, error components, props patterns
+  - `layouts/` - Layout system, slot patterns
+  - `styling/` - Tailwind config, design tokens, responsive design
+  - `content/` - Content collections, frontmatter, images
+  - `performance/` - SEO optimization, build optimization
+  - `testing/` - Astro testing patterns, component testing
 - **`rules/workflows/`** - Process and methodology
   - `feature-implementation.md` - Feature development process
   - `content-creation.md` - Content creation workflow
-  - `performance-optimization.mdx` - Performance optimization strategies
 
 ### **Code Generation**
 - **`templates/generic/`** - Universal templates
@@ -189,10 +193,10 @@ The `.claude/` directory is organized for optimal context loading and performanc
   - Auto-cleanup after 7 days to prevent repo pollution
 
 ### **Context Loading Optimization**
-- **Level 1 (Always)**: `core/` + `CLAUDE.md` (~800 lines)
-- **Level 2 (On Demand)**: `rules/` + relevant `templates/` (~400 lines)
-- **Level 3 (As Needed)**: `snippets/` + `inputs/` (~200 lines)
-- **Total Optimized**: ~1,400 lines vs. previous 2,163 lines (35% reduction)
+- **Level 1 (Always)**: `core/` + `CLAUDE.md` (~400 lines)
+- **Level 2 (Contextual)**: Specific `rules/` subfolder (~100-150 lines each)
+- **Level 3 (As Needed)**: `templates/` + `snippets/` (~50-100 lines each)
+- **Total Optimized**: ~400-700 lines per context vs. previous 2,163 lines (70% reduction)
 
 ## Claude Code Workflow Integration
 
@@ -220,11 +224,16 @@ The `.claude/` directory is organized for optimal context loading and performanc
 ```
 
 ### **Context Referencing Strategy**
-- **Before editing**: Check `core/` for patterns and standards
-- **During development**: Reference relevant `rules/` and `templates/`
-- **For testing**: Use `snippets/generic/vitest-config-guide.md` for aliases and coverage
-- **For debugging**: Utilize `inputs/` and `snippets/` for quick fixes
-- **Code generation**: Use `templates/` for consistent structure
+- **Before editing**: Check `core/` for essential patterns and workflow
+- **During development**: Reference specific `rules/` subfolders by domain
+- **For components**: Use `rules/astro/components/` and `templates/astro/`
+- **For testing**: Use `rules/generic/testing/` and `rules/astro/testing/`
+- **For errors**: Use `rules/generic/error-handling/` and `rules/astro/components/error-components.mdx`
+- **For styling**: Use `rules/astro/styling/` for Tailwind configuration
+- **For performance**: Use `rules/generic/performance/` for Core Web Vitals
+- **For security**: Use `rules/generic/security/` for frontend security
+- **For debugging**: Utilize `inputs/` and relevant `snippets/` subfolders
+- **Code generation**: Use domain-specific `templates/` subfolders
 
 ### **Performance Optimization**
 - Load only relevant context based on task type
@@ -242,13 +251,29 @@ The `.claude/` directory is organized for optimal context loading and performanc
 
 **Quality Control Workflow**:
 - Run `pnpm quality` before committing (enforced by pre-commit hooks)
-- Follow standards defined in `core/generic-standards.mdx`
-- Apply Astro patterns from `core/astro-patterns.mdx`
-- Validate accessibility and performance against targets
+- Follow standards defined in `rules/generic/code-quality/`
+- Apply Astro patterns from `rules/astro/`
+- Validate accessibility and performance against targets from `rules/generic/performance/`
 
 **Architecture Compliance**:
-- Follow component-based design patterns from `rules/astro/component-architecture.mdx`
-- Respect layout hierarchy defined in project structure
-- Use design tokens consistently (see `snippets/css/responsive-patterns.md`)
+- Follow component-based design patterns from `rules/astro/components/`
+- Respect layout hierarchy defined in `core/project-overview.mdx`
+- Use design tokens consistently from `rules/astro/styling/`
 - Maintain mobile-first approach with Tailwind breakpoints
-- Apply TypeScript strict patterns from `core/generic-standards.mdx`
+- Apply TypeScript strict patterns from `rules/generic/code-quality/typescript.mdx`
+- Use error handling patterns from `rules/generic/error-handling/`
+
+## Context Maintenance
+
+**Automatic CLAUDE.md Updates**:
+- Claude MUST automatically check and update CLAUDE.md after any structural modification
+- Update triggers: .claude/ structure changes, new components/pages, new commands, workflow modifications
+- Sections to maintain: Architecture Overview, Commands, Context Organization, Context Referencing Strategy
+- Process: Read current state → Note impacts → Update immediately → Validate references
+- Goal: Keep CLAUDE.md always synchronized with actual project state
+
+**Update Responsibility**:
+- Claude is responsible for maintaining documentation accuracy
+- No manual intervention required from user
+- Updates must happen in the same session as modifications
+- All references and file paths must remain valid and current

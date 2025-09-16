@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import type { NavigationConfig } from '../../types/navigation';
 import HeaderLink from '../ui/HeaderLink.astro';
 import FormattedSlug from '../ui/FormattedSlug.astro';
+import { handleError, logError } from '../../utils/error-handler';
 
 interface Props {
   navigation: NavigationConfig;
@@ -25,23 +26,24 @@ async function buildNavigationWithDynamicChildren(config: NavigationConfig) {
       try {
         const entries = await getCollection(collection);
         let filteredEntries = filter ? entries.filter(filter) : entries;
-        
+
         if (sort) {
           filteredEntries = filteredEntries.sort(sort);
         }
-        
-        navItem.children = transform 
+
+        navItem.children = transform
           ? filteredEntries.map(transform)
           : filteredEntries.map(entry => ({
               label: entry.data.title || entry.slug,
               href: `/${collection}/${entry.slug || entry.id}`,
               enabled: true
             }));
-            
+
         // Filter enabled children
         navItem.children = navItem.children.filter(child => child.enabled !== false);
       } catch (error) {
-        console.error(`Error loading dynamic children for ${item.label}:`, error);
+        const appError = handleError(error);
+        logError(appError, `Navigation dynamic children for ${item.label}`);
         navItem.children = [];
       }
     }
