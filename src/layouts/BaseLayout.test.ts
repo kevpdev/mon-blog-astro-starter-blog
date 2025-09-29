@@ -7,7 +7,7 @@ const createBaseLayoutThemeScript = () => {
     try {
       const savedTheme = localStorage.getItem('theme');
       let systemPrefersDark = false;
-      
+
       try {
         systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       } catch {
@@ -34,14 +34,14 @@ describe('BaseLayout Theme Initialization', () => {
   beforeEach(() => {
     // Reset DOM
     document.documentElement.className = '';
-    
+
     // Reset mocks
     vi.clearAllMocks();
-    
+
     // Get fresh references to mocks
     mockLocalStorage = window.localStorage;
     mockMatchMedia = window.matchMedia;
-    
+
     // Create the theme initialization script
     themeScript = createBaseLayoutThemeScript();
   });
@@ -50,36 +50,36 @@ describe('BaseLayout Theme Initialization', () => {
     test('should immediately apply dark theme when saved theme is dark', () => {
       mockLocalStorage.getItem.mockReturnValue('dark');
       mockMatchMedia.mockReturnValue({ matches: false });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
 
     test('should not apply dark theme when saved theme is light', () => {
       mockLocalStorage.getItem.mockReturnValue('light');
       mockMatchMedia.mockReturnValue({ matches: false });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
 
     test('should apply dark theme when no saved theme but system prefers dark', () => {
       mockLocalStorage.getItem.mockReturnValue(null);
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
 
     test('should not apply dark theme when no saved theme and system prefers light', () => {
       mockLocalStorage.getItem.mockReturnValue(null);
       mockMatchMedia.mockReturnValue({ matches: false });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
   });
@@ -88,18 +88,18 @@ describe('BaseLayout Theme Initialization', () => {
     test('should check system preference when no saved theme', () => {
       mockLocalStorage.getItem.mockReturnValue(null);
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(mockMatchMedia).toHaveBeenCalledWith('(prefers-color-scheme: dark)');
     });
 
     test('should not check system preference when theme is saved', () => {
       mockLocalStorage.getItem.mockReturnValue('light');
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(mockMatchMedia).toHaveBeenCalledWith('(prefers-color-scheme: dark)');
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
@@ -109,7 +109,7 @@ describe('BaseLayout Theme Initialization', () => {
       mockMatchMedia.mockImplementation(() => {
         throw new Error('matchMedia not supported');
       });
-      
+
       // Should not throw
       expect(() => themeScript.initializeTheme()).not.toThrow();
     });
@@ -118,9 +118,9 @@ describe('BaseLayout Theme Initialization', () => {
   describe('LocalStorage Integration', () => {
     test('should read theme preference from localStorage', () => {
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       themeScript.initializeTheme();
-      
+
       expect(mockLocalStorage.getItem).toHaveBeenCalledWith('theme');
     });
 
@@ -129,7 +129,7 @@ describe('BaseLayout Theme Initialization', () => {
         throw new Error('LocalStorage access denied');
       });
       mockMatchMedia.mockReturnValue({ matches: false });
-      
+
       // Should not throw and should fallback to system preference
       expect(() => themeScript.initializeTheme()).not.toThrow();
     });
@@ -137,11 +137,11 @@ describe('BaseLayout Theme Initialization', () => {
     test('should handle invalid localStorage values', () => {
       mockLocalStorage.getItem.mockReturnValue('invalid-theme');
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       // Invalid value should not match 'dark', and since there IS a saved theme
-      // (even if invalid), it should NOT fallback to system preference  
+      // (even if invalid), it should NOT fallback to system preference
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
   });
@@ -149,9 +149,9 @@ describe('BaseLayout Theme Initialization', () => {
   describe('DOM Manipulation', () => {
     test('should add dark class to document.documentElement', () => {
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(document.documentElement.className).toBe('dark');
     });
@@ -159,9 +159,9 @@ describe('BaseLayout Theme Initialization', () => {
     test('should not modify existing classes when adding dark class', () => {
       document.documentElement.className = 'existing-class another-class';
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('existing-class')).toBe(true);
       expect(document.documentElement.classList.contains('another-class')).toBe(true);
       expect(document.documentElement.classList.contains('dark')).toBe(true);
@@ -170,9 +170,9 @@ describe('BaseLayout Theme Initialization', () => {
     test('should work when documentElement already has dark class', () => {
       document.documentElement.classList.add('dark');
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       themeScript.initializeTheme();
-      
+
       // Should still have dark class (no duplication)
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(document.documentElement.classList.length).toBe(1);
@@ -183,18 +183,18 @@ describe('BaseLayout Theme Initialization', () => {
     test('should execute synchronously to prevent FOUC', () => {
       let executed = false;
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       // Mock to verify synchronous execution
       const originalAdd = document.documentElement.classList.add;
       document.documentElement.classList.add = vi.fn((...args) => {
         executed = true;
         return originalAdd.apply(document.documentElement.classList, args);
       });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(executed).toBe(true);
-      
+
       // Restore original method
       document.documentElement.classList.add = originalAdd;
     });
@@ -202,12 +202,12 @@ describe('BaseLayout Theme Initialization', () => {
     test('should not perform unnecessary DOM queries', () => {
       const spy = vi.spyOn(document, 'querySelector');
       mockLocalStorage.getItem.mockReturnValue('light');
-      
+
       themeScript.initializeTheme();
-      
+
       // Should not query DOM elements, only work with documentElement
       expect(spy).not.toHaveBeenCalled();
-      
+
       spy.mockRestore();
     });
   });
@@ -221,21 +221,21 @@ describe('BaseLayout Theme Initialization', () => {
         .dark .example { color: white; }
       `;
       document.head.appendChild(style);
-      
+
       mockLocalStorage.getItem.mockReturnValue('dark');
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      
+
       // Verify the CSS rule would apply
       const testElement = document.createElement('div');
       testElement.className = 'example';
       document.body.appendChild(testElement);
-      
+
       // The .dark .example selector should now be active
       expect(document.documentElement.classList.contains('dark')).toBe(true);
       expect(testElement.matches('.dark .example')).toBe(true);
-      
+
       // Cleanup
       document.body.removeChild(testElement);
       document.head.removeChild(style);
@@ -250,12 +250,12 @@ describe('BaseLayout Theme Initialization', () => {
         body { color: rgb(var(--text-color)); }
       `;
       document.head.appendChild(style);
-      
+
       mockLocalStorage.getItem.mockReturnValue('dark');
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
-      
+
       // Cleanup
       document.head.removeChild(style);
     });
@@ -265,9 +265,9 @@ describe('BaseLayout Theme Initialization', () => {
     test('should prioritize saved theme over system preference', () => {
       mockLocalStorage.getItem.mockReturnValue('light');
       mockMatchMedia.mockReturnValue({ matches: true }); // System prefers dark
-      
+
       themeScript.initializeTheme();
-      
+
       // Should use saved theme (light) not system preference (dark)
       expect(document.documentElement.classList.contains('dark')).toBe(false);
     });
@@ -275,18 +275,18 @@ describe('BaseLayout Theme Initialization', () => {
     test('should use system preference when no saved theme', () => {
       mockLocalStorage.getItem.mockReturnValue(null);
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
 
     test('should handle empty string as no saved theme', () => {
       mockLocalStorage.getItem.mockReturnValue('');
       mockMatchMedia.mockReturnValue({ matches: true });
-      
+
       themeScript.initializeTheme();
-      
+
       expect(document.documentElement.classList.contains('dark')).toBe(true);
     });
   });
@@ -297,18 +297,18 @@ describe('BaseLayout Theme Initialization', () => {
       // @ts-ignore
       Object.defineProperty(document, 'documentElement', {
         value: null,
-        configurable: true
+        configurable: true,
       });
-      
+
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       // Should not throw
       expect(() => themeScript.initializeTheme()).not.toThrow();
-      
+
       // Restore
       Object.defineProperty(document, 'documentElement', {
         value: originalDocumentElement,
-        configurable: true
+        configurable: true,
       });
     });
 
@@ -316,32 +316,32 @@ describe('BaseLayout Theme Initialization', () => {
       const mockElement = { classList: null };
       Object.defineProperty(document, 'documentElement', {
         value: mockElement,
-        configurable: true
+        configurable: true,
       });
-      
+
       mockLocalStorage.getItem.mockReturnValue('dark');
-      
+
       // Should not throw
       expect(() => themeScript.initializeTheme()).not.toThrow();
-      
+
       // Restore
       Object.defineProperty(document, 'documentElement', {
         value: document.documentElement,
-        configurable: true
+        configurable: true,
       });
     });
 
     test('should work in different browser environments', () => {
       // Test in environment where matchMedia might not exist
       const originalMatchMedia = window.matchMedia;
-      // @ts-ignore  
+      // @ts-ignore
       delete window.matchMedia;
-      
+
       mockLocalStorage.getItem.mockReturnValue(null);
-      
+
       // Should not throw and should fallback gracefully
       expect(() => themeScript.initializeTheme()).not.toThrow();
-      
+
       // Restore
       window.matchMedia = originalMatchMedia;
     });
@@ -352,10 +352,10 @@ describe('BaseLayout Theme Initialization', () => {
       const originalWindow = global.window;
       // @ts-ignore
       delete global.window;
-      
+
       // Should not throw in SSR environment
       expect(() => themeScript.initializeTheme()).not.toThrow();
-      
+
       global.window = originalWindow;
     });
 
@@ -363,10 +363,10 @@ describe('BaseLayout Theme Initialization', () => {
       const originalDocument = global.document;
       // @ts-ignore
       delete global.document;
-      
-      // Should not throw in SSR environment  
+
+      // Should not throw in SSR environment
       expect(() => themeScript.initializeTheme()).not.toThrow();
-      
+
       global.document = originalDocument;
     });
   });

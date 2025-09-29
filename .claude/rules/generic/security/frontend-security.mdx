@@ -7,12 +7,14 @@ description: Frontend security best practices and guidelines
 ## Core Security Principles
 
 ### Never Commit Secrets
+
 - Never commit secrets, API keys, or passwords to repository
 - Use environment variables for sensitive configuration
 - Validate environment variables at startup
 - Use different secrets for development, staging, and production
 
 ### Input Sanitization
+
 ```typescript
 // ✅ Always sanitize user inputs
 function sanitizeUserInput(input: string): string {
@@ -37,10 +39,13 @@ function processUserComment(rawComment: string): string {
 ## HTTPS and Transport Security
 
 ### HTTPS Everywhere
+
 ```typescript
 // ✅ Enforce HTTPS in production
 if (import.meta.env.PROD && globalThis.location?.protocol !== 'https:') {
-  globalThis.location.replace(`https:${globalThis.location.href.substring(globalThis.location.protocol.length)}`);
+  globalThis.location.replace(
+    `https:${globalThis.location.href.substring(globalThis.location.protocol.length)}`,
+  );
 }
 
 // ✅ Use secure headers
@@ -51,18 +56,21 @@ export default defineConfig({
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
-      'X-XSS-Protection': '1; mode=block'
-    }
-  }
+      'X-XSS-Protection': '1; mode=block',
+    },
+  },
 });
 ```
 
 ## Content Security Policy (CSP)
 
 ### CSP Configuration
+
 ```html
 <!-- ✅ Implement strict CSP -->
-<meta http-equiv="Content-Security-Policy" content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
   default-src 'self';
   script-src 'self' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
@@ -72,10 +80,12 @@ export default defineConfig({
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
-">
+"
+/>
 ```
 
 ### Inline Script Security
+
 ```astro
 ---
 // ✅ Use nonce for inline scripts when necessary
@@ -93,6 +103,7 @@ const nonce = crypto.randomUUID();
 ## Data Validation
 
 ### Client-Side Validation
+
 ```typescript
 // ✅ Always validate on both client and server
 function validateEmail(email: string): boolean {
@@ -114,6 +125,7 @@ function validateUserInput(input: unknown): string {
 ```
 
 ### Form Security
+
 ```astro
 ---
 // ✅ Validate form data on submit
@@ -146,6 +158,7 @@ const message = validateUserInput(formData.get('message'));
 ## Authentication & Authorization
 
 ### Token Handling
+
 ```typescript
 // ✅ Secure token storage and handling
 class TokenManager {
@@ -180,6 +193,7 @@ class TokenManager {
 ```
 
 ### Session Management
+
 ```typescript
 // ✅ Secure session handling
 function validateSession(): boolean {
@@ -203,6 +217,7 @@ function validateSession(): boolean {
 ## Cross-Site Scripting (XSS) Prevention
 
 ### Output Encoding
+
 ```astro
 ---
 // ✅ Astro automatically escapes content, but be explicit
@@ -220,6 +235,7 @@ const userContent = sanitizeUserInput(userInput);
 ```
 
 ### Safe HTML Processing
+
 ```typescript
 // ✅ Use a proper HTML sanitizer for rich content
 import DOMPurify from 'isomorphic-dompurify';
@@ -227,7 +243,7 @@ import DOMPurify from 'isomorphic-dompurify';
 function sanitizeHTML(html: string): string {
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'ul', 'ol', 'li'],
-    ALLOWED_ATTR: []
+    ALLOWED_ATTR: [],
   });
 }
 ```
@@ -235,6 +251,7 @@ function sanitizeHTML(html: string): string {
 ## Environment Security
 
 ### Environment Variables
+
 ```typescript
 // ✅ Validate environment variables
 interface EnvConfig {
@@ -247,7 +264,7 @@ function validateEnvConfig(): EnvConfig {
   const config = {
     NODE_ENV: import.meta.env.NODE_ENV,
     API_URL: import.meta.env.API_URL,
-    SITE_URL: import.meta.env.SITE_URL
+    SITE_URL: import.meta.env.SITE_URL,
   };
 
   // Validate required variables
@@ -262,6 +279,7 @@ function validateEnvConfig(): EnvConfig {
 ```
 
 ### Secrets Management
+
 ```typescript
 // ✅ Never expose secrets to client
 // .env (server-only)
@@ -276,7 +294,7 @@ function validateEnvConfig(): EnvConfig {
 // ✅ Use different prefixes for clarity
 const clientConfig = {
   apiUrl: import.meta.env.PUBLIC_API_URL,
-  siteName: import.meta.env.PUBLIC_SITE_NAME
+  siteName: import.meta.env.PUBLIC_SITE_NAME,
 };
 
 // ❌ Never expose secrets
@@ -286,6 +304,7 @@ const clientConfig = {
 ## Dependency Security
 
 ### Package Auditing
+
 ```bash
 # ✅ Regular security audits
 pnpm audit
@@ -296,6 +315,7 @@ pnpm dlx audit-ci --config audit-ci.json
 ```
 
 ### Dependency Management
+
 ```json
 // package.json
 {
@@ -310,6 +330,7 @@ pnpm dlx audit-ci --config audit-ci.json
 ## Error Handling Security
 
 ### Safe Error Messages
+
 ```typescript
 // ✅ Don't expose system information in errors
 function handleUserError(error: unknown): string {
@@ -338,6 +359,7 @@ function handleUserError(error: unknown): string {
 ## Security Checklist
 
 ### Development
+
 - [ ] All user inputs are validated and sanitized
 - [ ] No secrets committed to repository
 - [ ] Environment variables are validated
@@ -345,24 +367,28 @@ function handleUserError(error: unknown): string {
 - [ ] CSP headers are configured
 
 ### Authentication
+
 - [ ] Tokens are stored securely (httpOnly cookies in production)
 - [ ] Session validation is implemented
 - [ ] Token expiration is checked
 - [ ] Logout clears all session data
 
 ### Data Protection
+
 - [ ] User data is validated before processing
 - [ ] Output is properly escaped
 - [ ] File uploads are restricted and validated
 - [ ] Rate limiting is implemented where needed
 
 ### Dependencies
+
 - [ ] Regular security audits are performed
 - [ ] Dependencies are kept up to date
 - [ ] Only necessary packages are installed
 - [ ] Vulnerability scanning is automated
 
 ### Error Handling
+
 - [ ] Error messages don't expose system information
 - [ ] Errors are logged securely
 - [ ] Stack traces are not exposed to users

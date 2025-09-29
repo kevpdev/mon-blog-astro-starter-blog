@@ -5,10 +5,12 @@ Documentation technique pour le blog Astro avec TypeScript et Tailwind CSS.
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 24+
 - pnpm (package manager)
 
 ### Development
+
 ```bash
 pnpm install       # Install dependencies
 pnpm dev          # Start dev server (localhost:4321)
@@ -17,6 +19,7 @@ pnpm preview      # Preview production build
 ```
 
 ### Quality & Testing
+
 ```bash
 pnpm quality      # Run all checks (typecheck + lint + format)
 pnpm lint         # ESLint check

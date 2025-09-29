@@ -26,7 +26,7 @@ export function getCurrentTheme(): ThemeMode {
  */
 export function setTheme(theme: ThemeMode): void {
   if (typeof window === 'undefined') return;
-  
+
   localStorage.setItem('theme', theme);
   applyTheme(theme);
 }
@@ -36,12 +36,12 @@ export function setTheme(theme: ThemeMode): void {
  */
 export function applyTheme(theme: ThemeMode): void {
   if (typeof document === 'undefined') return;
-  
+
   const root = document.documentElement;
-  
+
   // Remove existing theme class
   root.classList.remove('dark');
-  
+
   // Apply new theme (only add dark class for dark mode)
   if (theme === 'system') {
     const systemTheme = getSystemTheme();
@@ -58,10 +58,10 @@ export function applyTheme(theme: ThemeMode): void {
  */
 export function initializeTheme(): void {
   if (typeof window === 'undefined') return;
-  
+
   const currentTheme = getCurrentTheme();
   applyTheme(currentTheme);
-  
+
   // Listen for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (getCurrentTheme() === 'system') {

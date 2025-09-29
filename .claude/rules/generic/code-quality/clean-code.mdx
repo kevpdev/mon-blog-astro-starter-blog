@@ -7,6 +7,7 @@ description: Clean code principles and quality standards
 ## Code Quality Rules
 
 ### Fundamental Principles
+
 - Write no comments unless absolutely necessary
 - Use strict types only
 - Disallow untyped values
@@ -17,12 +18,14 @@ description: Clean code principles and quality standards
 - Eliminate duplication (DRY)
 
 ### Length Limits
+
 - Max 30 lines per function
 - Max 5 parameters per function
 - Max 300 lines per file
 - Max 10 sub-files per folder
 
 ### Architecture Patterns
+
 - One responsibility per file
 - No flag parameters
 - Fail fast, throw errors early
@@ -31,6 +34,7 @@ description: Clean code principles and quality standards
 ## Function Design
 
 ### Function Rules
+
 ```typescript
 // ✅ Good: Single responsibility, clear name
 function calculateTotalPriceWithTax(price: number, taxRate: number): number {
@@ -45,6 +49,7 @@ function process(data: any): any {
 ```
 
 ### Parameter Guidelines
+
 ```typescript
 // ✅ Good: Few parameters, clear types
 function createUser(name: string, email: string, role: UserRole): User {
@@ -52,7 +57,14 @@ function createUser(name: string, email: string, role: UserRole): User {
 }
 
 // ❌ Bad: Too many parameters
-function createUser(name: string, email: string, age: number, role: string, active: boolean, country: string): User {
+function createUser(
+  name: string,
+  email: string,
+  age: number,
+  role: string,
+  active: boolean,
+  country: string,
+): User {
   // Too many parameters - use an object instead
 }
 
@@ -65,6 +77,7 @@ function createUser(userData: CreateUserRequest): User {
 ## Variable and Naming
 
 ### Naming Conventions
+
 ```typescript
 // ✅ Good: Descriptive, specific names
 const userAccountBalance = 1500;
@@ -78,6 +91,7 @@ const calc = (b: number) => b * 0.02;
 ```
 
 ### Constants vs Magic Numbers
+
 ```typescript
 // ✅ Good: Named constants
 const MAX_LOGIN_ATTEMPTS = 3;
@@ -97,6 +111,7 @@ if (loginAttempts > 3) {
 ## Code Organization
 
 ### File Structure
+
 ```typescript
 // ✅ Good: One main export per file
 // user-service.ts
@@ -111,12 +126,13 @@ export interface User {
 
 // ❌ Bad: Multiple unrelated exports
 // utils.ts
-export class UserService { }
-export class EmailService { }
-export class DatabaseConnection { }
+export class UserService {}
+export class EmailService {}
+export class DatabaseConnection {}
 ```
 
 ### Function Composition
+
 ```typescript
 // ✅ Good: Small, composable functions
 const validateEmail = (email: string): boolean => {
@@ -146,6 +162,7 @@ const processUserRegistration = (email: string): User => {
 ## Error Handling
 
 ### Fail Fast Principle
+
 ```typescript
 // ✅ Good: Early validation and errors
 function calculateDiscount(price: number, discountPercentage: number): number {
@@ -175,6 +192,7 @@ function calculateDiscount(price: number, discountPercentage: number): number {
 ## Anti-Patterns to Avoid
 
 ### Common Mistakes
+
 ```typescript
 // ❌ Comments explaining what code does
 function calculateTotal() {
@@ -228,6 +246,7 @@ function processRegularUser(user: User) {
 ## Code Review Checklist
 
 ### Before Committing
+
 - [ ] Function has single responsibility
 - [ ] Variables have descriptive names
 - [ ] No magic numbers or strings

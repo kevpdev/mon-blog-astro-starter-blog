@@ -4,7 +4,10 @@ import type { CollectionEntry } from 'astro:content';
  * Helper function to safely access array elements in tests
  * Throws descriptive error if element doesn't exist
  */
-export function getPostAt(posts: CollectionEntry<'blog'>[], index: number): CollectionEntry<'blog'> {
+export function getPostAt(
+  posts: CollectionEntry<'blog'>[],
+  index: number,
+): CollectionEntry<'blog'> {
   const post = posts[index];
   if (!post) {
     throw new Error(`Expected post at index ${index}, but got ${posts.length} posts`);

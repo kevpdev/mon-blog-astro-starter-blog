@@ -1,6 +1,6 @@
 ---
-title: "À propos"
-description: "En savoir plus sur ce blog Astro"
+title: 'À propos'
+description: 'En savoir plus sur ce blog Astro'
 pubDate: 2024-12-01
 ---
 

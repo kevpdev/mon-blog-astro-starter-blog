@@ -57,10 +57,12 @@ const socialLinkSchema = z.object({
 
 const footerSchema = z.object({
   socialLinks: z.array(socialLinkSchema),
-  legalPages: z.array(z.object({
-    title: z.string(),
-    href: z.string(),
-  })),
+  legalPages: z.array(
+    z.object({
+      title: z.string(),
+      href: z.string(),
+    }),
+  ),
   copyright: z.string(),
 });
 
@@ -75,6 +77,7 @@ export const collections = {
 ## Frontmatter Examples
 
 ### Blog Post
+
 ```yaml
 ---
 title: 'Guide Complet Astro : Maîtrisez les Bases'
@@ -90,6 +93,7 @@ category: 'tutorial'
 ```
 
 ### Static Page
+
 ```yaml
 ---
 title: 'À Propos de Notre Équipe'

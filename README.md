@@ -5,6 +5,7 @@ Un template de blog Astro moderne avec Tailwind CSS v4, design tokens, TypeScrip
 ## 🚀 Fonctionnalités
 
 ### ✨ Architecture & Performance
+
 - ✅ **Architecture composable** - Layouts modulaires et composants réutilisables
 - ✅ **Tailwind CSS v4** - Dernière version avec architecture CSS-in-JS
 - ✅ **Design Tokens System** - Système de design cohérent et maintenable
@@ -13,6 +14,7 @@ Un template de blog Astro moderne avec Tailwind CSS v4, design tokens, TypeScrip
 - ✅ **Mobile-first responsive** - Design adaptatif sur tous écrans
 
 ### 📝 Contenu & SEO
+
 - ✅ **3 Collections de contenu** - Blog, pages statiques, configuration footer
 - ✅ **Support Markdown & MDX** - Contenu riche avec composants
 - ✅ **SEO optimisé** - Meta tags, URLs canoniques, sitemap XML
@@ -20,12 +22,14 @@ Un template de blog Astro moderne avec Tailwind CSS v4, design tokens, TypeScrip
 - ✅ **Images optimisées** - Composant Image d'Astro avec WebP
 
 ### 🎨 Style & UX
+
 - ✅ **Mode sombre** - Support complet avec préférences système
 - ✅ **Navigation responsive** - Menu hamburger mobile
 - ✅ **Composants UI** - Système de composants réutilisables
 - ✅ **Accessibilité WCAG 2.2** - Standards d'accessibilité respectés
 
 ### 🛠️ Développement
+
 - ✅ **Husky + Lint-staged** - Pre-commit hooks automatiques
 - ✅ **ESLint + Prettier** - Formatage et qualité de code
 - ✅ **Vitest** - Tests unitaires configurés
@@ -34,6 +38,7 @@ Un template de blog Astro moderne avec Tailwind CSS v4, design tokens, TypeScrip
 ## 🏗️ Architecture du Projet
 
 ### Structure des fichiers
+
 ```text
 mon-blog-astro-starter-blog/
 ├── src/
@@ -117,15 +122,15 @@ mon-blog-astro-starter-blog/
 /* src/styles/design-tokens.css */
 :root {
   /* Brand Colors */
-  --brand-primary: 55 65 81;           /* Format RGB pour Tailwind */
+  --brand-primary: 55 65 81; /* Format RGB pour Tailwind */
   --brand-secondary: 107 114 128;
-  
+
   /* Semantic Colors */
   --text-primary: 17 24 39;
   --text-secondary: 75 85 99;
   --bg-primary: 255 255 255;
   --bg-secondary: 243 244 246;
-  
+
   /* State Colors */
   --success: 5 150 105;
   --warning: 217 119 6;
@@ -193,11 +198,11 @@ export const collections = {
       updatedDate: z.date().optional(),
       heroImage: z.string().optional(),
       tags: z.array(z.string()).default([]),
-    })
+    }),
   }),
   pages: defineCollection({
     // Schéma similaire pour pages statiques
-  })
+  }),
 };
 ```
 
@@ -231,8 +236,8 @@ export const SITE_CONFIG = {
   url: 'https://example.com',
   author: {
     name: 'John Doe',
-    email: 'john@example.com'
-  }
+    email: 'john@example.com',
+  },
 };
 ```
 
@@ -252,7 +257,7 @@ export const NAVIGATION = [
 ```css
 /* Modifiez src/styles/design-tokens.css */
 :root {
-  --brand-primary: 59 130 246;  /* Votre couleur primaire */
+  --brand-primary: 59 130 246; /* Votre couleur primaire */
   --brand-secondary: 107 114 128;
   /* ... autres tokens */
 }

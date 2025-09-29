@@ -86,7 +86,7 @@ describe('Site Configuration', () => {
     });
 
     test('should have valid link structure', () => {
-      COMMON_LINKS.forEach(link => {
+      COMMON_LINKS.forEach((link) => {
         expect(link).toMatchObject({
           label: expect.any(String),
           href: expect.any(String),
@@ -101,14 +101,14 @@ describe('Site Configuration', () => {
     });
 
     test('should have valid href formats', () => {
-      COMMON_LINKS.forEach(link => {
+      COMMON_LINKS.forEach((link) => {
         // Should be either absolute path or full URL
         expect(link.href).toMatch(/^(\/|https?:\/\/)/);
       });
     });
 
     test('should have non-empty labels', () => {
-      COMMON_LINKS.forEach(link => {
+      COMMON_LINKS.forEach((link) => {
         expect(link.label.trim()).toBeTruthy();
       });
     });
@@ -122,7 +122,7 @@ describe('Site Configuration', () => {
     });
 
     test('should include blog link', () => {
-      const blogLink = COMMON_LINKS.find(link => link.href === '/blog');
+      const blogLink = COMMON_LINKS.find((link) => link.href === '/blog');
       expect(blogLink).toBeDefined();
       expect(blogLink?.label).toBe('Blog');
     });
@@ -135,7 +135,7 @@ describe('Site Configuration', () => {
     });
 
     test('should have valid link structure', () => {
-      FOOTER_LINKS.forEach(link => {
+      FOOTER_LINKS.forEach((link) => {
         expect(link).toMatchObject({
           label: expect.any(String),
           href: expect.any(String),
@@ -145,16 +145,20 @@ describe('Site Configuration', () => {
     });
 
     test('should include required legal pages', () => {
-      const requiredPages = ['mentions-legales', 'politique-confidentialite', 'conditions-utilisation'];
-      
-      requiredPages.forEach(page => {
-        const link = FOOTER_LINKS.find(link => link.href.includes(page));
+      const requiredPages = [
+        'mentions-legales',
+        'politique-confidentialite',
+        'conditions-utilisation',
+      ];
+
+      requiredPages.forEach((page) => {
+        const link = FOOTER_LINKS.find((link) => link.href.includes(page));
         expect(link).toBeDefined();
       });
     });
 
     test('should have valid href paths', () => {
-      FOOTER_LINKS.forEach(link => {
+      FOOTER_LINKS.forEach((link) => {
         expect(link.href).toMatch(/^\/[a-z-]+$/);
       });
     });
@@ -182,7 +186,7 @@ describe('Site Configuration', () => {
     });
 
     test('should have all URLs as strings', () => {
-      Object.values(SOCIAL_CONFIG).forEach(url => {
+      Object.values(SOCIAL_CONFIG).forEach((url) => {
         expect(typeof url).toBe('string');
         expect(url.length).toBeGreaterThan(0);
       });
@@ -195,13 +199,13 @@ describe('Site Configuration', () => {
     });
 
     test('should not have duplicate links in common links', () => {
-      const hrefs = COMMON_LINKS.map(link => link.href);
+      const hrefs = COMMON_LINKS.map((link) => link.href);
       const uniqueHrefs = [...new Set(hrefs)];
       expect(hrefs.length).toBe(uniqueHrefs.length);
     });
 
     test('should not have duplicate links in footer links', () => {
-      const hrefs = FOOTER_LINKS.map(link => link.href);
+      const hrefs = FOOTER_LINKS.map((link) => link.href);
       const uniqueHrefs = [...new Set(hrefs)];
       expect(hrefs.length).toBe(uniqueHrefs.length);
     });
@@ -241,8 +245,8 @@ describe('Site Configuration', () => {
         AUTHOR_CONFIG.bio,
       ];
 
-      configValues.forEach(value => {
-        placeholderPatterns.forEach(pattern => {
+      configValues.forEach((value) => {
+        placeholderPatterns.forEach((pattern) => {
           expect(value).not.toMatch(pattern);
         });
       });

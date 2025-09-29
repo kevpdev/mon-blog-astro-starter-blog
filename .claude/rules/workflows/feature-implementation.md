@@ -3,6 +3,7 @@
 Processus méthodique pour implémenter de nouvelles fonctionnalités en suivant les meilleures pratiques d'architecture et de qualité.
 
 ## Objectifs
+
 - Implémenter des fonctionnalités robustes et maintenables
 - Respecter l'architecture existante du projet
 - Assurer la qualité et la testabilité du code
@@ -11,6 +12,7 @@ Processus méthodique pour implémenter de nouvelles fonctionnalités en suivant
 ## Étapes détaillées
 
 ### 1. Analyse des besoins
+
 ```bash
 # Documenter la fonctionnalité
 echo "=== FEATURE ANALYSIS ==="
@@ -20,12 +22,14 @@ echo "Acceptance Criteria: [LIST_CRITERIA]"
 ```
 
 **Questions clés :**
+
 - [ ] Quelle est la valeur métier de cette fonctionnalité ?
 - [ ] Quels sont les cas d'usage principaux ?
 - [ ] Y a-t-il des contraintes techniques spécifiques ?
 - [ ] Comment mesurer le succès de l'implémentation ?
 
 ### 2. Analyse technique et design
+
 ```bash
 # Explorer l'architecture existante
 echo "=== ARCHITECTURE REVIEW ==="
@@ -37,6 +41,7 @@ ls -la src/components/ | grep -i "[RELATED_KEYWORD]"
 ```
 
 **Design Checklist :**
+
 - [ ] Composants à créer/modifier identifiés
 - [ ] Interfaces TypeScript définies
 - [ ] Flux de données planifié
@@ -44,24 +49,29 @@ ls -la src/components/ | grep -i "[RELATED_KEYWORD]"
 - [ ] Considérations de performance évaluées
 
 ### 3. Plan d'implémentation
+
 **Décomposition en tâches :**
 
 #### Phase 1 - Structure de base
+
 - [ ] Créer les interfaces TypeScript
 - [ ] Implémenter la logique métier dans `src/lib/`
 - [ ] Créer les composants UI de base
 
 #### Phase 2 - Intégration
+
 - [ ] Intégrer les composants dans les layouts
 - [ ] Configurer le routing si nécessaire
 - [ ] Ajouter la validation des données
 
 #### Phase 3 - Finition
+
 - [ ] Ajouter les styles et animations
 - [ ] Optimiser les performances
 - [ ] Améliorer l'accessibilité
 
 ### 4. Implémentation de la logique métier
+
 ```bash
 # Créer la structure de base
 mkdir -p src/lib/[feature-name]
@@ -71,6 +81,7 @@ touch src/lib/[feature-name]/utils.ts
 ```
 
 **Template de logique métier :**
+
 ```typescript
 // src/lib/[feature-name]/types.ts
 export interface [FeatureName]Config {
@@ -112,6 +123,7 @@ export function create[FeatureName](config: [FeatureName]Config): [FeatureName]M
 ```
 
 ### 5. Création des composants
+
 ```bash
 # Créer la structure des composants
 mkdir -p src/components/[feature-name]
@@ -120,6 +132,7 @@ touch src/components/[feature-name]/[SubComponent].astro
 ```
 
 **Template de composant Astro :**
+
 ```astro
 ---
 // src/components/[feature-name]/[MainComponent].astro
@@ -152,6 +165,7 @@ const [featureName]Manager = create[FeatureName](config);
 ```
 
 ### 6. Tests unitaires
+
 ```bash
 # Créer les tests
 mkdir -p src/lib/[feature-name]/__tests__
@@ -160,6 +174,7 @@ touch src/lib/[feature-name]/__tests__/utils.test.ts
 ```
 
 **Template de tests :**
+
 ```typescript
 // src/lib/[feature-name]/__tests__/index.test.ts
 import { describe, it, expect, beforeEach } from 'vitest';
@@ -196,6 +211,7 @@ describe('[FeatureName]Manager', () => {
 ```
 
 ### 7. Intégration et routing
+
 ```bash
 # Intégrer dans les pages existantes
 echo "=== INTEGRATION ==="
@@ -206,6 +222,7 @@ ls -la src/pages/ | grep -E "\[.*\]"
 ```
 
 ### 8. Styling et responsive design
+
 ```bash
 # Vérifier les tokens de design
 cat src/styles/design-tokens.css | grep -E "color|spacing|typography"
@@ -215,6 +232,7 @@ echo "Breakpoints: mobile (default), tablet (640px), desktop (768px), large (102
 ```
 
 ### 9. Validation qualité
+
 ```bash
 # Tests automatisés
 echo "=== QUALITY VALIDATION ==="
@@ -231,6 +249,7 @@ pnpm preview
 ```
 
 ### 10. Documentation et finalisation
+
 ```bash
 # Mise à jour de la documentation
 echo "=== DOCUMENTATION ==="
@@ -240,42 +259,51 @@ echo "- Update README if user-facing feature"
 ```
 
 **Template de documentation feature :**
+
 ```markdown
 ## [Feature Name]
 
 ### Description
+
 [Brief description of the feature and its purpose]
 
 ### Usage
-\`\`\`astro
----
-import [MainComponent] from '../components/[feature-name]/[MainComponent].astro';
----
 
-<[MainComponent] 
-  config={{ 
+## \`\`\`astro
+
+## import [MainComponent] from '../components/[feature-name]/[MainComponent].astro';
+
+<[MainComponent]
+config={{
     // Configuration options
   }}
-  className="custom-class"
+className="custom-class"
+
 >
+
   <!-- Content -->
+
 </[MainComponent]>
 \`\`\`
 
 ### Configuration Options
+
 - \`option1\`: [Description] (required/optional)
 - \`option2\`: [Description] (required/optional)
 
 ### Examples
+
 [Provide practical examples]
 
 ### Testing
+
 \`\`\`bash
 pnpm test [feature-name]
 \`\`\`
 ```
 
 ## Checklist de validation finale
+
 - [ ] Fonctionnalité implémentée selon les spécifications
 - [ ] Tests unitaires créés et passants
 - [ ] Code respecte les standards du projet
@@ -287,6 +315,7 @@ pnpm test [feature-name]
 - [ ] Ready for production
 
 ## Métriques de succès
+
 ```bash
 # Mesurer l'impact
 echo "=== SUCCESS METRICS ==="
@@ -297,6 +326,7 @@ echo "Performance impact: [measure]"
 ```
 
 ## Sortie attendue
+
 - **Fonctionnalité complète** et testée
 - **Documentation technique** à jour
 - **Tests unitaires** avec bonne couverture

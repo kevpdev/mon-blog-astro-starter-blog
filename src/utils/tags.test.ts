@@ -29,17 +29,17 @@ describe('Tags Utilities', () => {
       expect(popularTags[0]).toEqual({
         name: 'Javascript',
         count: 3,
-        slug: 'javascript'
+        slug: 'javascript',
       });
       expect(popularTags[1]).toEqual({
         name: 'Typescript',
         count: 2,
-        slug: 'typescript'
+        slug: 'typescript',
       });
       expect(popularTags[2]).toEqual({
         name: 'React',
         count: 1,
-        slug: 'react'
+        slug: 'react',
       });
     });
 
@@ -77,15 +77,13 @@ describe('Tags Utilities', () => {
       expect(popularTags[0]).toEqual({
         name: 'Javascript',
         count: 3,
-        slug: 'javascript'
+        slug: 'javascript',
       });
     });
 
     test('should respect the limit parameter', async () => {
       // Arrange
-      const mockPosts = [
-        createMockPost({ tags: ['a', 'b', 'c', 'd', 'e'] }),
-      ];
+      const mockPosts = [createMockPost({ tags: ['a', 'b', 'c', 'd', 'e'] })];
       mockGetCollection.mockResolvedValue(mockPosts);
 
       // Act
@@ -100,20 +98,20 @@ describe('Tags Utilities', () => {
     test('should return posts filtered by tag', async () => {
       // Arrange
       const mockPosts = [
-        createMockPost({ 
+        createMockPost({
           title: 'JS Post 1',
           tags: ['javascript', 'frontend'],
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
-        createMockPost({ 
+        createMockPost({
           title: 'JS Post 2',
           tags: ['javascript', 'backend'],
-          pubDate: new Date('2024-01-25')
+          pubDate: new Date('2024-01-25'),
         }),
-        createMockPost({ 
+        createMockPost({
           title: 'React Post',
           tags: ['react', 'frontend'],
-          pubDate: new Date('2024-01-15')
+          pubDate: new Date('2024-01-15'),
         }),
       ];
       mockGetCollection.mockResolvedValue(mockPosts);
@@ -145,9 +143,7 @@ describe('Tags Utilities', () => {
 
     test('should return empty array for non-existent tag', async () => {
       // Arrange
-      const mockPosts = [
-        createMockPost({ tags: ['javascript'] }),
-      ];
+      const mockPosts = [createMockPost({ tags: ['javascript'] })];
       mockGetCollection.mockResolvedValue(mockPosts);
 
       // Act
@@ -236,9 +232,7 @@ describe('Tags Utilities', () => {
   describe('Tag normalization edge cases', () => {
     test('should handle accented characters in tags', async () => {
       // Arrange
-      const mockPosts = [
-        createMockPost({ tags: ['développement', 'français'] }),
-      ];
+      const mockPosts = [createMockPost({ tags: ['développement', 'français'] })];
       mockGetCollection.mockResolvedValue(mockPosts);
 
       // Act
@@ -251,18 +245,16 @@ describe('Tags Utilities', () => {
 
     test('should handle special characters in tags', async () => {
       // Arrange
-      const mockPosts = [
-        createMockPost({ tags: ['C++', 'Node.js', 'Vue.js 3'] }),
-      ];
+      const mockPosts = [createMockPost({ tags: ['C++', 'Node.js', 'Vue.js 3'] })];
       mockGetCollection.mockResolvedValue(mockPosts);
 
       // Act
       const popularTags = await getPopularTags();
 
       // Assert
-      expect(popularTags.find(tag => tag.name === 'C++')?.slug).toBe('c');
-      expect(popularTags.find(tag => tag.name === 'Node.js')?.slug).toBe('node-js');
-      expect(popularTags.find(tag => tag.name === 'Vue.js 3')?.slug).toBe('vue-js-3');
+      expect(popularTags.find((tag) => tag.name === 'C++')?.slug).toBe('c');
+      expect(popularTags.find((tag) => tag.name === 'Node.js')?.slug).toBe('node-js');
+      expect(popularTags.find((tag) => tag.name === 'Vue.js 3')?.slug).toBe('vue-js-3');
     });
   });
 });

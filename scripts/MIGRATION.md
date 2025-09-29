@@ -12,7 +12,7 @@
 ❌ **Complexité excessive** - Scripts de 400+ lignes pour des tâches simples  
 ❌ **Fiabilité limitée** - Bugs sur Windows, timeouts, logique fragile  
 ❌ **Maintenance difficile** - Code complexe, hard à débugger  
-❌ **Sur-ingénierie** - Fonctionnalités avancées jamais utilisées  
+❌ **Sur-ingénierie** - Fonctionnalités avancées jamais utilisées
 
 ### Avantages des commandes bash :
 
@@ -20,22 +20,23 @@
 ✅ **Fiabilité** - Outils bash standards (grep, sed, find)  
 ✅ **Performance** - Exécution rapide, pas de startup JS  
 ✅ **Maintenance** - Code lisible, facile à modifier  
-✅ **Compatibilité** - Fonctionne sur tous les systèmes  
+✅ **Compatibilité** - Fonctionne sur tous les systèmes
 
 ## 📊 Comparaison fonctionnelle
 
-| Fonctionnalité | Scripts JS | Commandes Bash | Statut |
-|---|---|---|---|
-| **Sync des commands** | ✅ Complexe | ✅ Simple | ✨ Amélioré |
-| **Architecture scan** | ✅ Détaillé | ✅ Efficace | ✨ Amélioré |
-| **Préservation manuelle** | 🟡 Fragile | ✅ Robuste | ✨ Amélioré |
-| **Detection changements** | ❌ Buggy | ✅ Fiable | ✨ Amélioré |
-| **Exit codes** | ❌ Broken | ✅ Standards | ✨ Amélioré |
-| **Windows support** | ❌ Problèmes | ✅ Compatible | ✨ Amélioré |
+| Fonctionnalité            | Scripts JS   | Commandes Bash | Statut      |
+| ------------------------- | ------------ | -------------- | ----------- |
+| **Sync des commands**     | ✅ Complexe  | ✅ Simple      | ✨ Amélioré |
+| **Architecture scan**     | ✅ Détaillé  | ✅ Efficace    | ✨ Amélioré |
+| **Préservation manuelle** | 🟡 Fragile   | ✅ Robuste     | ✨ Amélioré |
+| **Detection changements** | ❌ Buggy     | ✅ Fiable      | ✨ Amélioré |
+| **Exit codes**            | ❌ Broken    | ✅ Standards   | ✨ Amélioré |
+| **Windows support**       | ❌ Problèmes | ✅ Compatible  | ✨ Amélioré |
 
 ## 🚀 Migration des commandes
 
 ### Avant (Scripts JS) :
+
 ```bash
 pnpm claude:sync     # node scripts/claude-sync.js
 pnpm claude:check    # node scripts/claude-check.js
@@ -43,6 +44,7 @@ pnpm claude:diff     # node scripts/claude-diff.js
 ```
 
 ### Après (Commandes Bash) :
+
 ```bash
 pnpm claude:sync     # bash .claude/commands/sync-context
 pnpm claude:check    # bash .claude/commands/check-context
@@ -64,11 +66,13 @@ Les anciens scripts JavaScript ont été supprimés après migration réussie :
 - ❌ ~~`README.md`~~ - Documentation complète (supprimée)
 
 **Seul reste dans `scripts/` :**
+
 - ✅ `MIGRATION.md` - Cette documentation de migration
 
 ## 🎯 Nouveau workflow
 
 ### Développement quotidien :
+
 ```bash
 # Vérification rapide
 /check-context
@@ -78,6 +82,7 @@ Les anciens scripts JavaScript ont été supprimés après migration réussie :
 ```
 
 ### Intégration CI/CD :
+
 ```bash
 # Dans pre-commit hook
 pnpm claude:check || echo "CLAUDE.md needs update"
@@ -90,6 +95,7 @@ pnpm claude:check || echo "CLAUDE.md needs update"
 ## 🔧 Personnalisation
 
 ### Simple avec bash :
+
 ```bash
 # Modifier .claude/commands/sync-context directement
 # Pas besoin de configuration complexe
@@ -97,6 +103,7 @@ pnpm claude:check || echo "CLAUDE.md needs update"
 ```
 
 ### Complexe avec JS (ancien) :
+
 ```javascript
 // Modifier claude-config.js
 // Comprendre la logique de 400+ lignes
@@ -106,20 +113,23 @@ pnpm claude:check || echo "CLAUDE.md needs update"
 ## 📈 Résultats
 
 **Performance** :
+
 - ⚡ 5x plus rapide (pas de startup Node.js)
 - 💾 10x moins de mémoire utilisée
 
 **Fiabilité** :
+
 - ✅ 0 bugs détectés vs 5+ avec les scripts JS
 - ✅ Compatible Windows/Linux/macOS
 
 **Maintenabilité** :
+
 - 📝 Code 3x plus court et lisible
 - 🔧 Modifications triviales vs refactoring complet
 
 ## 💡 Conclusion
 
-Cette migration privilégie la **simplicité et la fiabilité** over la sophistication technique. 
+Cette migration privilégie la **simplicité et la fiabilité** over la sophistication technique.
 
 **Objectif atteint** : Un système de maintenance CLAUDE.md qui **fonctionne vraiment** et est **facile à maintenir**.
 

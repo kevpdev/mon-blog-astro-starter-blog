@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
 export const AUTHOR_CONFIG = {
   name: 'AuthorName',
   email: 'contact@monblog.com',
-  bio: 'Développeur web passionné par les technologies modernes et l\'optimisation des performances. Je partage mes connaissances et expériences à travers ce blog.',
+  bio: "Développeur web passionné par les technologies modernes et l'optimisation des performances. Je partage mes connaissances et expériences à travers ce blog.",
   avatar: '/images/avatar.jpg',
   jobTitle: 'Développeur Web Full-Stack',
   company: 'Freelance',
@@ -20,7 +20,7 @@ export const AUTHOR_CONFIG = {
   phone: '+33 1 23 45 67 89',
   location: 'Paris, France',
   twitterHandle: '@monhandle',
-  linkedinUrl: 'https://linkedin.com/in/monprofil'
+  linkedinUrl: 'https://linkedin.com/in/monprofil',
 } as const;
 
 // Liens communs utilisés dans navigation et footer
@@ -35,28 +35,28 @@ export const COMMON_LINKS: CommonLink[] = [
   {
     label: 'Home',
     href: '/',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'About',
     href: '/about',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Meilleures formations seo / business',
     href: '/meilleures-formations-seo-business',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Blog',
     href: '/blog',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Contact',
     href: '/contact',
-    enabled: true
-  }
+    enabled: true,
+  },
 ];
 
 // Liens spécifiques au footer
@@ -64,23 +64,23 @@ export const FOOTER_LINKS: CommonLink[] = [
   {
     label: 'Mentions légales',
     href: '/mentions-legales',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Politique de confidentialité',
     href: '/politique-confidentialite',
-    enabled: true
+    enabled: true,
   },
   {
-    label: 'Conditions d\'utilisation',
+    label: "Conditions d'utilisation",
     href: '/conditions-utilisation',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Plan du site',
     href: '/sitemap',
-    enabled: false
-  }
+    enabled: false,
+  },
 ];
 
 // Configuration des réseaux sociaux (URLs de base)
@@ -90,5 +90,5 @@ export const SOCIAL_CONFIG = {
   instagram: 'https://instagram.com/votrecompte',
   tiktok: 'https://tiktok.com/@votrecompte',
   github: 'https://github.com/votrecompte',
-  mastodon: 'https://mastodon.social/@votrecompte'
+  mastodon: 'https://mastodon.social/@votrecompte',
 } as const;

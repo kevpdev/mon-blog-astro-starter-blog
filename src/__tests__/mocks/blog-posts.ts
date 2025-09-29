@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
  * Factory function to create mock blog posts
  */
 export function createMockPost(
-  overrides: Partial<CollectionEntry<'blog'>['data']> = {}
+  overrides: Partial<CollectionEntry<'blog'>['data']> = {},
 ): CollectionEntry<'blog'> {
   return {
     id: `test-post-${Math.random().toString(36).substring(2, 11)}`,
@@ -21,11 +21,12 @@ export function createMockPost(
       author: 'Test Author',
       ...overrides,
     },
-    render: async () => ({
-      Content: () => 'Mock Content' as any,
-      headings: [],
-      remarkPluginFrontmatter: {},
-    } as any),
+    render: async () =>
+      ({
+        Content: () => 'Mock Content' as any,
+        headings: [],
+        remarkPluginFrontmatter: {},
+      }) as any,
   };
 }
 
@@ -34,16 +35,18 @@ export function createMockPost(
  */
 export function createMockPosts(count: number): CollectionEntry<'blog'>[] {
   const posts: CollectionEntry<'blog'>[] = [];
-  
+
   for (let i = 0; i < count; i++) {
-    posts.push(createMockPost({
-      title: `Test Post ${i + 1}`,
-      pubDate: new Date(`2024-01-${String(i + 1).padStart(2, '0')}`),
-      tags: i % 2 === 0 ? ['javascript', 'typescript'] : ['react', 'astro'],
-      author: i % 3 === 0 ? 'Custom Author' : undefined,
-    }));
+    posts.push(
+      createMockPost({
+        title: `Test Post ${i + 1}`,
+        pubDate: new Date(`2024-01-${String(i + 1).padStart(2, '0')}`),
+        tags: i % 2 === 0 ? ['javascript', 'typescript'] : ['react', 'astro'],
+        author: i % 3 === 0 ? 'Custom Author' : undefined,
+      }),
+    );
   }
-  
+
   return posts;
 }
 
@@ -56,14 +59,14 @@ export const mockBlogPosts: CollectionEntry<'blog'>[] = [
     description: 'Learn the basics of JavaScript',
     pubDate: new Date('2024-01-15'),
     tags: ['javascript', 'fundamentals'],
-    author: 'John Doe'
+    author: 'John Doe',
   }),
   createMockPost({
     title: 'TypeScript Advanced',
     description: 'Advanced TypeScript concepts',
     pubDate: new Date('2024-01-20'),
     tags: ['typescript', 'advanced'],
-    author: 'Jane Smith'
+    author: 'Jane Smith',
   }),
   createMockPost({
     title: 'React Best Practices',
@@ -76,7 +79,7 @@ export const mockBlogPosts: CollectionEntry<'blog'>[] = [
     description: 'Complete guide to Astro framework',
     pubDate: new Date('2024-02-01'),
     tags: ['astro', 'guide'],
-    author: 'Bob Wilson'
+    author: 'Bob Wilson',
   }),
   createMockPost({
     title: 'CSS Modern Techniques',
@@ -95,7 +98,7 @@ export const mockPostsWithTags: CollectionEntry<'blog'>[] = [
     tags: ['javascript', 'frontend'],
   }),
   createMockPost({
-    title: 'JavaScript Article 2', 
+    title: 'JavaScript Article 2',
     tags: ['javascript', 'backend'],
   }),
   createMockPost({
@@ -125,7 +128,7 @@ export const mockRelatedPosts: CollectionEntry<'blog'>[] = [
     tags: ['typescript', 'javascript'],
   }),
   createMockPost({
-    title: 'Related Post 2', 
+    title: 'Related Post 2',
     tags: ['testing', 'jest'],
   }),
   createMockPost({

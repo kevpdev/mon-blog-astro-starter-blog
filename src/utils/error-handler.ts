@@ -29,12 +29,17 @@ export class CustomError extends Error {
       message: this.message,
       details: this.details,
       code: this.code,
-      timestamp: this.timestamp
+      timestamp: this.timestamp,
     };
   }
 }
 
-export function createError(type: ErrorType, message: string, details?: string, code?: string): CustomError {
+export function createError(
+  type: ErrorType,
+  message: string,
+  details?: string,
+  code?: string,
+): CustomError {
   return new CustomError(type, message, details, code);
 }
 
@@ -48,15 +53,15 @@ export function handleError(error: unknown): AppError {
       type: 'unknown',
       message: error.message,
       details: error.stack,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 
   return {
     type: 'unknown',
-    message: 'Une erreur inattendue s\'est produite',
+    message: "Une erreur inattendue s'est produite",
     details: String(error),
-    timestamp: new Date()
+    timestamp: new Date(),
   };
 }
 
@@ -64,8 +69,9 @@ export function logError(error: AppError, context?: string): void {
   const logData = {
     ...error,
     context,
-    userAgent: typeof globalThis.navigator !== 'undefined' ? globalThis.navigator.userAgent : 'server',
-    url: typeof globalThis.window !== 'undefined' ? globalThis.window.location.href : 'unknown'
+    userAgent:
+      typeof globalThis.navigator !== 'undefined' ? globalThis.navigator.userAgent : 'server',
+    url: typeof globalThis.window !== 'undefined' ? globalThis.window.location.href : 'unknown',
   };
 
   globalThis.console.error('[ErrorHandler]', logData);
@@ -84,17 +90,34 @@ export function validateRequired<T>(value: T | null | undefined, fieldName: stri
   return value;
 }
 
-export function validateString(value: unknown, fieldName: string, minLength = 0, maxLength = Infinity): string {
+export function validateString(
+  value: unknown,
+  fieldName: string,
+  minLength = 0,
+  maxLength = Infinity,
+): string {
   if (typeof value !== 'string') {
-    throw createError('validation', `${fieldName} doit être une chaîne de caractères`, `Type: ${typeof value}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit être une chaîne de caractères`,
+      `Type: ${typeof value}`,
+    );
   }
 
   if (value.length < minLength) {
-    throw createError('validation', `${fieldName} doit contenir au moins ${minLength} caractères`, `Length: ${value.length}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit contenir au moins ${minLength} caractères`,
+      `Length: ${value.length}`,
+    );
   }
 
   if (value.length > maxLength) {
-    throw createError('validation', `${fieldName} doit contenir au maximum ${maxLength} caractères`, `Length: ${value.length}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit contenir au maximum ${maxLength} caractères`,
+      `Length: ${value.length}`,
+    );
   }
 
   return value;
@@ -110,7 +133,7 @@ export function validateArray<T>(value: unknown, fieldName: string): T[] {
 export function safeExecute<T>(
   fn: () => T | Promise<T>,
   fallback: T,
-  context?: string
+  context?: string,
 ): T | Promise<T> {
   try {
     const result = fn();
@@ -133,7 +156,7 @@ export async function withRetry<T>(
   fn: () => Promise<T>,
   maxRetries = 3,
   delay = 1000,
-  context?: string
+  context?: string,
 ): Promise<T> {
   let lastError: unknown;
 
@@ -152,7 +175,7 @@ export async function withRetry<T>(
       logError(appError, `${context} - Attempt ${attempt}/${maxRetries} failed, retrying...`);
 
       // Délai avant la prochaine tentative
-      await new Promise(resolve => globalThis.setTimeout(resolve, delay * attempt));
+      await new Promise((resolve) => globalThis.setTimeout(resolve, delay * attempt));
     }
   }
 

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Base colors using design tokens */
@@ -14,7 +14,7 @@
   --color-border-primary: var(--border-primary);
   --color-border-secondary: var(--border-secondary);
   --color-border-muted: var(--border-muted);
-  
+
   /* State colors */
   --color-success: var(--success);
   --color-success-light: var(--success-light);
@@ -40,7 +40,12 @@
   line-height: 1.75;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
   color: rgb(var(--text-primary));
   font-weight: 600;
   margin-top: 2rem;
@@ -122,7 +127,8 @@
   color: rgb(var(--text-secondary));
 }
 
-.prose ul, .prose ol {
+.prose ul,
+.prose ol {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
   padding-left: 1.625rem;
@@ -138,7 +144,7 @@
 }
 
 .prose ul > li::before {
-  content: "";
+  content: '';
   position: absolute;
   background-color: rgb(var(--text-muted));
   border-radius: 50%;

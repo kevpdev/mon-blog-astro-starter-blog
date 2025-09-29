@@ -37,20 +37,40 @@ export default [
     },
     rules: {
       'no-console': ['warn', { allow: ['error'] }],
-      '@typescript-eslint/no-unused-vars': 'error',
+      'no-unused-vars': 'off', // Disable the base rule for TypeScript files
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'max-lines-per-function': ['warn', { max: 100 }], // Augmenté pour les tests
-      'complexity': ['warn', 15], // Augmenté pour les tests
+      complexity: ['warn', 15], // Augmenté pour les tests
     },
   },
   {
-    files: ['**/*.test.{js,ts}', '**/__tests__/**/*.{js,ts}', '**/vitest.*.{js,ts}', '**/*.setup.{js,ts}'],
+    files: [
+      '**/*.test.{js,ts}',
+      '**/__tests__/**/*.{js,ts}',
+      '**/vitest.*.{js,ts}',
+      '**/*.setup.{js,ts}',
+    ],
     rules: {
       'max-lines-per-function': 'off', // Désactiver pour les tests
-      'complexity': 'off', // Désactiver pour les tests
+      complexity: 'off', // Désactiver pour les tests
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
   ...astro.configs.recommended,
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      globals: {
+        // Browser globals for Astro components
+        HTMLElementTagNameMap: 'readonly',
+        HTMLElement: 'readonly',
+        Element: 'readonly',
+        Document: 'readonly',
+        window: 'readonly',
+        document: 'readonly',
+      },
+    },
+  },
   {
     ignores: ['dist', '.astro', 'node_modules', '.claude/**', '**/*.config.mjs'],
   },

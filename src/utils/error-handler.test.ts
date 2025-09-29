@@ -7,7 +7,7 @@ import {
   validateString,
   validateArray,
   safeExecute,
-  withRetry
+  withRetry,
 } from './error-handler';
 
 describe('error-handler', () => {
@@ -36,7 +36,7 @@ describe('error-handler', () => {
       expect(json).toMatchObject({
         type: 'network',
         message: 'Network error',
-        timestamp: expect.any(Date)
+        timestamp: expect.any(Date),
       });
     });
   });
@@ -82,7 +82,7 @@ describe('error-handler', () => {
       const result = handleError('String error');
 
       expect(result.type).toBe('unknown');
-      expect(result.message).toBe('Une erreur inattendue s\'est produite');
+      expect(result.message).toBe("Une erreur inattendue s'est produite");
       expect(result.details).toBe('String error');
     });
   });
@@ -97,7 +97,9 @@ describe('error-handler', () => {
 
       test('should throw error for null/undefined', () => {
         expect(() => validateRequired(null, 'testField')).toThrow('Le champ testField est requis');
-        expect(() => validateRequired(undefined, 'testField')).toThrow('Le champ testField est requis');
+        expect(() => validateRequired(undefined, 'testField')).toThrow(
+          'Le champ testField est requis',
+        );
       });
     });
 
@@ -107,15 +109,21 @@ describe('error-handler', () => {
       });
 
       test('should throw error for non-string', () => {
-        expect(() => validateString(123, 'field')).toThrow('field doit être une chaîne de caractères');
+        expect(() => validateString(123, 'field')).toThrow(
+          'field doit être une chaîne de caractères',
+        );
       });
 
       test('should validate minimum length', () => {
-        expect(() => validateString('ab', 'field', 3)).toThrow('field doit contenir au moins 3 caractères');
+        expect(() => validateString('ab', 'field', 3)).toThrow(
+          'field doit contenir au moins 3 caractères',
+        );
       });
 
       test('should validate maximum length', () => {
-        expect(() => validateString('toolong', 'field', 0, 5)).toThrow('field doit contenir au maximum 5 caractères');
+        expect(() => validateString('toolong', 'field', 0, 5)).toThrow(
+          'field doit contenir au maximum 5 caractères',
+        );
       });
     });
 
@@ -140,7 +148,9 @@ describe('error-handler', () => {
     });
 
     test('should return fallback when function throws', () => {
-      const fn = () => { throw new Error('Failed'); };
+      const fn = () => {
+        throw new Error('Failed');
+      };
       const result = safeExecute(fn, 'fallback');
 
       expect(result).toBe('fallback');
@@ -155,7 +165,9 @@ describe('error-handler', () => {
     });
 
     test('should handle async function failures', async () => {
-      const fn = async () => { throw new Error('Async failed'); };
+      const fn = async () => {
+        throw new Error('Async failed');
+      };
       const result = await safeExecute(fn, 'fallback');
 
       expect(result).toBe('fallback');
@@ -173,7 +185,8 @@ describe('error-handler', () => {
     });
 
     test('should retry on failure and eventually succeed', async () => {
-      const fn = vi.fn()
+      const fn = vi
+        .fn()
         .mockRejectedValueOnce(new Error('Fail 1'))
         .mockRejectedValueOnce(new Error('Fail 2'))
         .mockResolvedValue('success');

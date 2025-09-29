@@ -82,61 +82,53 @@ const activeNavItems = navigationConfig.filter(item => item.enabled !== false);
     const hamburgerLines = document.querySelectorAll('.hamburger-line');
     const body = document.body;
 
+    function toggleHamburgerToX() {
+      hamburgerLines[0]?.classList.add('rotate-45');
+      hamburgerLines[1]?.classList.add('opacity-0');
+      hamburgerLines[2]?.classList.add('-rotate-45');
+    }
+
+    function resetHamburger() {
+      hamburgerLines[0]?.classList.remove('rotate-45');
+      hamburgerLines[1]?.classList.remove('opacity-0');
+      hamburgerLines[2]?.classList.remove('-rotate-45');
+    }
+
+    function showMobileMenu() {
+      mobileMenu?.classList.add('active', 'opacity-100', 'pointer-events-auto');
+      mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+
+      const menuContent = mobileMenu?.querySelector('.mobile-menu-content');
+      menuContent?.classList.remove('translate-x-full');
+      menuContent?.classList.add('translate-x-0');
+
+      body.classList.add('mobile-menu-open');
+      menuBtn?.setAttribute('aria-expanded', 'true');
+      toggleHamburgerToX();
+    }
+
+    function hideMobileMenu() {
+      mobileMenu?.classList.remove('active', 'opacity-100', 'pointer-events-auto');
+      mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+
+      const menuContent = mobileMenu?.querySelector('.mobile-menu-content');
+      menuContent?.classList.remove('translate-x-0');
+      menuContent?.classList.add('translate-x-full');
+
+      body.classList.remove('mobile-menu-open');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      resetHamburger();
+    }
+
     menuBtn?.addEventListener('click', () => {
       const isOpen = mobileMenu?.classList.contains('active');
-
-      if (isOpen) {
-        mobileMenu?.classList.remove('active');
-        mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
-        mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
-
-        const menuContent = mobileMenu?.querySelector('.mobile-menu-content');
-        menuContent?.classList.remove('translate-x-0');
-        menuContent?.classList.add('translate-x-full');
-
-        body.classList.remove('mobile-menu-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-
-        // Reset hamburger animation
-        hamburgerLines[0]?.classList.remove('rotate-45');
-        hamburgerLines[1]?.classList.remove('opacity-0');
-        hamburgerLines[2]?.classList.remove('-rotate-45');
-      } else {
-        mobileMenu?.classList.add('active');
-        mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
-        mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
-
-        const menuContent = mobileMenu?.querySelector('.mobile-menu-content');
-        menuContent?.classList.remove('translate-x-full');
-        menuContent?.classList.add('translate-x-0');
-
-        body.classList.add('mobile-menu-open');
-        menuBtn.setAttribute('aria-expanded', 'true');
-
-        // Animate hamburger to X
-        hamburgerLines[0]?.classList.add('rotate-45');
-        hamburgerLines[1]?.classList.add('opacity-0');
-        hamburgerLines[2]?.classList.add('-rotate-45');
-      }
+      isOpen ? hideMobileMenu() : showMobileMenu();
     });
 
     // Close menu on link click
     mobileMenu?.addEventListener('click', (e) => {
       if ((e.target as HTMLElement)?.tagName === 'A') {
-        mobileMenu.classList.remove('active', 'opacity-100', 'pointer-events-auto');
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-
-        const menuContent = mobileMenu?.querySelector('.mobile-menu-content');
-        menuContent?.classList.remove('translate-x-0');
-        menuContent?.classList.add('translate-x-full');
-
-        body.classList.remove('mobile-menu-open');
-        menuBtn?.setAttribute('aria-expanded', 'false');
-
-        // Reset hamburger
-        hamburgerLines[0]?.classList.remove('rotate-45');
-        hamburgerLines[1]?.classList.remove('opacity-0');
-        hamburgerLines[2]?.classList.remove('-rotate-45');
+        hideMobileMenu();
       }
     });
   });

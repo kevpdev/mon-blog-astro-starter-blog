@@ -16,7 +16,7 @@ describe('Related Posts Utility', () => {
       const currentPost = createMockPost({
         title: 'Current Post',
         tags: ['typescript', 'testing'],
-        pubDate: new Date('2024-01-15')
+        pubDate: new Date('2024-01-15'),
       });
 
       const mockPosts = [
@@ -24,22 +24,22 @@ describe('Related Posts Utility', () => {
         createMockPost({
           title: 'Related Post 1',
           tags: ['typescript', 'javascript'],
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
         createMockPost({
           title: 'Related Post 2',
           tags: ['testing', 'vitest'],
-          pubDate: new Date('2024-01-25')
+          pubDate: new Date('2024-01-25'),
         }),
         createMockPost({
           title: 'Related Post 3',
           tags: ['typescript', 'testing', 'react'], // Highest score (2 matches)
-          pubDate: new Date('2024-01-10')
+          pubDate: new Date('2024-01-10'),
         }),
         createMockPost({
           title: 'Unrelated Post',
           tags: ['css', 'design'],
-          pubDate: new Date('2024-01-30')
+          pubDate: new Date('2024-01-30'),
         }),
       ];
 
@@ -53,12 +53,12 @@ describe('Related Posts Utility', () => {
       expect(relatedPosts[0]!.data.title).toBe('Related Post 3'); // Highest score first
       expect(relatedPosts[1]!.data.title).toBe('Related Post 2'); // More recent among same score
       expect(relatedPosts[2]!.data.title).toBe('Related Post 1');
-      
+
       // Should not include the current post
-      expect(relatedPosts.find(post => post.data.title === 'Current Post')).toBeUndefined();
-      
+      expect(relatedPosts.find((post) => post.data.title === 'Current Post')).toBeUndefined();
+
       // Should not include unrelated post
-      expect(relatedPosts.find(post => post.data.title === 'Unrelated Post')).toBeUndefined();
+      expect(relatedPosts.find((post) => post.data.title === 'Unrelated Post')).toBeUndefined();
     });
 
     test('should return recent posts when current post has no tags', async () => {
@@ -66,22 +66,22 @@ describe('Related Posts Utility', () => {
       const currentPost = createMockPost({
         title: 'Current Post',
         tags: [],
-        pubDate: new Date('2024-01-15')
+        pubDate: new Date('2024-01-15'),
       });
 
       const mockPosts = [
         currentPost,
         createMockPost({
           title: 'Recent Post 1',
-          pubDate: new Date('2024-01-25')
+          pubDate: new Date('2024-01-25'),
         }),
         createMockPost({
           title: 'Recent Post 2',
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
         createMockPost({
           title: 'Old Post',
-          pubDate: new Date('2024-01-01')
+          pubDate: new Date('2024-01-01'),
         }),
       ];
 
@@ -101,14 +101,14 @@ describe('Related Posts Utility', () => {
       const currentPost = createMockPost({
         title: 'Current Post',
         tags: undefined,
-        pubDate: new Date('2024-01-15')
+        pubDate: new Date('2024-01-15'),
       });
 
       const mockPosts = [
         currentPost,
         createMockPost({
           title: 'Recent Post',
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
       ];
 
@@ -164,17 +164,17 @@ describe('Related Posts Utility', () => {
         createMockPost({
           title: 'Post with undefined tags',
           tags: undefined,
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
         createMockPost({
           title: 'Post with empty tags',
           tags: [],
-          pubDate: new Date('2024-01-25')
+          pubDate: new Date('2024-01-25'),
         }),
         createMockPost({
           title: 'Related Post',
           tags: ['typescript', 'javascript'],
-          pubDate: new Date('2024-01-15')
+          pubDate: new Date('2024-01-15'),
         }),
       ];
 
@@ -198,11 +198,13 @@ describe('Related Posts Utility', () => {
 
       const mockPosts = [
         currentPost,
-        ...Array.from({ length: 5 }, (_, i) => createMockPost({
-          title: `Related Post ${i + 1}`,
-          tags: ['typescript'],
-          pubDate: new Date(`2024-01-${20 + i}`)
-        })),
+        ...Array.from({ length: 5 }, (_, i) =>
+          createMockPost({
+            title: `Related Post ${i + 1}`,
+            tags: ['typescript'],
+            pubDate: new Date(`2024-01-${20 + i}`),
+          }),
+        ),
       ];
 
       mockGetCollection.mockResolvedValue(mockPosts);
@@ -252,17 +254,17 @@ describe('Related Posts Utility', () => {
         createMockPost({
           title: 'Score 1, Older',
           tags: ['typescript'],
-          pubDate: new Date('2024-01-10')
+          pubDate: new Date('2024-01-10'),
         }),
         createMockPost({
           title: 'Score 1, Newer',
           tags: ['typescript'],
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
         createMockPost({
           title: 'Score 2',
           tags: ['typescript', 'testing'],
-          pubDate: new Date('2024-01-05') // Oldest but highest score
+          pubDate: new Date('2024-01-05'), // Oldest but highest score
         }),
       ];
 
@@ -283,7 +285,7 @@ describe('Related Posts Utility', () => {
       const currentPost = createMockPost({
         title: 'Current Post',
         tags: ['unique-tag'],
-        pubDate: new Date('2024-01-15')
+        pubDate: new Date('2024-01-15'),
       });
 
       const mockPosts = [
@@ -291,12 +293,12 @@ describe('Related Posts Utility', () => {
         createMockPost({
           title: 'Unrelated Post 1',
           tags: ['different-tag'],
-          pubDate: new Date('2024-01-20')
+          pubDate: new Date('2024-01-20'),
         }),
         createMockPost({
           title: 'Unrelated Post 2',
           tags: ['another-tag'],
-          pubDate: new Date('2024-01-25')
+          pubDate: new Date('2024-01-25'),
         }),
       ];
 

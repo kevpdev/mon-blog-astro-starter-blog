@@ -12,12 +12,7 @@ interface Props {
   children?: any;
 }
 
-const {
-  variant = 'primary',
-  size = 'md',
-  className = '',
-  ...props
-} = Astro.props;
+const { variant = 'primary', size = 'md', className = '', ...props } = Astro.props;
 ```
 
 ## Conditional Classes

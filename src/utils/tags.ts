@@ -27,7 +27,7 @@ export async function getPopularTags(limit = 6): Promise<TagCount[]> {
     .map(([name, count]) => ({
       name: capitalizeTag(name),
       count,
-      slug: slugifyTag(name)
+      slug: slugifyTag(name),
     }))
     .sort((a, b) => b.count - a.count)
     .slice(0, limit);
@@ -42,12 +42,12 @@ export async function getPostsByTag(tag: string): Promise<CollectionEntry<'blog'
   const allPosts = await getCollection('blog');
   const normalizedTag = tag.toLowerCase();
 
-  return allPosts.filter((post) => {
-    const postTags = post.data.tags || [];
-    return postTags.some((postTag: string) => 
-      postTag.toLowerCase() === normalizedTag
-    );
-  }).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return allPosts
+    .filter((post) => {
+      const postTags = post.data.tags || [];
+      return postTags.some((postTag: string) => postTag.toLowerCase() === normalizedTag);
+    })
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 /**

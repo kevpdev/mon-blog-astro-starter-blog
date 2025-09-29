@@ -5,26 +5,26 @@ export const navigationConfig: NavigationConfig = [
   {
     label: 'Home',
     href: '/',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'About',
     href: '/about',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Meilleures formations seo / business',
     href: '/meilleures-formations-seo-business',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Blog',
     href: '/blog',
-    enabled: true
+    enabled: true,
   },
   {
     label: 'Contact',
     href: '/contact',
-    enabled: true
-  }
+    enabled: true,
+  },
 ];

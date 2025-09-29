@@ -8,17 +8,17 @@ export interface AuthorConfig {
   name: string;
   bio: string;
   avatar?: string;
-  
+
   // Contact
   email: string;
   phone?: string;
   location?: string;
-  
+
   // Professionnel
   jobTitle: string;
   company?: string;
   website: string;
-  
+
   // SEO & Meta
   twitterHandle?: string;
   linkedinUrl?: string;

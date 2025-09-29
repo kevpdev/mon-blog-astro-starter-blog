@@ -9,9 +9,9 @@ export interface NavigationItem {
 export interface DynamicNavigationItem extends NavigationItem {
   dynamicChildren?: {
     collection: 'blog' | 'pages';
-    filter?: (entry: any) => boolean;
-    sort?: (a: any, b: any) => number;
-    transform?: (entry: any) => NavigationItem;
+    filter?: (_entry: unknown) => boolean;
+    sort?: (_a: unknown, _b: unknown) => number;
+    transform?: (_entry: unknown) => NavigationItem;
   };
 }
 

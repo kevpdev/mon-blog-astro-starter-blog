@@ -12,8 +12,8 @@ export const z = {
   array: vi.fn(() => ({ default: vi.fn(() => ({})) })),
   object: vi.fn(() => ({})),
   coerce: {
-    date: vi.fn(() => ({ optional: vi.fn(() => ({})) }))
-  }
+    date: vi.fn(() => ({ optional: vi.fn(() => ({})) })),
+  },
 };
 
 export type CollectionEntry<T extends string> = {
