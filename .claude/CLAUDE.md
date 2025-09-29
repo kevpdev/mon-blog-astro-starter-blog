@@ -7,12 +7,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 All commands are run from the root of the project using pnpm:
 
 ### Development
+
 - `pnpm dev` - Start development server at localhost:4321
 - `pnpm build` - Build production site to ./dist/
 - `pnpm preview` - Preview build locally
 - `pnpm astro` - Run Astro CLI commands (e.g., `pnpm astro add`, `pnpm astro check`)
 
 ### Quality & Testing
+
 - `pnpm lint` - Run ESLint on .js, .ts, .astro files
 - `pnpm lint:fix` - Run ESLint with auto-fix
 - `pnpm format` - Format code with Prettier
@@ -23,6 +25,7 @@ All commands are run from the root of the project using pnpm:
 - `pnpm quality` - Run typecheck, lint, and format check
 
 ### Claude Commands
+
 - `/implement-feature [name] [type]` - Structured feature implementation
 - `/create-content [type] [title]` - Content creation workflow
 - `/commit-push-smart [message?]` - Smart commit and push
@@ -36,6 +39,7 @@ This is a modern Astro blog with TypeScript strict configuration, following comp
 ### Layout Architecture (Composable Design)
 
 **Base Layout System**:
+
 - `BaseLayout.astro` - Core HTML structure, shared head/body/footer
 - `BlogLayout.astro` - Blog post layout with hero image, metadata, tags
 - `BlogListLayout.astro` - Layout component
@@ -44,6 +48,7 @@ This is a modern Astro blog with TypeScript strict configuration, following comp
 - `PageLayout.astro` - Static page layout for content pages
 
 **Component System**:
+
 ```
 src/components/
 │   ├── layout/
@@ -70,6 +75,7 @@ src/components/
 ### Configuration
 
 **Core Stack**:
+
 - **Astro 5.13.3** with TypeScript strict mode and null checks
 - **Tailwind CSS 4.1.13** with Vite plugin for performance
 - **Vitest** for unit testing with @testing-library/dom
@@ -81,6 +87,7 @@ src/components/
 ### Code Quality & Standards
 
 **Automated Quality Control**:
+
 - **ESLint**: Static analysis with auto-fix (`pnpm lint:fix`)
 - **Prettier**: Code formatting with consistent style
 - **TypeScript**: Strict mode with null checks enabled
@@ -88,6 +95,7 @@ src/components/
 - **Quality Command**: `pnpm quality` runs typecheck + lint + format check
 
 **Architecture Principles**:
+
 - **DRY (Don't Repeat Yourself)**: Shared components and layouts
 - **Component-Based**: Reusable, configurable components
 - **Mobile-First**: Progressive enhancement from mobile to desktop
@@ -97,6 +105,7 @@ src/components/
 ### Core Standards Summary
 
 **Clean Code**:
+
 - Write no comments
 - Use strict types only
 - Max 30 lines per function, 5 params max
@@ -104,12 +113,14 @@ src/components/
 - Long, readable variable names
 
 **TypeScript**:
+
 - Strict configuration enabled
 - Explicit interfaces over implicit types
 - Prefer `type` for unions, `interface` for objects
 - Avoid `any`, prefer `unknown`
 
 **Astro Patterns**:
+
 - Props interface at component top
 - Semantic HTML structure
 - Scoped styles when needed
@@ -118,12 +129,14 @@ src/components/
 ### Performance & UX
 
 **Technical Stack**:
+
 - **Package Manager**: pnpm with Node.js 24+ support
 - **Testing**: Vitest with @testing-library/dom for component testing
 - **Build**: Optimized production builds with Astro's static generation
 - **Assets**: WebP images with responsive sizing and lazy loading
 
 **Core Web Vitals Targets**:
+
 - **LCP**: < 2.5s
 - **FID**: < 100ms
 - **CLS**: < 0.1
@@ -133,11 +146,13 @@ src/components/
 The `.claude/` directory is organized with thematic subfolders for optimal context loading and performance:
 
 ### **Core Context (Always Loaded)**
+
 - **`core/project-overview.mdx`** - Essential architecture, tech stack, project structure
 - **`core/development-workflow.mdx`** - Commands, quality workflow, essential practices
 - **`CLAUDE.md`** (this file) - Central orchestration and project context
 
 ### **Specialized Rules (Contextual Loading by Theme)**
+
 - **`rules/generic/`** - Reusable across projects
   - `code-quality/` - Clean code, TypeScript standards, naming conventions
   - `testing/` - Testing organization, coverage, frontend testing patterns
@@ -156,6 +171,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
   - `content-creation.md` - Content creation workflow
 
 ### **Code Generation**
+
 - **`templates/generic/`** - Universal templates
   - `command-template.mdx` - Command structure template
   - `test-template.spec.ts.mdx` - Unit test template
@@ -166,6 +182,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
   - `blog-post-template.md` - Blog post structure
 
 ### **Code Fragments & Configs**
+
 - **`snippets/generic/`** - Universal code snippets
   - `typescript-types.md` - Common TypeScript patterns
   - `vitest.config.ts` + `vitest-config-guide.md` - Testing configuration & aliases
@@ -178,6 +195,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
   - `responsive-patterns.md` - Mobile-first responsive patterns
 
 ### **Operational Commands**
+
 - **`commands/`** - Essential Claude operations (5 max for performance)
   - `implement-feature.md` - Structured feature development
   - `create-content.md` - Content creation with SEO optimization
@@ -186,6 +204,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
   - `debug-issue.md` - Systematic debugging workflow
 
 ### **Debug & Analysis**
+
 - **`inputs/`** - Temporary files for debugging
   - `screenshots/` - Visual debugging captures
   - `logs/` - Error logs and system output
@@ -193,6 +212,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
   - Auto-cleanup after 7 days to prevent repo pollution
 
 ### **Context Loading Optimization**
+
 - **Level 1 (Always)**: `core/` + `CLAUDE.md` (~400 lines)
 - **Level 2 (Contextual)**: Specific `rules/` subfolder (~100-150 lines each)
 - **Level 3 (As Needed)**: `templates/` + `snippets/` (~50-100 lines each)
@@ -201,6 +221,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 ## Claude Code Workflow Integration
 
 ### **Command Usage Patterns**
+
 ```bash
 # Feature Development
 /implement-feature search-component component
@@ -224,6 +245,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 ```
 
 ### **Context Referencing Strategy**
+
 - **Before editing**: Check `core/` for essential patterns and workflow
 - **During development**: Reference specific `rules/` subfolders by domain
 - **For components**: Use `rules/astro/components/` and `templates/astro/`
@@ -236,6 +258,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 - **Code generation**: Use domain-specific `templates/` subfolders
 
 ### **Performance Optimization**
+
 - Load only relevant context based on task type
 - Prefer specific snippets over full rule loading
 - Use templates for rapid prototyping
@@ -244,18 +267,21 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 ## Important Instructions
 
 **File Operations**:
+
 - ALWAYS prefer editing existing files over creating new ones
 - NEVER create documentation files unless explicitly requested
 - Use existing patterns and conventions from `core/` and `rules/`
 - Reference `templates/` for new file structure
 
 **Quality Control Workflow**:
+
 - Run `pnpm quality` before committing (enforced by pre-commit hooks)
 - Follow standards defined in `rules/generic/code-quality/`
 - Apply Astro patterns from `rules/astro/`
 - Validate accessibility and performance against targets from `rules/generic/performance/`
 
 **Architecture Compliance**:
+
 - Follow component-based design patterns from `rules/astro/components/`
 - Respect layout hierarchy defined in `core/project-overview.mdx`
 - Use design tokens consistently from `rules/astro/styling/`
@@ -266,6 +292,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 ## Context Maintenance
 
 **Automatic CLAUDE.md Updates**:
+
 - Claude MUST automatically check and update CLAUDE.md after any structural modification
 - Update triggers: .claude/ structure changes, new components/pages, new commands, workflow modifications
 - Sections to maintain: Architecture Overview, Commands, Context Organization, Context Referencing Strategy
@@ -273,6 +300,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 - Goal: Keep CLAUDE.md always synchronized with actual project state
 
 **Update Responsibility**:
+
 - Claude is responsible for maintaining documentation accuracy
 - No manual intervention required from user
 - Updates must happen in the same session as modifications
