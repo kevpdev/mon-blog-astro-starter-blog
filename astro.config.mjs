@@ -42,7 +42,9 @@ console.log('isDev:', isDev);
 console.log('isGitHubPages:', isGitHubPages);
 console.log('isNetlify:', isNetlify);
 console.log('---');
-console.log(`🔧 Config: ${isDev ? 'DEV' : isGitHubPages ? 'GITHUB_PAGES' : isNetlify ? 'NETLIFY' : 'OTHER'}`);
+console.log(
+  `🔧 Config: ${isDev ? 'DEV' : isGitHubPages ? 'GITHUB_PAGES' : isNetlify ? 'NETLIFY' : 'OTHER'}`,
+);
 console.log(`🌐 Site: ${site}`);
 console.log(`📁 Base: ${base}`);
 console.log('========================');
