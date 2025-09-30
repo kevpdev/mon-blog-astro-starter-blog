@@ -32,7 +32,9 @@ if (isDev) {
 }
 
 // Debug de la configuration (visible dans build logs)
-console.log(`🔧 Astro Config: ${isDev ? 'DEV' : isGitHubPages ? 'GITHUB_PAGES' : isNetlify ? 'NETLIFY' : 'OTHER'}`);
+console.log(
+  `🔧 Astro Config: ${isDev ? 'DEV' : isGitHubPages ? 'GITHUB_PAGES' : isNetlify ? 'NETLIFY' : 'OTHER'}`,
+);
 console.log(`🌐 Site: ${site}`);
 console.log(`📁 Base: ${base}`);
 
