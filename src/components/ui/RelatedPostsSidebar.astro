@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import PostCard from './PostCard.astro';
+import { createInternalUrl } from '../../utils/url.ts';
 
 export interface Props {
   posts: CollectionEntry<'blog'>[];
@@ -77,8 +78,8 @@ const { posts, class: className = '' } = Astro.props;
 
       <!-- Lien vers tous les articles -->
       <div class="pt-4 border-t border-[rgb(var(--border-secondary))]">
-        <a 
-          href="/blog"
+        <a
+          href={createInternalUrl('/blog')}
           class="text-sm text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] transition-colors"
         >
           Voir tous les articles →

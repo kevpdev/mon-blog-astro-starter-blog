@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import Section from '../components/ui/Section.astro';
 import Button from '../components/ui/Button.astro';
+import { createInternalUrl } from '../utils/url.ts';
 
 const title = 'Erreur serveur - 500';
 const description = 'Une erreur inattendue s\'est produite sur le serveur.';
@@ -28,7 +29,7 @@ const description = 'Une erreur inattendue s\'est produite sur le serveur.';
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <Button
-          href="/"
+          href={createInternalUrl('/')}
           variant="primary"
           size="lg"
         >
@@ -58,7 +59,7 @@ const description = 'Une erreur inattendue s\'est produite sur le serveur.';
         </div>
         <div class="mt-6">
           <a
-            href="/contact"
+            href={createInternalUrl('/contact')}
             class="text-[rgb(var(--brand-primary))] hover:text-[rgb(var(--brand-primary-hover))] transition-colors no-underline"
           >
             Nous contacter pour signaler le problème

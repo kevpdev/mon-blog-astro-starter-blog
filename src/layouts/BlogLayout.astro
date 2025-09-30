@@ -10,6 +10,7 @@ import Button from '../components/ui/Button.astro';
 import RelatedPostsSidebar from '../components/ui/RelatedPostsSidebar.astro';
 import { getRelatedPosts } from '../utils/related-posts';
 import { AUTHOR_CONFIG } from '../config/site';
+import { createInternalUrl } from '../utils/url.ts';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   currentPost?: CollectionEntry<'blog'>;
@@ -63,7 +64,7 @@ const relatedPosts = currentPost ? await getRelatedPosts(currentPost, 3) : [];
 
             <!-- Navigation de retour -->
             <div class="mt-12 mb-8 pt-8 border-t border-neutral-200 dark:border-neutral-700 text-center">
-              <Button href="/blog" variant="outline">
+              <Button href={createInternalUrl('/blog')} variant="outline">
                 ← Retour au blog
               </Button>
             </div>

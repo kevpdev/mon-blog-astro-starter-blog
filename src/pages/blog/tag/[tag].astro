@@ -7,6 +7,7 @@ import Section from '../../../components/ui/Section.astro';
 import ErrorMessage from '../../../components/ui/ErrorMessage.astro';
 import { getPostsByTag, getAllTags } from '../../../utils/tags';
 import { validateRequired, validateString, handleError, logError, createError } from '../../../utils/error-handler';
+import { createInternalUrl } from '../../../utils/url.ts';
 
 export async function getStaticPaths() {
   try {
@@ -82,7 +83,7 @@ try {
         >
           <div class="mt-4">
             <a
-              href="/blog"
+              href={createInternalUrl('/blog')}
               class="inline-flex items-center px-4 py-2 bg-[rgb(var(--brand-primary))] text-[rgb(var(--text-inverse))] rounded-lg hover:bg-[rgb(var(--brand-primary-hover))] transition-colors no-underline"
             >
               ← Retour au blog
@@ -116,7 +117,7 @@ try {
                 Il n'y a actuellement aucun article avec le tag "{capitalizedTag}".
               </p>
               <a
-                href="/blog"
+                href={createInternalUrl('/blog')}
                 class="inline-flex items-center px-4 py-2 bg-[rgb(var(--brand-primary))] text-[rgb(var(--text-inverse))] rounded-lg hover:bg-[rgb(var(--brand-primary-hover))] transition-colors no-underline"
               >
                 ← Retour au blog
@@ -126,7 +127,7 @@ try {
 
           <div class="mt-12 text-center">
             <a
-              href="/blog"
+              href={createInternalUrl('/blog')}
               class="inline-flex items-center px-4 py-2 bg-[rgb(var(--bg-muted))] text-[rgb(var(--text-primary))] rounded-lg hover:bg-[rgb(var(--brand-primary))] hover:text-[rgb(var(--text-inverse))] transition-colors no-underline"
             >
               ← Retour au blog
