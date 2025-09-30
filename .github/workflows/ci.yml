@@ -1,36 +1,49 @@
-steps:
-  - name: Checkout
-    uses: actions/checkout@v4
+name: CI/CD Pipeline
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: '24'
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
 
-  - name: Setup pnpm
-    uses: pnpm/action-setup@v4
-    with:
-      version: latest
+jobs:
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
 
-  - name: Install dependencies
-    run: pnpm install --frozen-lockfile
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
 
-  - name: Build project
-    run: pnpm build
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
 
-  - name: Create .nojekyll file for GitHub Pages
-    run: touch dist/.nojekyll
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: latest
 
-  - name: Verify .nojekyll file exists
-    run: |
-      ls -la dist
-      cat dist/.nojekyll || echo ".nojekyll file is empty as expected"
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
 
-  - name: Deploy to GitHub Pages
-    uses: peaceiris/actions-gh-pages@v4
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: ./dist
-      publish_branch: gh-pages-dev
-      user_name: 'github-actions[bot]'
-      user_email: 'github-actions[bot]@users.noreply.github.com'
+    - name: Build project
+      run: pnpm build
+
+    - name: Create .nojekyll file for GitHub Pages
+      run: touch dist/.nojekyll
+
+    - name: Verify .nojekyll file exists
+      run: |
+        ls -la dist
+        cat dist/.nojekyll || echo ".nojekyll file is empty as expected"
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        publish_branch: gh-pages-dev
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
