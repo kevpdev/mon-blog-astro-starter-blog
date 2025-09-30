@@ -26,14 +26,3 @@ export function createAssetUrl(assetPath: string): string {
   const cleanPath = assetPath.startsWith('/') ? assetPath : `/${assetPath}`;
   return `${base}${cleanPath}`.replace(/\/+/g, '/');
 }
-
-/**
- * Debug function to log current environment configuration
- */
-export function debugUrls() {
-  console.log('=== URL DEBUG ===');
-  console.log('BASE_URL:', import.meta.env.BASE_URL);
-  console.log('Example internal:', createInternalUrl('/about'));
-  console.log('Example asset:', createAssetUrl('/favicon.svg'));
-  console.log('================');
-}
