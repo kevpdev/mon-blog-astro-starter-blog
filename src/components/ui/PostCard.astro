@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
+import { createInternalUrl } from '../../utils/url.ts';
 
 export interface Props {
   post: any;
@@ -14,7 +15,7 @@ const { title, description, pubDate, heroImage } = post.data;
 <article
   class={`bg-[rgb(var(--bg-primary))] rounded-lg shadow-sm border border-[rgb(var(--border-primary))] overflow-hidden hover:shadow-md transition-all duration-200 ${className}`}>
   <a
-    href={`/blog/${post.slug}/`}
+    href={createInternalUrl(`/blog/${post.slug}/`)}
     class="block">
     <div class="relative">
       {

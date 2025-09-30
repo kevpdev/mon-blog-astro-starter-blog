@@ -1,6 +1,7 @@
 ---
 import FormattedDate from './FormattedDate.astro';
 import Badge from './Badge.astro';
+import { createInternalUrl } from '../../utils/url.ts';
 
 export interface Props {
   class?: string;
@@ -66,7 +67,7 @@ const {
   {showTags && tags.length > 0 && (
     <div class="post-tags flex items-center gap-2 flex-wrap">
       {tags.map((tag) => (
-        <Badge variant="secondary" size="sm" href={`/blog/tag/${tag.toLowerCase()}`}>
+        <Badge variant="secondary" size="sm" href={createInternalUrl(`/blog/tag/${tag.toLowerCase()}`)}>
           #{tag}
         </Badge>
       ))}

@@ -6,6 +6,7 @@ import Container from '../components/ui/Container.astro';
 import Section from '../components/ui/Section.astro';
 import Hero from '../components/ui/Hero.astro';
 import FormattedDate from '../components/ui/FormattedDate.astro';
+import { createInternalUrl } from '../utils/url.ts';
 
 export interface Props {
   title: string;
@@ -49,8 +50,8 @@ const formationPosts = allBlogPosts
               )}
               <div>
                 <h2 class="text-xl font-bold text-[rgb(var(--text-primary))] mb-3">
-                  <a 
-                    href={`/blog/${post.slug}/`}
+                  <a
+                    href={createInternalUrl(`/blog/${post.slug}/`)}
                     class="hover:text-[rgb(var(--brand-primary))] transition-colors"
                   >
                     {post.data.title}

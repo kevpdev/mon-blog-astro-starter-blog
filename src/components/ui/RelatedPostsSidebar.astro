@@ -24,8 +24,8 @@ const { posts, class: className = '' } = Astro.props;
       <div class="space-y-4">
         {posts.map((post) => (
           <article class="group">
-            <a 
-              href={`/blog/${post.slug}/`}
+            <a
+              href={createInternalUrl(`/blog/${post.slug}/`)}
               class="flex gap-3 hover:opacity-80 transition-opacity duration-200"
             >
               <!-- Aperçu d'image -->
