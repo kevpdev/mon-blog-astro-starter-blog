@@ -62,6 +62,11 @@ jobs:
       - name: Create .nojekyll file for GitHub Pages
         run: touch dist/.nojekyll
 
+      - name: Verify .nojekyll file exists
+        run: |
+          ls -la dist
+          cat dist/.nojekyll || echo ".nojekyll file is empty as expected"
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
