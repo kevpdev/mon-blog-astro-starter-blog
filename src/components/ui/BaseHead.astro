@@ -5,14 +5,15 @@ import type { ImageMetadata } from 'astro';
 import FallbackImage from '../../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../../consts';
 import { authorConfig } from '../../config/author';
+import { createAssetUrl } from '../../utils/url.ts';
 import '../../styles/design-tokens.css';
 import '../../styles/global.css';
 
-// Fonts
+// Fonts with proper base URL
 const fontStyles = `
 @font-face {
   font-family: 'Atkinson';
-  src: url('/fonts/atkinson-regular.woff') format('woff');
+  src: url('${createAssetUrl('/fonts/atkinson-regular.woff')}') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -20,7 +21,7 @@ const fontStyles = `
 
 @font-face {
   font-family: 'Atkinson';
-  src: url('/fonts/atkinson-bold.woff') format('woff');
+  src: url('${createAssetUrl('/fonts/atkinson-bold.woff')}') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -51,11 +52,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link
   rel="icon"
   type="image/svg+xml"
-  href="/favicon.svg"
+  href={createAssetUrl('/favicon.svg')}
 />
 <link
   rel="sitemap"
-  href="/sitemap-index.xml"
+  href={createAssetUrl('/sitemap-index.xml')}
 />
 <link
   rel="alternate"
@@ -71,14 +72,14 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Font preloads -->
 <link
   rel="preload"
-  href="/fonts/atkinson-regular.woff"
+  href={createAssetUrl('/fonts/atkinson-regular.woff')}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/fonts/atkinson-bold.woff"
+  href={createAssetUrl('/fonts/atkinson-bold.woff')}
   as="font"
   type="font/woff"
   crossorigin
