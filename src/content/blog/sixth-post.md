@@ -1,5 +1,5 @@
 ---
-title: 'Sixth post'
+title: 'Sixième article'
 description: 'Découvrez les nouvelles tendances du développement web'
 pubDate: 'Aug 24 2025'
 heroImage: '../../assets/purple-flower-6620617_1280.jpg'

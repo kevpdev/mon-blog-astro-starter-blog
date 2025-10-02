@@ -43,7 +43,6 @@ This is a modern Astro blog with TypeScript strict configuration, following comp
 - `BaseLayout.astro` - Core HTML structure, shared head/body/footer
 - `BlogLayout.astro` - Blog post layout with hero image, metadata, tags
 - `BlogListLayout.astro` - Layout component
-- `FormationsLayout.astro` - Layout component
 - `HomeLayout.astro` - Homepage-specific layout extending BaseLayout
 - `PageLayout.astro` - Static page layout for content pages
 
@@ -67,7 +66,7 @@ src/components/
 - `src/pages/about.astro` - About page
 - `src/pages/contact.astro` - contact page
 - `src/pages/index.astro` - Homepage
-- `src/pages/meilleures-formations-seo-business.astro` - meilleures-formations-seo-business page
+- `src/pages/services.astro` - Services page
 - `src/pages/blog/index.astro` - Blog listing page
 - `src/pages/blog/[...slug].astro` - Individual blog posts
 - `src/pages/rss.xml.js` - RSS feed generation

@@ -3,18 +3,18 @@ import type { NavigationConfig } from '../types/navigation';
 // Utilise les liens communs définis dans site.ts
 export const navigationConfig: NavigationConfig = [
   {
-    label: 'Home',
+    label: 'Accueil',
     href: '/',
     enabled: true,
   },
   {
-    label: 'About',
+    label: 'À propos',
     href: '/about',
     enabled: true,
   },
   {
-    label: 'Meilleures formations seo / business',
-    href: '/meilleures-formations-seo-business',
+    label: 'Services',
+    href: '/services',
     enabled: true,
   },
   {
