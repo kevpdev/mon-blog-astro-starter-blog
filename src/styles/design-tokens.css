@@ -43,6 +43,15 @@
 
 /* ===== DARK THEME ===== */
 .dark {
+  /* Brand colors for dark mode */
+  --brand-primary: 156 163 175; /* rgb(156, 163, 175) - lighter gray for better contrast */
+  --brand-primary-hover: 209 213 219; /* rgb(209, 213, 219) - even lighter on hover */
+  --brand-primary-active: 229 231 235; /* rgb(229, 231, 235) - lightest on active */
+
+  --brand-secondary: 209 213 219; /* rgb(209, 213, 219) */
+  --brand-secondary-hover: 229 231 235; /* rgb(229, 231, 235) */
+  --brand-secondary-active: 243 244 246; /* rgb(243, 244, 246) */
+
   --text-primary: 249 250 251; /* rgb(249, 250, 251) */
   --text-secondary: 209 213 219; /* rgb(209, 213, 219) */
   --text-muted: 156 163 175; /* rgb(156, 163, 175) */
