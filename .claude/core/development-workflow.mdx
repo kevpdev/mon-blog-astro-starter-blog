@@ -10,14 +10,12 @@ alwaysApply: true
 All commands are run from the root of the project using pnpm:
 
 ### Development
-
 - `pnpm dev` - Start development server at localhost:4321
 - `pnpm build` - Build production site to ./dist/
 - `pnpm preview` - Preview build locally
 - `pnpm astro` - Run Astro CLI commands (e.g., `pnpm astro add`, `pnpm astro check`)
 
 ### Quality & Testing
-
 - `pnpm lint` - Run ESLint on .js, .ts, .astro files
 - `pnpm lint:fix` - Run ESLint with auto-fix
 - `pnpm format` - Format code with Prettier
@@ -28,7 +26,6 @@ All commands are run from the root of the project using pnpm:
 - `pnpm quality` - Run typecheck, lint, and format check
 
 ### Claude Commands
-
 - `/implement-feature [name] [type]` - Structured feature implementation
 - `/create-content [type] [title]` - Content creation workflow
 - `/commit-push-smart [message?]` - Smart commit and push
@@ -38,7 +35,6 @@ All commands are run from the root of the project using pnpm:
 ## Quality Control Workflow
 
 ### Automated Quality Control
-
 - **ESLint**: Static analysis with auto-fix (`pnpm lint:fix`)
 - **Prettier**: Code formatting with consistent style
 - **TypeScript**: Strict mode with null checks enabled
@@ -46,7 +42,6 @@ All commands are run from the root of the project using pnpm:
 - **Quality Command**: `pnpm quality` runs typecheck + lint + format check
 
 ### Pre-commit Process
-
 1. **Husky Hook**: Triggers on `git commit`
 2. **lint-staged**: Runs only on staged files
 3. **ESLint**: Validates code quality
@@ -55,7 +50,6 @@ All commands are run from the root of the project using pnpm:
 6. **Commit**: Proceeds only if all checks pass
 
 ### Quality Gates
-
 - **Development**: `pnpm quality` before committing (enforced by pre-commit hooks)
 - **CI/CD**: All quality checks must pass
 - **Code Review**: Follow established patterns and standards
@@ -63,14 +57,12 @@ All commands are run from the root of the project using pnpm:
 ## File Operations Guidelines
 
 ### Important Instructions
-
 - **ALWAYS prefer editing existing files over creating new ones**
 - **NEVER create documentation files unless explicitly requested**
 - **Use existing patterns and conventions from rules/**
 - **Reference templates/ for new file structure**
 
 ### Architecture Compliance
-
 - Follow component-based design patterns
 - Respect layout hierarchy defined in project structure
 - Use design tokens consistently
@@ -80,12 +72,10 @@ All commands are run from the root of the project using pnpm:
 ## Git Workflow
 
 ### Commit Convention
-
 - Use conventional commits format
 - Run `pnpm quality` before committing
 - Ensure all tests pass
 - Include proper commit message ending:
-
   ```
   🤖 Generated with [Claude Code](https://claude.ai/code)
 
@@ -93,7 +83,6 @@ All commands are run from the root of the project using pnpm:
   ```
 
 ### Branch Strategy
-
 - `main` - Production-ready code
 - Feature branches for development
 - No direct commits to main
@@ -101,41 +90,34 @@ All commands are run from the root of the project using pnpm:
 ## Context Referencing Strategy
 
 ### Before editing
-
 - Check `core/` for essential patterns and standards
 - Review relevant `rules/` for specialized guidance
 
 ### During development
-
 - Reference relevant `rules/` and `templates/`
 - Use `snippets/` for code patterns
 
 ### For testing
-
 - Use `snippets/generic/vitest-config-guide.md` for aliases and coverage
 - Follow testing standards in `rules/generic/testing/`
 
 ### For debugging
-
 - Utilize `inputs/` and `snippets/` for quick fixes
 - Use error handling patterns from `rules/generic/error-handling/`
 
 ### Code generation
-
 - Use `templates/` for consistent structure
 - Follow component patterns from `rules/astro/components/`
 
 ## Performance Optimization
 
 ### Context Loading Strategy
-
 - **Core (Always Loaded)**: Essential project patterns (~200 lines)
 - **Rules (Contextual Loading)**: Specialized guidance by domain (~100-150 lines each)
 - **Templates (As Needed)**: Code generation templates
 - **Snippets (As Needed)**: Quick code patterns
 
 ### Development Performance
-
 - Load only relevant context based on task type
 - Prefer specific snippets over full rule loading
 - Use templates for rapid prototyping
@@ -144,7 +126,6 @@ All commands are run from the root of the project using pnpm:
 ## Essential Development Principles
 
 ### Code Quality
-
 - Write no comments unless absolutely necessary
 - Use strict TypeScript types only
 - Max 30 lines per function, 5 params max
@@ -152,7 +133,6 @@ All commands are run from the root of the project using pnpm:
 - Long, readable variable names
 
 ### Error Handling
-
 - Use custom domain errors with typed error classes
 - Create centralized error handling utilities
 - Use `globalThis` for SSR/client compatibility
@@ -160,7 +140,6 @@ All commands are run from the root of the project using pnpm:
 - Provide fallback mechanisms and retry logic
 
 ### Component Development
-
 - Props interface at component top
 - Semantic HTML structure
 - Performance-first approach
@@ -168,7 +147,6 @@ All commands are run from the root of the project using pnpm:
 - Accessibility compliance (WCAG 2.2 AA)
 
 ### Testing
-
 - Unit tests: >80% coverage
 - Integration tests for critical paths
 - Write tests in English with descriptive names

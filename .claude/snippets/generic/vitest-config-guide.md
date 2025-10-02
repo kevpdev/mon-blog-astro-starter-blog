@@ -7,14 +7,12 @@ Documentation de la configuration Vitest du projet pour génération de tests co
 Référence : `vitest.config.ts` (racine du projet)
 
 ### Environment & Setup
-
 - **Environment** : `jsdom` pour tests DOM
 - **Globals** : `true` (pas besoin d'importer describe, it, expect)
 - **Setup file** : `./src/__tests__/setup/vitest.setup.ts`
 - **Timeout** : 10 secondes pour tests async
 
 ### Path Aliases (IMPORTANT)
-
 ```typescript
 // Utiliser ces alias dans les tests générés
 '@': './src'
@@ -26,7 +24,6 @@ Référence : `vitest.config.ts` (racine du projet)
 ```
 
 ### Exemple d'import dans les tests :
-
 ```typescript
 // ✅ Correct - utiliser les alias
 import { Button } from '@/components/ui/Button.astro';
@@ -37,19 +34,16 @@ import { Button } from '../../../components/ui/Button.astro';
 ```
 
 ### Coverage Requirements
-
 - **Lines** : 80% minimum
 - **Functions** : 80% minimum
 - **Branches** : 70% minimum
 - **Statements** : 80% minimum
 
 ### Mocks Astro Disponibles
-
 - `astro:content` → `src/__tests__/mocks/astro-content-virtual.ts`
 - `astro:assets` → `src/__tests__/mocks/astro-assets-virtual.ts`
 
 ### Pattern de Tests
-
 ```typescript
 // Structure recommandée avec alias
 import { describe, it, expect } from 'vitest';
@@ -64,7 +58,6 @@ describe('ComponentName', () => {
 ```
 
 ### Exclusions Coverage
-
 - `node_modules/`
 - `src/__tests__/`
 - `**/*.d.ts`
@@ -72,7 +65,6 @@ describe('ComponentName', () => {
 - `dist/`, `.astro/`
 
 ### Commandes Vitest
-
 ```bash
 pnpm test              # Run tests
 pnpm test:watch        # Watch mode

@@ -7,13 +7,11 @@ description: Core Web Vitals optimization and performance targets
 ## Performance Targets
 
 ### Core Web Vitals Thresholds
-
 - **LCP (Largest Contentful Paint)**: < 2.5s
 - **FID (First Input Delay)**: < 100ms
 - **CLS (Cumulative Layout Shift)**: < 0.1
 
 ### Additional Metrics
-
 - **FCP (First Contentful Paint)**: < 1.8s
 - **TTI (Time to Interactive)**: < 3.8s
 - **TBT (Total Blocking Time)**: < 200ms
@@ -21,7 +19,6 @@ description: Core Web Vitals optimization and performance targets
 ## Largest Contentful Paint (LCP)
 
 ### Optimization Strategies
-
 ```astro
 ---
 // ✅ Optimize hero images for LCP
@@ -45,7 +42,6 @@ import heroImage from '../assets/hero.webp';
 ```
 
 ### Resource Prioritization
-
 ```astro
 ---
 // ✅ Critical resource hints
@@ -75,7 +71,6 @@ import heroImage from '../assets/hero.webp';
 ```
 
 ### Image Optimization
-
 ```typescript
 // ✅ Responsive image configuration
 const imageConfig = {
@@ -100,7 +95,6 @@ const imageConfig = {
 ## First Input Delay (FID)
 
 ### JavaScript Optimization
-
 ```typescript
 // ✅ Use web workers for heavy computation
 function processDataInWorker(data: unknown[]): Promise<ProcessedData[]> {
@@ -127,7 +121,7 @@ async function processLargeDataset(items: DataItem[]): Promise<ProcessedItem[]> 
     results.push(...processed);
 
     // Yield to main thread
-    await new Promise((resolve) => globalThis.setTimeout(resolve, 0));
+    await new Promise(resolve => globalThis.setTimeout(resolve, 0));
   }
 
   return results;
@@ -135,12 +129,11 @@ async function processLargeDataset(items: DataItem[]): Promise<ProcessedItem[]> 
 ```
 
 ### Event Handler Optimization
-
 ```typescript
 // ✅ Debounce expensive operations
 function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
-  delay: number,
+  delay: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout>;
 
@@ -164,7 +157,6 @@ const optimizedClickHandler = debounce((event: MouseEvent) => {
 ## Cumulative Layout Shift (CLS)
 
 ### Layout Stability
-
 ```astro
 ---
 // ✅ Reserve space for dynamic content
@@ -198,7 +190,6 @@ const optimizedClickHandler = debounce((event: MouseEvent) => {
 ```
 
 ### Font Loading Strategy
-
 ```css
 /* ✅ Prevent font layout shifts */
 @font-face {
@@ -210,20 +201,13 @@ const optimizedClickHandler = debounce((event: MouseEvent) => {
 
 /* ✅ Fallback font with similar metrics */
 body {
-  font-family:
-    'Inter var',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    system-ui,
-    sans-serif;
+  font-family: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 /* ✅ Preload critical fonts */
 ```
 
 ### Dynamic Content Handling
-
 ```typescript
 // ✅ Measure and reserve space for dynamic content
 function loadDynamicContent(container: HTMLElement): void {
@@ -245,7 +229,6 @@ function loadDynamicContent(container: HTMLElement): void {
 ## Resource Loading Optimization
 
 ### Code Splitting
-
 ```typescript
 // ✅ Dynamic imports for non-critical code
 async function loadThemeToggle(): Promise<void> {
@@ -265,7 +248,6 @@ if (globalThis.matchMedia('(min-width: 768px)').matches) {
 ```
 
 ### Critical Path Optimization
-
 ```astro
 ---
 // ✅ Inline critical CSS
@@ -291,7 +273,6 @@ const criticalCSS = `
 ## Performance Monitoring
 
 ### Core Web Vitals Measurement
-
 ```typescript
 // ✅ Measure and report Core Web Vitals
 function measureCoreWebVitals(): void {
@@ -339,13 +320,12 @@ function reportMetric(name: string, value: number): void {
 ```
 
 ### Performance Budget
-
 ```typescript
 // ✅ Performance budget configuration
 const performanceBudget = {
   lcp: 2500, // milliseconds
-  fid: 100, // milliseconds
-  cls: 0.1, // score
+  fid: 100,  // milliseconds
+  cls: 0.1,  // score
   fcp: 1800, // milliseconds
   tti: 3800, // milliseconds
 };
@@ -362,7 +342,6 @@ function validatePerformance(metrics: PerformanceMetrics): void {
 ## Performance Checklist
 
 ### Image Optimization
-
 - [ ] Images use modern formats (WebP/AVIF)
 - [ ] Critical images use `loading="eager"`
 - [ ] Non-critical images use `loading="lazy"`
@@ -370,7 +349,6 @@ function validatePerformance(metrics: PerformanceMetrics): void {
 - [ ] Responsive images use `sizes` attribute
 
 ### JavaScript
-
 - [ ] Critical JavaScript is inlined
 - [ ] Non-critical JavaScript is deferred
 - [ ] Long tasks are broken up or moved to workers
@@ -378,7 +356,6 @@ function validatePerformance(metrics: PerformanceMetrics): void {
 - [ ] Third-party scripts are loaded efficiently
 
 ### CSS
-
 - [ ] Critical CSS is inlined
 - [ ] Non-critical CSS is preloaded
 - [ ] Fonts use `font-display: swap`
@@ -386,7 +363,6 @@ function validatePerformance(metrics: PerformanceMetrics): void {
 - [ ] Unused CSS is removed
 
 ### Core Web Vitals
-
 - [ ] LCP < 2.5s
 - [ ] FID < 100ms
 - [ ] CLS < 0.1

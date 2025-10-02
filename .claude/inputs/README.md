@@ -15,19 +15,16 @@ inputs/
 ## Usage
 
 ### Screenshots
-
 - Placer les captures d'écran de bugs visuels
 - Nommer avec format : `bug-[component]-[date].png`
 - Exemple : `bug-navigation-mobile-2024-12-11.png`
 
 ### Logs
-
 - Copier les logs d'erreur pour analyse
 - Inclure stack traces complètes
 - Format : `error-[type]-[date].log`
 
 ### Configs
-
 - Fichiers de configuration problématiques
 - Comparaisons avant/après pour changes
 - Configurations externes à analyser
@@ -40,7 +37,6 @@ inputs/
 ## Nettoyage
 
 Ce dossier doit être nettoyé régulièrement :
-
 - Fichiers > 7 jours automatiquement supprimés
 - Après résolution des issues
 - Avant commits pour éviter pollution repo

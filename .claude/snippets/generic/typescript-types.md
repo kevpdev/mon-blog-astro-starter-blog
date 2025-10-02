@@ -142,7 +142,10 @@ function isNotNullish<T>(value: T | null | undefined): value is T {
   return value !== null && value !== undefined;
 }
 
-function hasProperty<K extends string>(obj: unknown, key: K): obj is Record<K, unknown> {
+function hasProperty<K extends string>(
+  obj: unknown,
+  key: K
+): obj is Record<K, unknown> {
   return typeof obj === 'object' && obj !== null && key in obj;
 }
 
@@ -191,7 +194,7 @@ class CustomError extends Error {
       message: this.message,
       details: this.details,
       code: this.code,
-      timestamp: this.timestamp,
+      timestamp: this.timestamp
     };
   }
 }

@@ -5,14 +5,14 @@ export default defineConfig({
   test: {
     // Environment for DOM testing
     environment: 'jsdom',
-
+    
     // Test file patterns
     include: ['src/**/*.{test,spec}.{js,ts}'],
     exclude: ['node_modules', 'dist', '.astro'],
-
+    
     // Global test setup
     setupFiles: ['./src/__tests__/setup/vitest.setup.ts'],
-
+    
     // Coverage configuration
     coverage: {
       provider: 'v8',
@@ -23,33 +23,33 @@ export default defineConfig({
         '**/*.d.ts',
         '**/*.config.*',
         'dist/',
-        '.astro/',
+        '.astro/'
       ],
       thresholds: {
         global: {
           branches: 70,
           functions: 80,
           lines: 80,
-          statements: 80,
-        },
-      },
+          statements: 80
+        }
+      }
     },
-
+    
     // Global configurations
     globals: true,
     clearMocks: true,
     restoreMocks: true,
-
+    
     // Timeout for async tests
     testTimeout: 10000,
-
+    
     // Reporter configuration
     reporter: ['verbose'],
-
+    
     // Mock CSS imports
     css: false,
   },
-
+  
   resolve: {
     alias: {
       'astro:content': resolve(__dirname, 'src/__tests__/mocks/astro-content-virtual.ts'),
@@ -60,16 +60,16 @@ export default defineConfig({
       '@/utils': resolve(__dirname, './src/utils'),
       '@/config': resolve(__dirname, './src/config'),
       '@/types': resolve(__dirname, './src/types'),
-    },
+    }
   },
-
+  
   // Esbuild configuration for TypeScript
   esbuild: {
-    target: 'node14',
+    target: 'node14'
   },
-
+  
   // Define globals for better type support
   define: {
     'import.meta.vitest': 'undefined',
-  },
+  }
 });

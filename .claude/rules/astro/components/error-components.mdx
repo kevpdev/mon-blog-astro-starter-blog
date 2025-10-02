@@ -7,7 +7,6 @@ description: Error handling components and patterns for Astro
 ## Error Pages Structure
 
 ### Basic Error Page Pattern
-
 ```astro
 <!-- src/pages/404.astro -->
 ---
@@ -32,7 +31,6 @@ const description = 'La page que vous cherchez n\'existe pas ou a été déplac�
 ## ErrorBoundary Component
 
 ### Component Structure
-
 ```astro
 <!-- src/components/ui/ErrorBoundary.astro -->
 ---
@@ -72,7 +70,6 @@ try {
 ## ErrorMessage Component
 
 ### Props Interface
-
 ```typescript
 interface ErrorMessageProps {
   title?: string;
@@ -85,7 +82,6 @@ interface ErrorMessageProps {
 ```
 
 ### Usage Examples
-
 ```astro
 <!-- Basic error message -->
 <ErrorMessage
@@ -112,7 +108,6 @@ interface ErrorMessageProps {
 ## Error Handling Integration
 
 ### Page Level Error Handling
-
 ```astro
 ---
 import { validateRequired, validateString, handleError, logError } from '../utils/error-handler';
@@ -149,7 +144,6 @@ try {
 ```
 
 ### Component Level Protection
-
 ```astro
 ---
 // Wrap risky operations in ErrorBoundary
@@ -163,7 +157,6 @@ import DynamicContent from './DynamicContent.astro';
 ```
 
 ### Collection Level Handling
-
 ```astro
 ---
 import { safeExecute } from '../utils/error-handler';
@@ -190,7 +183,6 @@ const posts = await safeExecute(
 ## Error Component Patterns
 
 ### Progressive Enhancement
-
 ```astro
 ---
 // Start with basic functionality, enhance with JavaScript
@@ -213,7 +205,6 @@ const posts = await safeExecute(
 ```
 
 ### Accessibility Considerations
-
 ```astro
 <div
   class="error-message"
@@ -230,15 +221,13 @@ const posts = await safeExecute(
 ## Error Integration Checklist
 
 ### Component Design
-
 - [ ] Props interface is well-defined with TypeScript
 - [ ] Fallback UI is provided for all error states
 - [ ] Error messages are user-friendly (not technical)
-- [ ] Accessibility attributes are included (role, aria-\*)
+- [ ] Accessibility attributes are included (role, aria-*)
 - [ ] Responsive design works on all breakpoints
 
 ### Error Handling
-
 - [ ] Try-catch blocks wrap risky operations
 - [ ] Errors are logged with proper context
 - [ ] User-safe error messages are displayed
@@ -246,7 +235,6 @@ const posts = await safeExecute(
 - [ ] Validation errors redirect appropriately
 
 ### Testing
-
 - [ ] Error scenarios are tested
 - [ ] Component renders correctly with different props
 - [ ] Accessibility is validated

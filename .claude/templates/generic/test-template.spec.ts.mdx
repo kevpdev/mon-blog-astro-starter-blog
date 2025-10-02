@@ -24,7 +24,7 @@ describe('ComponentName', () => {
       // Arrange
       const props = {
         title: 'Test Title',
-        variant: 'primary' as const,
+        variant: 'primary' as const
       };
 
       // Act
@@ -38,7 +38,7 @@ describe('ComponentName', () => {
     it('should apply default props when not provided', () => {
       // Arrange
       const props = {
-        title: 'Test Title',
+        title: 'Test Title'
       };
 
       // Act
@@ -55,7 +55,7 @@ describe('ComponentName', () => {
       const handleClick = vi.fn();
       const props = {
         title: 'Clickable Button',
-        onClick: handleClick,
+        onClick: handleClick
       };
 
       render(ComponentName(props));
@@ -89,7 +89,7 @@ describe('ComponentName', () => {
       // Arrange
       const props = {
         title: '',
-        variant: 'invalid' as any,
+        variant: 'invalid' as any
       };
 
       // Act & Assert
@@ -114,7 +114,7 @@ describe('ComponentName', () => {
       // Arrange
       const props = {
         title: 'Accessible Button',
-        ariaLabel: 'Custom accessible label',
+        ariaLabel: 'Custom accessible label'
       };
 
       // Act
@@ -143,25 +143,21 @@ describe('ComponentName', () => {
 ## Conventions de test
 
 ### Organisation
-
 - **describe** pour grouper les tests par fonctionnalité
 - **it** pour les cas de test individuels
 - **Arrange-Act-Assert** pattern obligatoire
 
 ### Naming
-
 - Tests en anglais pour cohérence
 - Noms descriptifs : "should [behavior] when [condition]"
 - Groupes logiques : Initialization, User Interactions, Edge Cases, Accessibility
 
 ### Mocking
-
 - Utiliser `vi.fn()` pour les fonctions mock
 - Nettoyer les mocks dans `afterEach`
 - Mocker les dépendances externes
 
 ### Assertions
-
 - Une assertion principale par test
 - Tester le comportement, pas l'implémentation
 - Couvrir les cas limites et erreurs
