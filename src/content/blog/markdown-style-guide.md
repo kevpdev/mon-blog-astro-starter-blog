@@ -80,16 +80,16 @@ L'élément blockquote représente un contenu cité d'une autre source, éventue
 ### Syntaxe
 
 ```markdown
-| Italique  | Gras     | Code   |
-| --------- | -------- | ------ |
-| _italique_| **gras** | `code` |
+| Italique   | Gras     | Code   |
+| ---------- | -------- | ------ |
+| _italique_ | **gras** | `code` |
 ```
 
 ### Résultat
 
-| Italique  | Gras     | Code   |
-| --------- | -------- | ------ |
-| _italique_| **gras** | `code` |
+| Italique   | Gras     | Code   |
+| ---------- | -------- | ------ |
+| _italique_ | **gras** | `code` |
 
 ## Blocs de code
 

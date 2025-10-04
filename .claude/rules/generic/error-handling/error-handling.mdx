@@ -7,6 +7,7 @@ description: Comprehensive error handling patterns and best practices
 ## Error Type System
 
 ### Core Error Types
+
 ```typescript
 type ErrorType = 'validation' | 'network' | 'content' | 'system' | 'unknown';
 
@@ -20,6 +21,7 @@ interface AppError {
 ```
 
 ### Custom Error Classes
+
 ```typescript
 class CustomError extends Error {
   type: ErrorType;
@@ -42,7 +44,7 @@ class CustomError extends Error {
       message: this.message,
       details: this.details,
       code: this.code,
-      timestamp: this.timestamp
+      timestamp: this.timestamp,
     };
   }
 }
@@ -51,8 +53,14 @@ class CustomError extends Error {
 ## Error Creation & Handling
 
 ### Factory Functions
+
 ```typescript
-export function createError(type: ErrorType, message: string, details?: string, code?: string): CustomError {
+export function createError(
+  type: ErrorType,
+  message: string,
+  details?: string,
+  code?: string,
+): CustomError {
   return new CustomError(type, message, details, code);
 }
 
@@ -66,27 +74,29 @@ export function handleError(error: unknown): AppError {
       type: 'unknown',
       message: error.message,
       details: error.stack,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 
   return {
     type: 'unknown',
-    message: 'Une erreur inattendue s\'est produite',
+    message: "Une erreur inattendue s'est produite",
     details: String(error),
-    timestamp: new Date()
+    timestamp: new Date(),
   };
 }
 ```
 
 ### Centralized Logging
+
 ```typescript
 export function logError(error: AppError, context?: string): void {
   const logData = {
     ...error,
     context,
-    userAgent: typeof globalThis.navigator !== 'undefined' ? globalThis.navigator.userAgent : 'server',
-    url: typeof globalThis.window !== 'undefined' ? globalThis.window.location.href : 'unknown'
+    userAgent:
+      typeof globalThis.navigator !== 'undefined' ? globalThis.navigator.userAgent : 'server',
+    url: typeof globalThis.window !== 'undefined' ? globalThis.window.location.href : 'unknown',
   };
 
   globalThis.console.error('[ErrorHandler]', logData);
@@ -102,6 +112,7 @@ export function logError(error: AppError, context?: string): void {
 ## Validation Patterns
 
 ### Input Validation
+
 ```typescript
 export function validateRequired<T>(value: T | null | undefined, fieldName: string): T {
   if (value === null || value === undefined) {
@@ -110,17 +121,34 @@ export function validateRequired<T>(value: T | null | undefined, fieldName: stri
   return value;
 }
 
-export function validateString(value: unknown, fieldName: string, minLength = 0, maxLength = Infinity): string {
+export function validateString(
+  value: unknown,
+  fieldName: string,
+  minLength = 0,
+  maxLength = Infinity,
+): string {
   if (typeof value !== 'string') {
-    throw createError('validation', `${fieldName} doit être une chaîne de caractères`, `Type: ${typeof value}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit être une chaîne de caractères`,
+      `Type: ${typeof value}`,
+    );
   }
 
   if (value.length < minLength) {
-    throw createError('validation', `${fieldName} doit contenir au moins ${minLength} caractères`, `Length: ${value.length}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit contenir au moins ${minLength} caractères`,
+      `Length: ${value.length}`,
+    );
   }
 
   if (value.length > maxLength) {
-    throw createError('validation', `${fieldName} doit contenir au maximum ${maxLength} caractères`, `Length: ${value.length}`);
+    throw createError(
+      'validation',
+      `${fieldName} doit contenir au maximum ${maxLength} caractères`,
+      `Length: ${value.length}`,
+    );
   }
 
   return value;
@@ -137,11 +165,12 @@ export function validateArray<T>(value: unknown, fieldName: string): T[] {
 ## Safe Execution Patterns
 
 ### Error-Safe Functions
+
 ```typescript
 export function safeExecute<T>(
   fn: () => T | Promise<T>,
   fallback: T,
-  context?: string
+  context?: string,
 ): T | Promise<T> {
   try {
     const result = fn();
@@ -162,12 +191,13 @@ export function safeExecute<T>(
 ```
 
 ### Retry Logic
+
 ```typescript
 export async function withRetry<T>(
   fn: () => Promise<T>,
   maxRetries = 3,
   delay = 1000,
-  context?: string
+  context?: string,
 ): Promise<T> {
   let lastError: unknown;
 
@@ -186,7 +216,7 @@ export async function withRetry<T>(
       logError(appError, `${context} - Attempt ${attempt}/${maxRetries} failed, retrying...`);
 
       // Délai avant la prochaine tentative
-      await new Promise(resolve => globalThis.setTimeout(resolve, delay * attempt));
+      await new Promise((resolve) => globalThis.setTimeout(resolve, delay * attempt));
     }
   }
 
@@ -197,6 +227,7 @@ export async function withRetry<T>(
 ## Frontend Error Handling
 
 ### Page-Level Error Handling
+
 ```astro
 ---
 // src/pages/blog/tag/[tag].astro
@@ -241,6 +272,7 @@ try {
 ```
 
 ### Component-Level Error Boundaries
+
 ```astro
 ---
 // src/components/ui/ErrorBoundary.astro
@@ -280,6 +312,7 @@ try {
 ## Testing Error Scenarios
 
 ### Unit Tests for Error Handling
+
 ```typescript
 // src/utils/error-handler.test.ts
 import { describe, test, expect, vi } from 'vitest';
@@ -304,6 +337,7 @@ describe('error-handler', () => {
 ```
 
 ### Integration Tests
+
 ```typescript
 // Test error pages and components
 describe('Error Pages', () => {
@@ -320,6 +354,7 @@ describe('Error Pages', () => {
 ## Production Monitoring
 
 ### Error Tracking Setup
+
 ```typescript
 // src/utils/monitoring.ts (example)
 interface MonitoringService {
@@ -347,6 +382,7 @@ if (import.meta.env.PROD) {
 ## Error Handling Checklist
 
 ### Development
+
 - [ ] All user inputs are validated
 - [ ] External API calls are wrapped in try-catch
 - [ ] Database operations have error handling
@@ -354,18 +390,21 @@ if (import.meta.env.PROD) {
 - [ ] Network requests have timeout and retry logic
 
 ### User Experience
+
 - [ ] Error messages are user-friendly (not technical)
 - [ ] Fallback UI is provided for failed components
 - [ ] Navigation alternatives are available on error pages
 - [ ] Loading states prevent multiple submissions
 
 ### Monitoring & Debugging
+
 - [ ] Errors are logged with sufficient context
 - [ ] Error tracking is configured for production
 - [ ] Performance impact of error handling is minimal
 - [ ] Error rates and patterns are monitored
 
 ### Security
+
 - [ ] Sensitive information is never exposed in error messages
 - [ ] Error responses don't leak system information
 - [ ] Input validation prevents injection attacks

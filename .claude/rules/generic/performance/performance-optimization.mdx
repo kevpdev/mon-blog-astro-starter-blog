@@ -1,6 +1,6 @@
 ---
 description: Méthodologie d'optimisation des performances web pour sites Astro
-globs: ["**/*.astro", "**/*.ts", "**/*.js", "src/styles/**/*.css"]
+globs: ['**/*.astro', '**/*.ts', '**/*.js', 'src/styles/**/*.css']
 alwaysApply: false
 ---
 
@@ -11,6 +11,7 @@ Processus systématique pour optimiser les performances d'un site Astro et attei
 ## Phase 1: Audit de performance
 
 ### Étape 1: Mesurer les performances actuelles
+
 ```bash
 # Build de production
 echo "=== PERFORMANCE BASELINE ==="
@@ -23,12 +24,13 @@ npx lighthouse http://localhost:4321 --output=html --output-path=./lighthouse-be
 
 # Core Web Vitals
 echo "Target metrics:"
-echo "- LCP (Largest Contentful Paint): <2.5s" 
+echo "- LCP (Largest Contentful Paint): <2.5s"
 echo "- FID (First Input Delay): <100ms"
 echo "- CLS (Cumulative Layout Shift): <0.1"
 ```
 
 ### Étape 2: Analyser la taille du bundle
+
 ```bash
 echo "=== BUNDLE ANALYSIS ==="
 du -sh dist/
@@ -43,6 +45,7 @@ find dist -name "*.jpg" -o -name "*.png" -o -name "*.webp" -exec du -h {} + | so
 ## Phase 2: Optimisations des ressources
 
 ### Étape 3: Optimisation des images
+
 ```bash
 # Installer les outils d'optimisation
 echo "=== IMAGE OPTIMIZATION ==="
@@ -73,6 +76,7 @@ EOF
 ```
 
 **Optimisations images :**
+
 - [ ] Utiliser le composant `<Image>` d'Astro
 - [ ] Formats modernes (AVIF, WebP) avec fallback
 - [ ] Lazy loading pour images below-the-fold
@@ -80,17 +84,18 @@ EOF
 - [ ] Compression adaptée au contenu (quality: 80-90%)
 
 ### Étape 4: Optimisation des polices
+
 ```bash
 echo "=== FONT OPTIMIZATION ==="
 
 # Template de préchargement des polices
 cat << 'EOF'
 <!-- Dans BaseHead.astro -->
-<link 
-  rel="preload" 
-  href="/fonts/Inter-Variable.woff2" 
-  as="font" 
-  type="font/woff2" 
+<link
+  rel="preload"
+  href="/fonts/Inter-Variable.woff2"
+  as="font"
+  type="font/woff2"
   crossorigin
 >
 
@@ -108,6 +113,7 @@ EOF
 ```
 
 ### Étape 5: Optimisation CSS
+
 ```bash
 echo "=== CSS OPTIMIZATION ==="
 
@@ -137,6 +143,7 @@ EOF
 ## Phase 3: Optimisations de code
 
 ### Étape 6: Code splitting et tree shaking
+
 ```bash
 echo "=== CODE SPLITTING ==="
 
@@ -165,6 +172,7 @@ EOF
 ```
 
 ### Étape 7: Optimisation du JavaScript
+
 ```bash
 echo "=== JS OPTIMIZATION ==="
 
@@ -177,6 +185,7 @@ grep -r "client:visible" src/components/
 ```
 
 **Stratégies d'hydratation :**
+
 ```astro
 ---
 // Optimiser l'hydratation des composants
@@ -198,6 +207,7 @@ grep -r "client:visible" src/components/
 ## Phase 4: Optimisations serveur/build
 
 ### Étape 8: Configuration de cache
+
 ```bash
 echo "=== CACHING STRATEGY ==="
 
@@ -215,7 +225,7 @@ cat << 'EOF'
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
-  
+
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -228,6 +238,7 @@ EOF
 ```
 
 ### Étape 9: Minification et compression
+
 ```bash
 echo "=== COMPRESSION ==="
 
@@ -248,6 +259,7 @@ EOF
 ```
 
 ### Étape 10: Optimisation du rendu
+
 ```bash
 echo "=== RENDERING OPTIMIZATION ==="
 
@@ -288,6 +300,7 @@ EOF
 ## Phase 5: Validation et monitoring
 
 ### Étape 11: Tests de performance
+
 ```bash
 echo "=== PERFORMANCE TESTING ==="
 
@@ -304,6 +317,7 @@ echo "After: $(cat lighthouse-after.json | jq '.lhr.categories.performance.score
 ```
 
 ### Étape 12: Tests de charge
+
 ```bash
 echo "=== LOAD TESTING ==="
 
@@ -332,6 +346,7 @@ echo "artillery run load-test.yml"
 ## Checklist d'optimisation
 
 ### Images et médias
+
 - [ ] Format WebP/AVIF avec fallback JPG
 - [ ] Lazy loading pour images below-the-fold
 - [ ] Images responsive avec srcset
@@ -339,6 +354,7 @@ echo "artillery run load-test.yml"
 - [ ] Alt text pour toutes les images
 
 ### CSS
+
 - [ ] CSS critique inline dans <head>
 - [ ] CSS non-critique chargé async
 - [ ] Minification activée
@@ -346,6 +362,7 @@ echo "artillery run load-test.yml"
 - [ ] Variables CSS pour consistance
 
 ### JavaScript
+
 - [ ] Hydratation sélective (client:idle, client:visible)
 - [ ] Code splitting activé
 - [ ] Tree shaking configuré
@@ -353,6 +370,7 @@ echo "artillery run load-test.yml"
 - [ ] Polyfills seulement si nécessaires
 
 ### Fonts
+
 - [ ] Font preloading pour polices critiques
 - [ ] font-display: swap configuré
 - [ ] Format WOFF2 avec fallbacks
@@ -360,6 +378,7 @@ echo "artillery run load-test.yml"
 - [ ] Font subsetting pour réduire la taille
 
 ### Réseau
+
 - [ ] Headers de cache configurés
 - [ ] Compression gzip/brotli activée
 - [ ] CDN configuré pour assets statiques
@@ -367,6 +386,7 @@ echo "artillery run load-test.yml"
 - [ ] Service Worker pour cache (optionnel)
 
 ### Monitoring
+
 - [ ] Google PageSpeed Insights >90
 - [ ] Core Web Vitals dans les cibles
 - [ ] Real User Monitoring configuré
@@ -376,22 +396,26 @@ echo "artillery run load-test.yml"
 ## Métriques cibles
 
 ### Lighthouse Scores (minimum)
+
 - **Performance:** >90
 - **Accessibility:** >95
 - **Best Practices:** >95
 - **SEO:** >95
 
 ### Core Web Vitals
+
 - **LCP (Largest Contentful Paint):** <2.5s
-- **FID (First Input Delay):** <100ms  
+- **FID (First Input Delay):** <100ms
 - **CLS (Cumulative Layout Shift):** <0.1
 
 ### Additional Metrics
+
 - **TTFB (Time to First Byte):** <600ms
 - **Speed Index:** <3.4s
 - **Total Blocking Time:** <200ms
 
 ## Sortie attendue
+
 - **Performance Lighthouse >90** sur toutes les pages
 - **Core Web Vitals** dans les cibles vertes
 - **Taille de bundle optimisée** (<500KB total)

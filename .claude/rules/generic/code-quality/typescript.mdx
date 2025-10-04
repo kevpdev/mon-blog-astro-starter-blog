@@ -7,6 +7,7 @@ description: TypeScript standards and best practices
 ## Type System
 
 ### Core Principles
+
 - Type everything explicitly
 - Never use `any`, prefer `unknown` if needed
 - Avoid `as` for type conversion, use type guards
@@ -14,6 +15,7 @@ description: TypeScript standards and best practices
 - Use descriptive type parameter names
 
 ### Type vs Interface
+
 ```typescript
 // ✅ Use `interface` for extensible objects
 interface User {
@@ -33,6 +35,7 @@ type EventHandler<T> = (event: T) => void;
 ```
 
 ### Strict Configuration
+
 ```typescript
 // ✅ Always use strict TypeScript settings
 // tsconfig.json
@@ -51,6 +54,7 @@ type EventHandler<T> = (event: T) => void;
 ## Interface Design
 
 ### Explicit Interfaces
+
 ```typescript
 // ✅ Good: Explicit, well-defined interface
 interface CreateUserRequest {
@@ -74,6 +78,7 @@ interface UserData {
 ```
 
 ### Generic Interfaces
+
 ```typescript
 // ✅ Good: Reusable generic interfaces
 interface ApiResponse<TData> {
@@ -102,6 +107,7 @@ type UserResponse = ApiResponse<User>;
 ## Type Guards and Validation
 
 ### Type Guards
+
 ```typescript
 // ✅ Good: Explicit type guards
 function isString(value: unknown): value is string {
@@ -109,22 +115,16 @@ function isString(value: unknown): value is string {
 }
 
 function isUser(obj: unknown): obj is User {
-  return typeof obj === 'object' &&
-         obj !== null &&
-         'id' in obj &&
-         'name' in obj &&
-         'email' in obj;
+  return typeof obj === 'object' && obj !== null && 'id' in obj && 'name' in obj && 'email' in obj;
 }
 
-function hasProperty<K extends string>(
-  obj: unknown,
-  key: K
-): obj is Record<K, unknown> {
+function hasProperty<K extends string>(obj: unknown, key: K): obj is Record<K, unknown> {
   return typeof obj === 'object' && obj !== null && key in obj;
 }
 ```
 
 ### Assertion Functions
+
 ```typescript
 // ✅ Good: Assertion functions for validation
 function assertIsNumber(value: unknown): asserts value is number {
@@ -150,6 +150,7 @@ function processUserData(data: unknown) {
 ## Union Types and Enums
 
 ### String Literal Unions
+
 ```typescript
 // ✅ Prefer string literal unions to enums
 type Theme = 'light' | 'dark' | 'auto';
@@ -165,6 +166,7 @@ interface AppState {
 ```
 
 ### When to Use Enums
+
 ```typescript
 // ✅ Use enums when you need explicit values
 enum HttpStatusCode {
@@ -173,7 +175,7 @@ enum HttpStatusCode {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
-  INTERNAL_SERVER_ERROR = 500
+  INTERNAL_SERVER_ERROR = 500,
 }
 
 // Usage
@@ -185,11 +187,10 @@ if (response.status === HttpStatusCode.NOT_FOUND) {
 ## Generics and Utility Types
 
 ### Generic Functions
+
 ```typescript
 // ✅ Good: Descriptive generic names
-function createAsyncFunction<TInput, TOutput>(
-  processor: (input: TInput) => Promise<TOutput>
-) {
+function createAsyncFunction<TInput, TOutput>(processor: (input: TInput) => Promise<TOutput>) {
   return async (input: TInput): Promise<TOutput> => {
     return await processor(input);
   };
@@ -198,13 +199,14 @@ function createAsyncFunction<TInput, TOutput>(
 // ✅ Constrained generics
 function processCollection<TItem extends { id: string }>(
   items: TItem[],
-  processor: (item: TItem) => TItem
+  processor: (item: TItem) => TItem,
 ): TItem[] {
   return items.map(processor);
 }
 ```
 
 ### Utility Types
+
 ```typescript
 // ✅ Use built-in utility types
 type PartialUser = Partial<User>;
@@ -223,6 +225,7 @@ type UserRoleValues = ValuesOf<typeof UserRole>;
 ## Error Handling Types
 
 ### Error Type System
+
 ```typescript
 // ✅ Well-defined error types
 type ErrorType = 'validation' | 'network' | 'content' | 'system' | 'unknown';
@@ -255,6 +258,7 @@ class CustomError extends Error {
 ## Avoid Anti-Patterns
 
 ### Common Mistakes
+
 ```typescript
 // ❌ Never use `any`
 function processData(data: any): any {
@@ -298,6 +302,7 @@ const color = theme.preference?.color ?? DEFAULT_COLOR;
 ## Type Configuration Checklist
 
 ### tsconfig.json Settings
+
 - [ ] `"strict": true` enabled
 - [ ] `"noImplicitAny": true` enabled
 - [ ] `"strictNullChecks": true` enabled
@@ -306,6 +311,7 @@ const color = theme.preference?.color ?? DEFAULT_COLOR;
 - [ ] `"noUnusedParameters": true` enabled
 
 ### Code Quality
+
 - [ ] No `any` types used
 - [ ] All functions have explicit return types
 - [ ] Interfaces are preferred for objects

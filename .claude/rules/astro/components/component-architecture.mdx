@@ -13,6 +13,7 @@ alwaysApply: true
 ## Architecture Rules
 
 ### Component Organization
+
 ```
 src/components/
 ├── ui/         # Pure UI components (no business logic)
@@ -20,16 +21,19 @@ src/components/
 ```
 
 ### Component Standards
+
 - **UI components**: Props interface, TypeScript strict, scoped styles
 - **Layout components**: Composable design, slot-based content
 - **Smart/dumb pattern**: Logic in parent, display in child
 
 ### Design System Integration
+
 - Use design tokens from `src/styles/design-tokens.css`
 - Mobile-first responsive design
 - Consistent spacing and typography scale
 
 ### Performance Rules
+
 - Static generation preferred over SSR
 - Selective hydration with `client:` directives
 - Image optimization with `<Image>` component

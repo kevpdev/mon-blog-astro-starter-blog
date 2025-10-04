@@ -12,7 +12,9 @@ Fragments CSS pour le design responsive mobile-first avec Tailwind.
 }
 
 @media (min-width: 640px) {
-  .container { padding: 0 1.5rem; }
+  .container {
+    padding: 0 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -23,11 +25,15 @@ Fragments CSS pour le design responsive mobile-first avec Tailwind.
 }
 
 @media (min-width: 1024px) {
-  .container { max-width: 1024px; }
+  .container {
+    max-width: 1024px;
+  }
 }
 
 @media (min-width: 1280px) {
-  .container { max-width: 1280px; }
+  .container {
+    max-width: 1280px;
+  }
 }
 ```
 
@@ -110,24 +116,16 @@ Fragments CSS pour le design responsive mobile-first avec Tailwind.
 
 ```html
 <!-- Spacing responsive -->
-<div class="p-4 sm:p-6 md:p-8 lg:p-12">
-  Padding adaptatif
-</div>
+<div class="p-4 sm:p-6 md:p-8 lg:p-12">Padding adaptatif</div>
 
 <!-- Text size responsive -->
-<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-  Titre responsive
-</h1>
+<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Titre responsive</h1>
 
 <!-- Grid responsive -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-  Grille adaptive
-</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">Grille adaptive</div>
 
 <!-- Flexbox responsive -->
-<div class="flex flex-col md:flex-row gap-4">
-  Layout flex adaptatif
-</div>
+<div class="flex flex-col md:flex-row gap-4">Layout flex adaptatif</div>
 
 <!-- Visibility responsive -->
 <div class="hidden md:block">Desktop uniquement</div>

@@ -7,12 +7,14 @@ description: Testing organization, coverage targets, and quality standards
 ## Organization
 
 ### Test File Structure
+
 - Organize test files by feature or component
 - Use `.test.ts` or `.spec.ts` suffix
 - Group related tests using `describe` blocks
 - Follow Arrange-Act-Assert (AAA) pattern
 
 ### Directory Structure
+
 ```
 src/
 ├── components/
@@ -32,6 +34,7 @@ src/
 ## Test Quality
 
 ### Naming Conventions
+
 ```typescript
 // ✅ Good: Descriptive test names in English
 describe('UserService', () => {
@@ -63,6 +66,7 @@ describe('UserService', () => {
 ```
 
 ### AAA Pattern
+
 ```typescript
 // ✅ Good: Clear Arrange-Act-Assert structure
 test('should calculate total price with tax', () => {
@@ -100,11 +104,13 @@ test('should update user profile successfully', async () => {
 ## Coverage Targets
 
 ### Minimum Coverage Requirements
+
 - **Unit tests**: >80% coverage
 - **Integration tests**: Critical paths covered
 - **E2E tests**: User workflows covered
 
 ### What to Test
+
 ```typescript
 // ✅ Test business logic
 function calculateDiscount(price: number, membershipLevel: string): number {
@@ -132,25 +138,24 @@ class User {
 ## Testing Patterns
 
 ### Error Testing
+
 ```typescript
 // ✅ Test error scenarios
 describe('error handling', () => {
   test('should throw CustomError for invalid input', () => {
-    expect(() => validateRequired(null, 'testField'))
-      .toThrow('Le champ testField est requis');
+    expect(() => validateRequired(null, 'testField')).toThrow('Le champ testField est requis');
   });
 
   test('should handle async errors properly', async () => {
     const mockFn = vi.fn().mockRejectedValue(new Error('Network error'));
 
-    await expect(withRetry(mockFn, 1, 100))
-      .rejects
-      .toThrow('Network error');
+    await expect(withRetry(mockFn, 1, 100)).rejects.toThrow('Network error');
   });
 });
 ```
 
 ### Mock Patterns
+
 ```typescript
 // ✅ Good: Focused mocking
 describe('UserService', () => {
@@ -176,6 +181,7 @@ describe('UserService', () => {
 ```
 
 ### Component Testing (Astro)
+
 ```typescript
 // ✅ Test Astro components
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
@@ -186,8 +192,8 @@ describe('ErrorMessage', () => {
     const container = await AstroContainer.create();
     const result = await container.renderToString(ErrorMessage, {
       props: {
-        message: 'Test error message'
-      }
+        message: 'Test error message',
+      },
     });
 
     expect(result).toContain('Test error message');
@@ -200,9 +206,13 @@ describe('ErrorMessage', () => {
 ## Test Utilities
 
 ### Helper Functions
+
 ```typescript
 // ✅ Create reusable test helpers
-export function getPostAt(posts: CollectionEntry<'blog'>[], index: number): CollectionEntry<'blog'> {
+export function getPostAt(
+  posts: CollectionEntry<'blog'>[],
+  index: number,
+): CollectionEntry<'blog'> {
   const post = posts[index];
   if (!post) {
     throw new Error(`Expected post at index ${index}, but got ${posts.length} posts`);
@@ -223,6 +233,7 @@ export function expectLengthAndGetFirst<T>(array: T[], expectedLength: number): 
 ```
 
 ### Mock Factories
+
 ```typescript
 // ✅ Create mock factories for complex objects
 export function createMockUser(overrides: Partial<User> = {}): User {
@@ -231,7 +242,7 @@ export function createMockUser(overrides: Partial<User> = {}): User {
     name: 'John Doe',
     email: 'john@example.com',
     role: 'user',
-    ...overrides
+    ...overrides,
   };
 }
 
@@ -242,7 +253,7 @@ export function createMockBlogPost(overrides: Partial<BlogPost> = {}): BlogPost 
     pubDate: new Date('2024-01-01'),
     tags: ['test'],
     draft: false,
-    ...overrides
+    ...overrides,
   };
 }
 ```
@@ -250,6 +261,7 @@ export function createMockBlogPost(overrides: Partial<BlogPost> = {}): BlogPost 
 ## Test Configuration
 
 ### Vitest Setup
+
 ```typescript
 // vitest.config.ts
 export default defineConfig({
@@ -264,15 +276,16 @@ export default defineConfig({
           statements: 80,
           branches: 80,
           functions: 80,
-          lines: 80
-        }
-      }
-    }
-  }
+          lines: 80,
+        },
+      },
+    },
+  },
 });
 ```
 
 ### Test Environment
+
 ```typescript
 // ✅ Setup test environment properly
 beforeEach(() => {
@@ -289,11 +302,13 @@ afterEach(() => {
 ## Testing Checklist
 
 ### Before Writing Tests
+
 - [ ] Identify the behavior to test (not implementation)
 - [ ] Consider edge cases and error scenarios
 - [ ] Plan test data and mocks needed
 
 ### Test Quality
+
 - [ ] Test names describe the expected behavior
 - [ ] Tests follow AAA pattern
 - [ ] Tests are isolated and independent
@@ -302,6 +317,7 @@ afterEach(() => {
 - [ ] Edge cases are tested
 
 ### Coverage
+
 - [ ] Business logic functions have >80% coverage
 - [ ] Error handling paths are tested
 - [ ] Integration points are covered

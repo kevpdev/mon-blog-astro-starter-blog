@@ -8,7 +8,7 @@ import { defineConfig } from 'astro/config';
 // Standard configuration for modern Astro blog
 export default defineConfig({
   site: process.env.SITE_URL || 'https://example.com',
-  
+
   integrations: [
     mdx(),
     sitemap({
@@ -18,7 +18,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  
+
   markdown: {
     syntaxHighlight: 'shiki',
     shikiConfig: {
@@ -26,17 +26,17 @@ export default defineConfig({
       wrap: true,
     },
   },
-  
+
   vite: {
     build: {
       sourcemap: true, // Development debugging
     },
   },
-  
+
   build: {
     inlineStylesheets: 'auto', // Performance optimization
   },
-  
+
   compressHTML: true,
   output: 'static',
 });
@@ -44,27 +44,23 @@ export default defineConfig({
 // Performance optimization variant (for production)
 export const productionConfig = defineConfig({
   site: process.env.SITE_URL || 'https://example.com',
-  
-  integrations: [
-    mdx(),
-    sitemap(),
-    tailwind({ applyBaseStyles: false }),
-  ],
-  
+
+  integrations: [mdx(), sitemap(), tailwind({ applyBaseStyles: false })],
+
   build: {
     inlineStylesheets: 'auto',
     assetsPrefix: '/assets/', // CDN prefix if needed
   },
-  
+
   vite: {
     build: {
       sourcemap: false, // Disable in production
       rollupOptions: {
         output: {
           manualChunks: {
-            'vendor': ['astro'],
-            'ui': ['./src/components/ui/index.ts'],
-            'utils': ['./src/utils/index.ts'],
+            vendor: ['astro'],
+            ui: ['./src/components/ui/index.ts'],
+            utils: ['./src/utils/index.ts'],
           },
         },
       },
@@ -73,7 +69,7 @@ export const productionConfig = defineConfig({
       include: ['astro', '@astrojs/markdown-remark'],
     },
   },
-  
+
   compressHTML: true,
   output: 'static',
 });
@@ -81,13 +77,9 @@ export const productionConfig = defineConfig({
 // Image optimization variant (for media-heavy sites)
 export const imageOptimizedConfig = defineConfig({
   site: process.env.SITE_URL || 'https://example.com',
-  
-  integrations: [
-    mdx(),
-    sitemap(),
-    tailwind({ applyBaseStyles: false }),
-  ],
-  
+
+  integrations: [mdx(), sitemap(), tailwind({ applyBaseStyles: false })],
+
   image: {
     formats: ['avif', 'webp', 'jpg'],
     domains: ['images.unsplash.com'],
@@ -98,10 +90,10 @@ export const imageOptimizedConfig = defineConfig({
       },
     ],
   },
-  
+
   vite: {
     build: { sourcemap: true },
   },
-  
+
   compressHTML: true,
 });
