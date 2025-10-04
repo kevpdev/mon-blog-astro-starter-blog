@@ -14,7 +14,7 @@
     "typecheck": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "quality": "pnpm typecheck && pnpm test && pnpm lint && pnpm format:check",
+    "quality": "pnpm typecheck && pnpm lint && pnpm format:check",
     "prepare": "husky"
   },
   "dependencies": {

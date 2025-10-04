@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Validation du format des messages de commit
+# Le message de commit doit commencer par "feat:" ou "fix:"
+
+commit_file="$1"
+commit_msg=$(cat "$commit_file")
+
+# Expression régulière pour valider le format
+commit_regex='^(feat|fix):'
+
+if ! echo "$commit_msg" | grep -qE "$commit_regex"; then
+  echo ""
+  echo "❌ Format de commit invalide!"
+  echo ""
+  echo "📋 Le message de commit doit commencer par:"
+  echo "   • feat: pour une nouvelle fonctionnalité"
+  echo "   • fix:  pour une correction de bug"
+  echo ""
+  echo "📝 Exemples valides:"
+  echo "   feat: add search functionality"
+  echo "   fix: resolve navigation mobile issue"
+  echo ""
+  echo "🚫 Message reçu: $commit_msg"
+  echo ""
+  exit 1
+fi
+
+echo "✅ Format de commit valide: $commit_msg"

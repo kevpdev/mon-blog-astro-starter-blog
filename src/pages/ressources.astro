@@ -1,0 +1,200 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Container from '../components/ui/Container.astro';
+---
+
+<PageLayout
+  title="Ressources Développeur"
+  description="Découvrez une collection d'outils, guides et ressources essentiels pour le développement web moderne avec Astro, TypeScript et les technologies frontend.">
+
+  <Container>
+    <div class="prose prose-lg max-w-none">
+      <p class="text-xl text-[rgb(var(--text-secondary))] mb-8">
+        Une collection soigneusement sélectionnée d'outils, guides et ressources pour les développeurs
+        web modernes. Que vous débutiez avec Astro ou que vous souhaitiez optimiser votre workflow,
+        trouvez ici tout ce dont vous avez besoin.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[rgb(var(--text-primary))] mt-12 mb-6">🛠️ Outils Recommandés</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))]">
+          <h3 class="text-lg font-semibold mb-3">Éditeurs & Extensions</h3>
+          <ul class="space-y-2">
+            <li><strong>VS Code</strong> - Éditeur recommandé avec support Astro</li>
+            <li><strong>Astro Extension</strong> - Coloration syntaxique et IntelliSense</li>
+            <li><strong>Tailwind CSS IntelliSense</strong> - Autocomplétion CSS</li>
+            <li><strong>TypeScript Hero</strong> - Gestion avancée des imports</li>
+          </ul>
+        </div>
+
+        <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))]">
+          <h3 class="text-lg font-semibold mb-3">CLI & Développement</h3>
+          <ul class="space-y-2">
+            <li><strong>pnpm</strong> - Gestionnaire de paquets performant</li>
+            <li><strong>Astro CLI</strong> - Commandes officielles Astro</li>
+            <li><strong>Lighthouse CI</strong> - Audit performance automatisé</li>
+            <li><strong>Git Hooks</strong> - Husky + lint-staged</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[rgb(var(--text-primary))] mt-12 mb-6">🚀 Stack Technique</h2>
+
+      <div class="bg-[rgb(var(--bg-secondary))] p-8 rounded-lg mb-12">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-[rgb(var(--brand-primary))]">Framework</h3>
+            <ul class="space-y-2">
+              <li><strong>Astro 5.x</strong> - SSG moderne</li>
+              <li><strong>TypeScript</strong> - Mode strict activé</li>
+              <li><strong>Vite</strong> - Build tool ultra-rapide</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-[rgb(var(--brand-primary))]">Styling</h3>
+            <ul class="space-y-2">
+              <li><strong>Tailwind CSS v4</strong> - Utility-first</li>
+              <li><strong>Design Tokens</strong> - Variables CSS</li>
+              <li><strong>Mobile-first</strong> - Responsive design</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4 text-[rgb(var(--brand-primary))]">Qualité</h3>
+            <ul class="space-y-2">
+              <li><strong>ESLint</strong> - Analyse statique</li>
+              <li><strong>Prettier</strong> - Formatage automatique</li>
+              <li><strong>Vitest</strong> - Tests unitaires</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[rgb(var(--text-primary))] mt-12 mb-6">📚 Guides de Démarrage</h2>
+
+      <div class="space-y-6 mb-12">
+        <div class="border-l-4 border-[rgb(var(--brand-primary))] pl-6">
+          <h3 class="text-lg font-semibold mb-2">Démarrage Rapide</h3>
+          <p class="text-[rgb(var(--text-secondary))] mb-3">
+            Clonez ce starter, personnalisez la configuration et commencez à créer votre contenu.
+          </p>
+          <code class="bg-[rgb(var(--bg-muted))] px-3 py-1 rounded text-sm">
+            git clone [repo] && pnpm install && pnpm dev
+          </code>
+        </div>
+
+        <div class="border-l-4 border-[rgb(var(--brand-primary))] pl-6">
+          <h3 class="text-lg font-semibold mb-2">Configuration TypeScript</h3>
+          <p class="text-[rgb(var(--text-secondary))] mb-3">
+            Mode strict activé avec null checks pour une meilleure qualité de code.
+          </p>
+          <code class="bg-[rgb(var(--bg-muted))] px-3 py-1 rounded text-sm">
+            strict: true, noUncheckedIndexedAccess: true
+          </code>
+        </div>
+
+        <div class="border-l-4 border-[rgb(var(--brand-primary))] pl-6">
+          <h3 class="text-lg font-semibold mb-2">Architecture Composants</h3>
+          <p class="text-[rgb(var(--text-secondary))] mb-3">
+            Système de composants réutilisables avec props typées et design tokens.
+          </p>
+          <code class="bg-[rgb(var(--bg-muted))] px-3 py-1 rounded text-sm">
+            src/components/ui/ + src/layouts/
+          </code>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[rgb(var(--text-primary))] mt-12 mb-6">📖 Ressources d'Apprentissage</h2>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Documentation Officielle</h3>
+          <ul class="space-y-2">
+            <li><a href="https://docs.astro.build" class="text-[rgb(var(--brand-primary))] hover:underline">Astro Docs</a> - Guide complet et API</li>
+            <li><a href="https://tailwindcss.com/docs" class="text-[rgb(var(--brand-primary))] hover:underline">Tailwind CSS</a> - Documentation v4</li>
+            <li><a href="https://www.typescriptlang.org/docs" class="text-[rgb(var(--brand-primary))] hover:underline">TypeScript</a> - Handbook officiel</li>
+            <li><a href="https://vitest.dev" class="text-[rgb(var(--brand-primary))] hover:underline">Vitest</a> - Framework de test moderne</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Communautés</h3>
+          <ul class="space-y-2">
+            <li><a href="https://astro.build/chat" class="text-[rgb(var(--brand-primary))] hover:underline">Discord Astro</a> - Support communautaire</li>
+            <li><a href="https://github.com/withastro/astro" class="text-[rgb(var(--brand-primary))] hover:underline">GitHub Astro</a> - Issues et discussions</li>
+            <li><a href="https://twitter.com/astrodotbuild" class="text-[rgb(var(--brand-primary))] hover:underline">Twitter @astrodotbuild</a> - Actualités</li>
+            <li><a href="https://www.reddit.com/r/astrodotbuild" class="text-[rgb(var(--brand-primary))] hover:underline">Reddit r/astrodotbuild</a> - Discussions</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[rgb(var(--text-primary))] mt-12 mb-6">✅ Checklist Qualité</h2>
+
+      <div class="bg-[rgb(var(--bg-primary))] p-6 rounded-lg border border-[rgb(var(--border-primary))] mb-12">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Développement</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>ESLint configuré et sans erreurs</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>Prettier pour le formatage automatique</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>TypeScript strict mode activé</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>Tests unitaires avec Vitest</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Performance</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>Lighthouse 100/100 Performance</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>Images optimisées (WebP)</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>CSS critique inline</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-green-500">✓</span>
+                <span>Accessibilité WCAG 2.2 AA</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-[rgb(var(--brand-primary))] to-[rgb(var(--brand-secondary))] p-8 rounded-lg text-[rgb(var(--text-inverse))]">
+        <h2 class="text-2xl font-bold mb-4 text-white drop-shadow-sm">🚀 Prêt à commencer ?</h2>
+        <p class="mb-6 text-white/90 drop-shadow-sm">
+          Utilisez ce starter comme base pour vos projets Astro. Toutes les configurations sont
+          optimisées et prêtes pour la production.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/blog" class="bg-white text-[rgb(var(--brand-primary))] px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-sm">
+            Lire les articles
+          </a>
+          <a href="/contact" class="bg-white/20 backdrop-blur border border-white/30 px-6 py-2 rounded-lg font-semibold text-white hover:bg-white hover:text-[rgb(var(--brand-primary))] transition-all duration-200 shadow-sm">
+            Nous contacter
+          </a>
+        </div>
+      </div>
+    </div>
+  </Container>
+</PageLayout>

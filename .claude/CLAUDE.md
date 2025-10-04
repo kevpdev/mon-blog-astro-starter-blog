@@ -26,7 +26,6 @@ All commands are run from the root of the project using pnpm:
 
 ### Claude Commands
 
-- `/implement-feature [name] [type]` - Structured feature implementation
 - `/create-content [type] [title]` - Content creation workflow
 - `/create-issue [type] [title]` - Generate structured issue templates
 - `/commit-push-smart [message?]` - Smart commit and push
@@ -203,8 +202,7 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 
 ### **Operational Commands**
 
-- **`commands/`** - Essential Claude operations (6 max for performance)
-  - `implement-feature.md` - Structured feature development
+- **`commands/`** - Essential Claude operations (5 max for performance)
   - `create-content.md` - Content creation with SEO optimization
   - `commit-push-smart.md` - Smart git operations
   - `bootstrap-quality.md` - Quality tooling setup
@@ -231,10 +229,6 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 ### **Command Usage Patterns**
 
 ```bash
-# Feature Development
-/implement-feature search-component component
-# → References: core/astro-patterns.mdx, templates/astro/component-template.astro.mdx
-
 # Content Creation
 /create-content tutorial "Astro Performance Guide"
 # → References: templates/content/blog-post-template.md, snippets/astro/frontmatter-schemas.md
@@ -291,10 +285,25 @@ The `.claude/` directory is organized with thematic subfolders for optimal conte
 
 **Quality Control Workflow**:
 
+- **ALWAYS run `pnpm quality` after completing any code changes** (includes typecheck + lint + format check)
 - Run `pnpm quality` before committing (enforced by pre-commit hooks)
 - Follow standards defined in `rules/generic/code-quality/`
 - Apply Astro patterns from `rules/astro/`
 - Validate accessibility and performance against targets from `rules/generic/performance/`
+
+**Automatic Feature Implementation Workflow**:
+
+- **Complex features** (components, layouts, integrations): Apply structured 8-step process automatically:
+  1. Analyze requirements and acceptance criteria
+  2. Explore existing architecture and identify similar patterns
+  3. Design technical approach (components, interfaces, data flow)
+  4. Create base structure (files, TypeScript interfaces)
+  5. Implement core functionality with unit tests
+  6. Integrate with existing architecture (layouts, components, styles)
+  7. Validate with comprehensive tests and code review
+  8. Document implementation and update guides
+- **Simple tasks** (fixes, adjustments, quick changes): Use direct approach
+- **Always**: Follow analyze → design → implement → integrate → validate → document flow
 
 **Architecture Compliance**:
 

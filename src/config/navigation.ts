@@ -13,8 +13,8 @@ export const navigationConfig: NavigationConfig = [
     enabled: true,
   },
   {
-    label: 'Services',
-    href: '/services',
+    label: 'Ressources',
+    href: '/ressources',
     enabled: true,
   },
   {

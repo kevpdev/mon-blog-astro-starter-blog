@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Hook pre-commit - Vérification de la qualité du code
+echo "🔍 Vérification de la qualité du code..."
+
+pnpm quality
