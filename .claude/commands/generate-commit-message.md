@@ -2,7 +2,7 @@
 
 Génère des messages de commit structurés avec titre et description détaillée, respectant strictement les limites de caractères.
 
-## Usage
+## Usage (command)
 
 ```
 /generate-commit-message [options]
