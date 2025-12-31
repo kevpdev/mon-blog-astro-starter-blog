@@ -1,332 +1,217 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Documentation pour Claude Code dans ce projet de blog Astro.
+
+---
 
 ## Commands
 
-All commands are run from the root of the project using pnpm:
+Commandes pnpm essentielles:
 
 ### Development
 
-- `pnpm dev` - Start development server at localhost:4321
-- `pnpm build` - Build production site to ./dist/
-- `pnpm preview` - Preview build locally
-- `pnpm astro` - Run Astro CLI commands (e.g., `pnpm astro add`, `pnpm astro check`)
+- `pnpm dev` - Serveur de développement (localhost:4321)
+- `pnpm build` - Build production
+- `pnpm preview` - Preview du build
 
-### Quality & Testing
+### Quality
 
-- `pnpm lint` - Run ESLint on .js, .ts, .astro files
-- `pnpm lint:fix` - Run ESLint with auto-fix
-- `pnpm format` - Format code with Prettier
-- `pnpm format:check` - Check code formatting
-- `pnpm typecheck` - Run Astro type checking
-- `pnpm test` - Run Vitest tests
-- `pnpm test:watch` - Run Vitest in watch mode
-- `pnpm quality` - Run typecheck, lint, and format check
+- `pnpm quality` - Typecheck + lint + format check
+- `pnpm lint` - ESLint check
+- `pnpm lint:fix` - ESLint with auto-fix
+- `pnpm format` - Format with Prettier
+- `pnpm test` - Tests Vitest
 
-### Claude Commands
+### Astro CLI
 
-- `/create-content [type] [title]` - Content creation workflow
-- `/create-issue [type] [title]` - Generate structured issue templates
-- `/commit-push-smart [message?]` - Smart commit and push
-- `/bootstrap-quality` - Setup quality tools and configs
-- `/debug-issue` - Debug workflow with inputs analysis
+- `pnpm astro add <integration>` - Add integration
+- `pnpm astro check` - Type check
 
-## Architecture Overview
+---
 
-This is a modern Astro blog with TypeScript strict configuration, following component-based architecture with design tokens and mobile-first responsive design.
+## Project Context
 
-### Layout Architecture (Composable Design)
+Ce projet utilise une structure simplifiée pour le contexte:
 
-**Base Layout System**:
+### Memory-Bank (Contexte Projet)
 
-- `BaseLayout.astro` - Core HTML structure, shared head/body/footer
-- `BlogLayout.astro` - Blog post layout with hero image, metadata, tags
-- `BlogListLayout.astro` - Layout component
-- `FormationsLayout.astro` - Layout component
-- `HomeLayout.astro` - Homepage-specific layout extending BaseLayout
-- `PageLayout.astro` - Static page layout for content pages
+**Location**: `.claude/memory-bank/`
 
-**Component System**:
+- **`projectbrief.md`** - Vision, objectifs, architecture, tech stack
+- **`activeContext.md`** - État actuel, changements récents, prochaines étapes
+- **`techContext.md`** - Stack technique détaillé, patterns, configuration
+- **`stories/`** - Workflows et fonctionnalités documentées
+  - `INDEX.md` - Index des stories (completed, active, planned)
+  - `CONTENT-001-creation-workflow.md` - Création et publication de contenu
 
-```
-src/components/
-│   ├── layout/
-│   │   ├── FooterNew.astro
-│   │   ├── Header.astro # Site header
-│   │   ├── Navigation.astro # Navigation menu
-│   ├── ui/
-│   │   ├── Badge.astro
-│   │   ├── BaseHead.astro
-│   │   ├── Button.astro # Button variants
-```
+### Global Rules
 
-### Routing
+**Location**: `~/.claude/CLAUDE.md`
 
-- `src/pages/[...slug].astro` - Dynamic pages from content collections
-- `src/pages/about.astro` - About page
-- `src/pages/contact.astro` - contact page
-- `src/pages/index.astro` - Homepage
-- `src/pages/meilleures-formations-seo-business.astro` - meilleures-formations-seo-business page
-- `src/pages/blog/index.astro` - Blog listing page
-- `src/pages/blog/[...slug].astro` - Individual blog posts
-- `src/pages/rss.xml.js` - RSS feed generation
+Règles génériques référencées depuis le `.claude` global:
 
-### Configuration
+- Code Quality (TypeScript strict, clean code, naming)
+- Testing standards (Vitest, coverage, patterns)
+- Performance optimization (Core Web Vitals, bundle size)
+- Security best practices (frontend security, dependencies)
+- Accessibility (WCAG AA, screen readers, keyboard nav)
+- Git workflow (conventional commits, quality gates)
 
-**Core Stack**:
+### Inputs (Debug Temporaire)
 
-- **Astro 5.13.3** with TypeScript strict mode and null checks
-- **Tailwind CSS 4.1.13** with Vite plugin for performance
-- **Vitest** for unit testing with @testing-library/dom
-- **ESLint** flat config with TypeScript support
-- **Husky + lint-staged** for pre-commit quality control
+**Location**: `.claude/inputs/`
 
-## Development Best Practices
+Fichiers temporaires pour debugging:
 
-### Code Quality & Standards
+- `debug/` - Logs et outputs
+- `mockups/` - Captures d'écran et designs
+- Auto-cleanup après 7 jours
 
-**Automated Quality Control**:
+---
 
-- **ESLint**: Static analysis with auto-fix (`pnpm lint:fix`)
-- **Prettier**: Code formatting with consistent style
-- **TypeScript**: Strict mode with null checks enabled
-- **Pre-commit Hooks**: Husky + lint-staged (validates only modified files)
-- **Quality Command**: `pnpm quality` runs typecheck + lint + format check
+## Quick Reference
 
-**Architecture Principles**:
+### Architecture
 
-- **DRY (Don't Repeat Yourself)**: Shared components and layouts
-- **Component-Based**: Reusable, configurable components
-- **Mobile-First**: Progressive enhancement from mobile to desktop
-- **Design System**: Centralized tokens for consistency
-- **Semantic HTML**: Proper markup with accessibility in mind
+Voir `memory-bank/techContext.md` pour:
 
-### Core Standards Summary
+- Structure des composants (ui/, layout/)
+- Configuration des Content Collections
+- Frontmatter schemas et validation
+- Layout hierarchy (BaseLayout → specialized)
+- Routing system (static + dynamic routes)
 
-**Clean Code**:
+### Content Creation
 
-- Write no comments
-- Use strict types only
-- Max 30 lines per function, 5 params max
-- Use explicit constants, no magic numbers
-- Long, readable variable names
+Voir `memory-bank/stories/CONTENT-001-creation-workflow.md` pour:
 
-**TypeScript**:
+- Workflow complet de création de contenu
+- Templates (blog post, tutorial, news)
+- SEO optimization et validation
+- Image optimization (WebP/AVIF)
+- Publication checklist
 
-- Strict configuration enabled
-- Explicit interfaces over implicit types
-- Prefer `type` for unions, `interface` for objects
-- Avoid `any`, prefer `unknown`
+### Development Best Practices
 
-**Astro Patterns**:
+Référencez les règles du `.claude` global pour:
 
-- Props interface at component top
-- Semantic HTML structure
-- Scoped styles when needed
-- Performance-first approach
+- **Code Quality**: TypeScript strict, clean code patterns
+- **Testing**: Unit tests, integration tests, coverage targets
+- **Performance**: Core Web Vitals optimization strategies
+- **Security**: Frontend security, dependency management
+- **Accessibility**: WCAG 2.2 AA compliance, screen reader support
 
-### Performance & UX
-
-**Technical Stack**:
-
-- **Package Manager**: pnpm with Node.js 24+ support
-- **Testing**: Vitest with @testing-library/dom for component testing
-- **Build**: Optimized production builds with Astro's static generation
-- **Assets**: WebP images with responsive sizing and lazy loading
-
-**Core Web Vitals Targets**:
-
-- **LCP**: < 2.5s
-- **FID**: < 100ms
-- **CLS**: < 0.1
-
-## Context Organization & Loading Strategy
-
-The `.claude/` directory is organized with thematic subfolders for optimal context loading and performance:
-
-### **Core Context (Always Loaded)**
-
-- **`core/project-overview.mdx`** - Essential architecture, tech stack, project structure
-- **`core/development-workflow.mdx`** - Commands, quality workflow, essential practices
-- **`CLAUDE.md`** (this file) - Central orchestration and project context
-
-### **Specialized Rules (Contextual Loading by Theme)**
-
-- **`rules/generic/`** - Reusable across projects
-  - `code-quality/` - Clean code, TypeScript standards, naming conventions
-  - `testing/` - Testing organization, coverage, frontend testing patterns
-  - `error-handling/` - Error handling patterns, monitoring, validation
-  - `security/` - Frontend security, dependency management
-  - `performance/` - Core Web Vitals, optimization strategies
-- **`rules/astro/`** - Framework-specific patterns
-  - `components/` - Component architecture, error components, props patterns
-  - `layouts/` - Layout system, slot patterns
-  - `styling/` - Tailwind config, design tokens, responsive design
-  - `content/` - Content collections, frontmatter, images
-  - `performance/` - SEO optimization, build optimization
-  - `testing/` - Astro testing patterns, component testing
-- **`rules/workflows/`** - Process and methodology
-  - `feature-implementation.md` - Feature development process
-  - `content-creation.md` - Content creation workflow
-
-### **Code Generation**
-
-- **`templates/generic/`** - Universal templates
-  - `command-template.mdx` - Command structure template
-  - `test-template.spec.ts.mdx` - Unit test template
-- **`templates/astro/`** - Astro-specific templates
-  - `component-template.astro.mdx` - Astro component template
-  - `page-template.astro.mdx` - Astro page template
-- **`templates/content/`** - Content templates
-  - `blog-post-template.md` - Blog post structure
-- **`templates/issues/`** - Issue templates for structured communication
-  - `README.md` - Usage guide for issue templates
-  - `feature-issue.md` - New feature requests [FEAT]
-  - `bug-fix-issue.md` - Bug reports and fixes [FIX]
-  - `refactor-issue.md` - Code improvements and refactoring [REFACTOR]
-  - `ui-component-issue.md` - UI component specifications
-
-### **Code Fragments & Configs**
-
-- **`snippets/generic/`** - Universal code snippets
-  - `typescript-types.md` - Common TypeScript patterns
-  - `vitest.config.ts` + `vitest-config-guide.md` - Testing configuration & aliases
-  - `settings.local.json` - Claude Code permissions
-  - `prettier.json`, `tsconfig.json` - Configuration files
-- **`snippets/astro/`** - Astro-specific snippets
-  - `component-patterns.md` - Astro component fragments
-  - `frontmatter-schemas.md` - Content Collection schemas
-- **`snippets/css/`** - CSS and styling snippets
-  - `responsive-patterns.md` - Mobile-first responsive patterns
-
-### **Operational Commands**
-
-- **`commands/`** - Essential Claude operations (5 max for performance)
-  - `create-content.md` - Content creation with SEO optimization
-  - `commit-push-smart.md` - Smart git operations
-  - `bootstrap-quality.md` - Quality tooling setup
-  - `debug-issue.md` - Systematic debugging workflow
-  - `create-issue.md` - Generate structured issue templates
-
-### **Debug & Analysis**
-
-- **`inputs/`** - Temporary files for debugging
-  - `screenshots/` - Visual debugging captures
-  - `logs/` - Error logs and system output
-  - `configs/` - Configuration files for analysis
-  - Auto-cleanup after 7 days to prevent repo pollution
-
-### **Context Loading Optimization**
-
-- **Level 1 (Always)**: `core/` + `CLAUDE.md` (~400 lines)
-- **Level 2 (Contextual)**: Specific `rules/` subfolder (~100-150 lines each)
-- **Level 3 (As Needed)**: `templates/` + `snippets/` (~50-100 lines each)
-- **Total Optimized**: ~400-700 lines per context vs. previous 2,163 lines (70% reduction)
-
-## Claude Code Workflow Integration
-
-### **Command Usage Patterns**
-
-```bash
-# Content Creation
-/create-content tutorial "Astro Performance Guide"
-# → References: templates/content/blog-post-template.md, snippets/astro/frontmatter-schemas.md
-
-# Issue Templates
-/create-issue feature "Advanced search system"
-/create-issue fix "Mobile navigation broken"
-/create-issue refactor "Performance optimization"
-/create-issue ui "Modern Card component"
-# → References: templates/issues/ for structured communication
-
-# Smart Git Operations
-/commit-push-smart "feat: add search functionality"
-# → Automatic analysis + conventional commits
-
-# Debug Issues
-/debug-issue css "Navigation mobile broken"
-# → Uses inputs/ for screenshots/logs analysis
-
-# Quality Bootstrap
-/bootstrap-quality
-# → Sets up ESLint, Prettier, Husky, Vitest configuration
-```
-
-### **Context Referencing Strategy**
-
-- **Before editing**: Check `core/` for essential patterns and workflow
-- **During development**: Reference specific `rules/` subfolders by domain
-- **For components**: Use `rules/astro/components/` and `templates/astro/`
-- **For testing**: Use `rules/generic/testing/` and `rules/astro/testing/`
-- **For errors**: Use `rules/generic/error-handling/` and `rules/astro/components/error-components.mdx`
-- **For styling**: Use `rules/astro/styling/` for Tailwind configuration
-- **For performance**: Use `rules/generic/performance/` for Core Web Vitals
-- **For security**: Use `rules/generic/security/` for frontend security
-- **For debugging**: Utilize `inputs/` and relevant `snippets/` subfolders
-- **For issue creation**: Use `templates/issues/` for structured communication
-- **Code generation**: Use domain-specific `templates/` subfolders
-
-### **Performance Optimization**
-
-- Load only relevant context based on task type
-- Prefer specific snippets over full rule loading
-- Use templates for rapid prototyping
-- Leverage inputs/ for visual debugging workflow
+---
 
 ## Important Instructions
 
-**File Operations**:
+### Quality Control
 
-- ALWAYS prefer editing existing files over creating new ones
-- NEVER create documentation files unless explicitly requested
-- Use existing patterns and conventions from `core/` and `rules/`
-- Reference `templates/` for new file structure
+**TOUJOURS exécuter `pnpm quality` après modifications**
 
-**Quality Control Workflow**:
+- Enforced par pre-commit hooks (Husky + lint-staged)
+- Vérifie: typecheck + lint + format
+- Doit passer avant tout commit
 
-- **ALWAYS run `pnpm quality` after completing any code changes** (includes typecheck + lint + format check)
-- Run `pnpm quality` before committing (enforced by pre-commit hooks)
-- Follow standards defined in `rules/generic/code-quality/`
-- Apply Astro patterns from `rules/astro/`
-- Validate accessibility and performance against targets from `rules/generic/performance/`
+### Architecture Compliance
 
-**Automatic Feature Implementation Workflow**:
+**Suivre les patterns définis dans `memory-bank/techContext.md`**
 
-- **Complex features** (components, layouts, integrations): Apply structured 8-step process automatically:
-  1. Analyze requirements and acceptance criteria
-  2. Explore existing architecture and identify similar patterns
-  3. Design technical approach (components, interfaces, data flow)
-  4. Create base structure (files, TypeScript interfaces)
-  5. Implement core functionality with unit tests
-  6. Integrate with existing architecture (layouts, components, styles)
-  7. Validate with comprehensive tests and code review
-  8. Document implementation and update guides
-- **Simple tasks** (fixes, adjustments, quick changes): Use direct approach
-- **Always**: Follow analyze → design → implement → integrate → validate → document flow
+- Component-based design (reusable components)
+- Mobile-first responsive design
+- Design system (centralized tokens)
+- TypeScript strict mode (no implicit any)
+- Error-safe implementation
 
-**Architecture Compliance**:
+### Content Creation
 
-- Follow component-based design patterns from `rules/astro/components/`
-- Respect layout hierarchy defined in `core/project-overview.mdx`
-- Use design tokens consistently from `rules/astro/styling/`
-- Maintain mobile-first approach with Tailwind breakpoints
-- Apply TypeScript strict patterns from `rules/generic/code-quality/typescript.mdx`
-- Use error handling patterns from `rules/generic/error-handling/`
+**Utiliser le workflow dans `memory-bank/stories/CONTENT-001`**
 
-## Context Maintenance
+- Planning → Research → Creation → Optimization → Validation → Publication
+- SEO metadata optimized (title 50-60 chars, description 120-160 chars)
+- Images optimized (WebP/AVIF, lazy loading)
+- Accessibility compliant (alt text, semantic HTML)
+- Performance targets met (Core Web Vitals)
 
-**Automatic CLAUDE.md Updates**:
+### Global Rules Reference
 
-- Claude MUST automatically check and update CLAUDE.md after any structural modification
-- Update triggers: .claude/ structure changes, new components/pages, new commands, workflow modifications
-- Sections to maintain: Architecture Overview, Commands, Context Organization, Context Referencing Strategy
-- Process: Read current state → Note impacts → Update immediately → Validate references
-- Goal: Keep CLAUDE.md always synchronized with actual project state
+**Pour standards génériques, référencer `~/.claude/CLAUDE.md`**
 
-**Update Responsibility**:
+- Ne pas dupliquer les règles génériques dans ce projet
+- Le global contient: Git workflow, commit conventions, testing patterns, security
+- Ce fichier contient uniquement: architecture Astro, workflows spécifiques, contexte projet
 
-- Claude is responsible for maintaining documentation accuracy
-- No manual intervention required from user
-- Updates must happen in the same session as modifications
-- All references and file paths must remain valid and current
+---
+
+## File Operations
+
+### File Creation
+
+- **ALWAYS prefer editing existing files over creating new ones**
+- **NEVER create documentation files unless explicitly requested**
+- Use existing patterns from `memory-bank/techContext.md`
+
+### Component Creation
+
+Follow component patterns:
+
+1. Props interface at top with TypeScript
+2. Semantic HTML structure
+3. Scoped styles when needed
+4. Mobile-first responsive design
+5. Accessibility attributes
+
+### Content Creation
+
+Follow CONTENT-001 workflow:
+
+1. Plan content structure
+2. Create file with proper frontmatter
+3. Optimize images (WebP/AVIF)
+4. Validate SEO and accessibility
+5. Test and publish
+
+---
+
+## Context Loading Strategy
+
+### Efficient Context Usage
+
+- **Level 1 (Always)**: `memory-bank/projectbrief.md` + `memory-bank/activeContext.md` (~400 lines)
+- **Level 2 (Task-specific)**: `memory-bank/techContext.md` for architecture, `memory-bank/stories/` for workflows (~200-300 lines)
+- **Level 3 (As needed)**: Global `.claude` for generic rules
+
+### When to Reference What
+
+- **Before editing code**: Check `techContext.md` for patterns and standards
+- **Creating content**: Follow `stories/CONTENT-001-creation-workflow.md`
+- **For generic standards**: Reference global `~/.claude/CLAUDE.md`
+- **Current project state**: See `activeContext.md`
+- **Project vision**: See `projectbrief.md`
+
+---
+
+## Notes
+
+### Critical Paths
+
+- **Memory-Bank**: `.claude/memory-bank/` (all project-specific context)
+- **Global Rules**: `~/.claude/CLAUDE.md` (generic development standards)
+- **Content**: `src/content/blog/`, `src/content/pages/`
+- **Components**: `src/components/ui/`, `src/components/layout/`
+- **Layouts**: `src/layouts/`
+- **Config**: `astro.config.mjs`, `tsconfig.json`, `tailwind.config.mjs`
+
+### External Links
+
+- **Astro Docs**: https://docs.astro.build
+- **Tailwind CSS**: https://tailwindcss.com/docs
+- **TypeScript**: https://www.typescriptlang.org/docs
+- **Vitest**: https://vitest.dev/guide
+
+### Maintenance
+
+- Update `activeContext.md` after completing major work
+- Add new stories to `stories/INDEX.md` when planned
+- Keep `projectbrief.md` in sync with actual project state
+- Archive old/completed documentation in `stories/archived/`
