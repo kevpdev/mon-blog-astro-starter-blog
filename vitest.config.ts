@@ -17,6 +17,8 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
+      // Count every source file, not only the ones the tests import.
+      include: ['src/**/*.{ts,js}'],
       exclude: [
         'node_modules/',
         'src/__tests__/',
@@ -25,14 +27,9 @@ export default defineConfig({
         'dist/',
         '.astro/',
       ],
-      thresholds: {
-        global: {
-          branches: 70,
-          functions: 80,
-          lines: 80,
-          statements: 80,
-        },
-      },
+      // Measured line coverage, rounded down (77.09 % on 2026-10-08). The former
+      // `thresholds.global` block was ignored by Vitest: a 99 % value there still passed.
+      thresholds: { lines: 77 },
     },
 
     // Global configurations

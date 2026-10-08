@@ -179,8 +179,20 @@ pnpm quality          # Lance tout : typecheck + lint + format
 
 # Tests
 pnpm test             # Tests Vitest
+pnpm test:coverage    # Tests avec la couverture et son seuil, comme la CI
 pnpm test:watch       # Tests en mode watch
 ```
+
+### Intégration continue
+
+Sur chaque pull request vers `develop` ou `main`, `.github/workflows/ci.yml` lance en parallèle :
+
+- `lint` : `pnpm quality`
+- `unit-tests` : `pnpm test:coverage`, avec un seuil de 77 % de lignes sur tout `src/`
+- `build` : `pnpm build`
+- `security` : `pnpm audit --audit-level=high` puis Trivy
+
+La porte `ci` échoue si l'un des quatre échoue. C'est le seul check que `develop` et `main` exigent. Un push sur `develop` lance `.github/workflows/deploy.yml`, qui construit le site et le publie sur GitHub Pages. Dependabot propose chaque semaine, vers `develop`, les mises à jour des actions et des paquets npm.
 
 ## 📝 Gestion du Contenu
 
