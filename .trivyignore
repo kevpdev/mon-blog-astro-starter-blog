@@ -1,11 +1,14 @@
 # Astro 5 findings that only a migration to Astro 6/7 fixes (tracked in a separate issue).
 # The blog is a static site: no server, no SSR, no server islands. Remove these lines with the migration.
-# Same list as pnpm.auditConfig.ignoreGhsas in package.json.
+# Same list as pnpm.auditConfig.ignoreGhsas in package.json. Trivy reports the CVE id, pnpm the GHSA id.
 # Astro AVIF image optimization RCE, fixed in 7.2.8 (build time only, the images come from the repository)
 GHSA-26w7-cxv4-gfx2
 # Astro slot name XSS, fixed in 6.3.3
 GHSA-8hv8-536x-4wqp
+CVE-2026-50146
 # Astro Host header SSRF on the prerendered error page, fixed in 6.4.6
 GHSA-2pvr-wf23-7pc7
+CVE-2026-54299
 # braces stack exhaustion, no fixed version, reached only through the lint-staged and ESLint dev tooling
 GHSA-vfj7-8cjw-p6xm
+CVE-2026-93687
